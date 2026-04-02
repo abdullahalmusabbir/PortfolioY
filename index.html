@@ -3,367 +3,903 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-
-    <!-- font awesome cdn link  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-
-    <!-- custom css file link  -->
-    <link rel="stylesheet" href="css/style.css">
-
+    <title>Abdullah Al Musabbir - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        spring: '#00ce79',
+                        dark: '#111111',
+                        card: '#1a1a1a',
+                        box: '#222222',
+                        btn: '#333333',
+                    },
+                    fontFamily: {
+                        nunito: ['Nunito', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'floatUpDown 2s ease-in-out infinite',
+                        'headBob': 'headBob 1s ease-in-out infinite',
+                        'armL': 'armL 0.6s ease-in-out infinite alternate',
+                        'armR': 'armR 0.6s ease-in-out infinite alternate',
+                        'legL': 'legL 0.6s ease-in-out infinite alternate',
+                        'legR': 'legR 0.6s ease-in-out infinite alternate',
+                        'armLFast': 'armL 0.3s ease-in-out infinite alternate',
+                        'armRFast': 'armR 0.3s ease-in-out infinite alternate',
+                        'legLFast': 'legL 0.3s ease-in-out infinite alternate',
+                        'legRFast': 'legR 0.3s ease-in-out infinite alternate',
+                        'laptopBob': 'laptopBob 1s ease-in-out infinite',
+                        'glowPulse': 'glowPulse 2s ease-in-out infinite',
+                        'particleFade': 'particleFade 0.8s ease-out forwards',
+                        'fadeInUp': 'fadeInUp 0.6s ease forwards',
+                        'speechPop': 'speechPop 4s ease-in-out infinite',
+                        'modalIn': 'modalIn 0.3s ease forwards',
+                    },
+                    keyframes: {
+                        floatUpDown: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        headBob: {
+                            '0%, 100%': { transform: 'translateX(-50%) rotate(0deg)' },
+                            '25%': { transform: 'translateX(-50%) rotate(-3deg)' },
+                            '75%': { transform: 'translateX(-50%) rotate(3deg)' },
+                        },
+                        armL: {
+                            '0%': { transform: 'rotate(15deg)' },
+                            '100%': { transform: 'rotate(-15deg)' },
+                        },
+                        armR: {
+                            '0%': { transform: 'rotate(-15deg)' },
+                            '100%': { transform: 'rotate(15deg)' },
+                        },
+                        legL: {
+                            '0%': { transform: 'rotate(20deg)' },
+                            '100%': { transform: 'rotate(-20deg)' },
+                        },
+                        legR: {
+                            '0%': { transform: 'rotate(-20deg)' },
+                            '100%': { transform: 'rotate(20deg)' },
+                        },
+                        laptopBob: {
+                            '0%, 100%': { transform: 'rotate(-5deg)' },
+                            '50%': { transform: 'rotate(5deg)' },
+                        },
+                        glowPulse: {
+                            '0%, 100%': { opacity: '0.3', transform: 'translateX(-50%) scale(1)' },
+                            '50%': { opacity: '0.6', transform: 'translateX(-50%) scale(1.2)' },
+                        },
+                        particleFade: {
+                            '0%': { opacity: '1', transform: 'scale(1)' },
+                            '100%': { opacity: '0', transform: 'scale(0) translateY(20px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        speechPop: {
+                            '0%, 70%, 100%': { opacity: '0', transform: 'translateY(5px)' },
+                            '10%, 60%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        modalIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.8)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        },
+                    },
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-    
-<!-- header section starts  -->
 
-<header>
+<body class="bg-dark font-nunito m-0 p-0 overflow-x-hidden">
 
-    <div class="user">
-        <img src="images/1.png" alt="Profile Picture">
-        <h3 class="name">Abdullah Al Musabbir</h3>
-        <h2 class="nickname">(Shuvo)</h3>
-        <p class="post"> Web Developer & Desiner</p>
+    <!-- ========== ANIMATED CHARACTER ========== -->
+    <div id="animated-character" class="fixed bottom-5 right-10 z-[9999] w-20 cursor-pointer" style="height:120px;">
+        <div id="charBody" class="relative w-20" style="height:120px;">
+            <!-- Speech Bubble -->
+            <div id="speechBubble" class="absolute -top-12 -left-16 bg-white text-btn px-3 py-1 rounded-xl text-[10px] font-bold whitespace-nowrap z-10 animate-speechPop">
+                Hello! 👋 Scroll down!
+                <div class="absolute -bottom-1.5 right-5 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-white"></div>
+            </div>
+            <!-- Head -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-9 h-9 bg-[#ffcc99] rounded-full z-[3] animate-headBob">
+                <div class="absolute -top-2 -left-1 w-11 h-6 bg-btn rounded-t-full"></div>
+                <div class="absolute w-[5px] h-[5px] bg-btn rounded-full top-3.5 left-2.5 z-[4]"></div>
+                <div class="absolute w-[5px] h-[5px] bg-btn rounded-full top-3.5 right-2.5 z-[4]"></div>
+                <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-2.5 h-1 bg-[#cc6666] rounded-b z-[4]"></div>
+            </div>
+            <!-- Torso -->
+            <div class="absolute top-8 left-1/2 -translate-x-1/2 w-[30px] h-[35px] bg-spring rounded-t-lg rounded-b z-[2]"></div>
+            <!-- Left Arm -->
+            <div id="armLeft" class="absolute top-9 left-2.5 w-2.5 h-[30px] bg-spring rounded z-[1] origin-top animate-armL">
+                <div class="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-[#ffcc99] rounded-full"></div>
+            </div>
+            <!-- Right Arm -->
+            <div id="armRight" class="absolute top-9 right-2.5 w-2.5 h-[30px] bg-spring rounded z-[1] origin-top animate-armR">
+                <div class="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-[#ffcc99] rounded-full"></div>
+            </div>
+            <!-- Laptop -->
+            <div class="absolute top-[45px] -left-4 w-[22px] h-4 bg-[#555] rounded-sm z-[5] animate-laptopBob">
+                <div class="absolute top-0.5 left-0.5 w-[18px] h-2.5 bg-[#4fc3f7] rounded-sm"></div>
+            </div>
+            <!-- Left Leg -->
+            <div id="legLeft" class="absolute top-[65px] left-[22px] w-3 h-[35px] bg-[#2a2a5a] rounded z-[1] origin-top animate-legL">
+                <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-2 bg-btn rounded"></div>
+            </div>
+            <!-- Right Leg -->
+            <div id="legRight" class="absolute top-[65px] right-[22px] w-3 h-[35px] bg-[#2a2a5a] rounded z-[1] origin-top animate-legR">
+                <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-2 bg-btn rounded"></div>
+            </div>
+            <!-- Glow -->
+            <div class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-[60px] h-[15px] bg-[radial-gradient(ellipse,rgba(0,206,121,0.3),transparent)] rounded-full animate-glowPulse"></div>
+        </div>
     </div>
 
-    <nav class="navbar">
-        <ul>
-            <li><a href="#home">home</a></li>
-            <li><a href="#about">about</a></li>
-            <li><a href="#education">education</a></li>
-            <li><a href="#portfolio">portfolio</a></li>
-            <li><a href="#contact">contact</a></li>
-        </ul>
-    </nav>
-
-</header>
-
-<!-- header section ends -->
-
-<div id="menu" class="fas fa-bars"></div>
-
-<!-- home section starts  -->
-
-<section class="home" id="home">
-
-    <h3>Hi, There !</h3>
-    <h1><span>I'm Abdullah Al Musabbir</span></h1>
-    <p>A professional full-stack web developer. I completed several courses in HTML, CSS, javascript, bootstrap, MongoDB, Express, Node js, React js, Django. Aso I have coding skills in c++, java programming language. 
-
-    </p>
-    <a href="#about"><button class="btn">about me <i class="fas fa-user"></i></button></a>
-
-</section>
-
-<!-- home section ends -->
-
-<!-- about section starts  -->
-
-<section class="about" id="about">
-
-<h1 class="heading"> <span>about</span> me </h1>
-
-<div class="row">
-
-    <div class="info">
-        <h3> <span> name : </span> Abdullah Al Musabbir </h3>
-        <h3> <span> age : </span> 23 </h3>
-        <h3> <span> qualification : </span> B.Sc in CSE </h3>
-        <h3> <span> post : </span> Full Stack Web Developer </h3>
-        <h3> <span> language : </span> English, Bangla, Hindi </h3>
-        <a href="https://www.facebook.com/shu.dho.7"><button class="btn"><i class="fab fa-facebook-f"></i> Follow </button></a>
+    <!-- ========== PROJECT MODAL ========== -->
+    <div id="projectModal" class="fixed inset-0 z-[10000] bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-card rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto animate-modalIn">
+            <div class="relative">
+                <img id="modalImage" src="" alt="" class="w-full h-64 sm:h-80 object-cover rounded-t-3xl">
+                <button id="modalClose" class="absolute top-4 right-4 w-10 h-10 bg-black/50 hover:bg-spring text-white rounded-full flex items-center justify-center text-xl transition-all hover:scale-110">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6 sm:p-8">
+                <span id="modalCategory" class="inline-block px-4 py-1 bg-spring/20 text-spring text-sm font-bold rounded-full mb-3"></span>
+                <h2 id="modalTitle" class="text-white text-2xl sm:text-3xl font-extrabold mb-4"></h2>
+                <p id="modalDesc" class="text-gray-400 text-sm sm:text-base leading-relaxed mb-6"></p>
+                <div id="modalTech" class="flex flex-wrap gap-2 mb-6"></div>
+                <div class="flex flex-wrap gap-3">
+                    <a id="modalLive" href="#" target="_blank" class="inline-flex items-center gap-2 px-6 py-2.5 bg-spring text-card font-bold rounded-full hover:bg-white transition-all text-sm">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>
+                    <a id="modalGithub" href="#" target="_blank" class="inline-flex items-center gap-2 px-6 py-2.5 border-2 border-spring text-spring font-bold rounded-full hover:bg-spring hover:text-card transition-all text-sm">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="counter">
-
-        <div class="box">
-            <span>1+</span>
-            <h3>years of experience</h3>
+    <!-- ========== SIDEBAR ========== -->
+    <header id="sidebar" class="fixed top-0 left-0 z-[1000] h-full w-[280px] bg-card flex flex-col items-center justify-center text-center transition-all duration-300 lg:translate-x-0 -translate-x-full overflow-y-auto">
+        <div class="px-4 py-6">
+            <img src="images/1.png" alt="Profile" class="w-36 h-36 rounded-full object-cover border-4 border-spring mx-auto mb-4 hover:scale-110 transition-transform duration-300">
+            <h3 class="text-white text-xl font-bold">Abdullah Al Musabbir</h3>
+            <h4 class="text-spring text-base font-semibold">(Shuvo)</h4>
+            <p class="text-gray-400 text-xs mt-1">Full Stack Web Developer & Designer</p>
         </div>
-
-        <div class="box">
-            <span>15+</span>
-            <h3>porject completed</h3>
+        <nav class="w-full px-5 mt-1">
+            <ul class="space-y-2">
+                <li><a href="#home" class="nav-link block py-2.5 px-4 bg-btn text-white text-sm rounded-full text-center capitalize hover:bg-spring hover:text-card transition-all"><i class="fas fa-home mr-2"></i>home</a></li>
+                <li><a href="#about" class="nav-link block py-2.5 px-4 bg-btn text-white text-sm rounded-full text-center capitalize hover:bg-spring hover:text-card transition-all"><i class="fas fa-user mr-2"></i>about</a></li>
+                <li><a href="#skills" class="nav-link block py-2.5 px-4 bg-btn text-white text-sm rounded-full text-center capitalize hover:bg-spring hover:text-card transition-all"><i class="fas fa-code mr-2"></i>skills</a></li>
+                <li><a href="#education" class="nav-link block py-2.5 px-4 bg-btn text-white text-sm rounded-full text-center capitalize hover:bg-spring hover:text-card transition-all"><i class="fas fa-graduation-cap mr-2"></i>education</a></li>
+                <li><a href="#portfolio" class="nav-link block py-2.5 px-4 bg-btn text-white text-sm rounded-full text-center capitalize hover:bg-spring hover:text-card transition-all"><i class="fas fa-briefcase mr-2"></i>portfolio</a></li>
+                <li><a href="#contact" class="nav-link block py-2.5 px-4 bg-btn text-white text-sm rounded-full text-center capitalize hover:bg-spring hover:text-card transition-all"><i class="fas fa-envelope mr-2"></i>contact</a></li>
+            </ul>
+        </nav>
+        <div class="flex gap-3 mt-4 pb-4">
+            <a href="https://www.facebook.com/profile.php?id=61586996791374" target="_blank" class="w-9 h-9 bg-btn text-white rounded-full flex items-center justify-center hover:bg-spring hover:text-card transition-all text-sm"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://github.com/abdullahalmusabbir" class="w-9 h-9 bg-btn text-white rounded-full flex items-center justify-center hover:bg-spring hover:text-card transition-all text-sm"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/abdullahalmusabbir/" class="w-9 h-9 bg-btn text-white rounded-full flex items-center justify-center hover:bg-spring hover:text-card transition-all text-sm"><i class="fab fa-linkedin-in"></i></a>
         </div>
+    </header>
 
-        <div class="box">
-            <span>3+</span>
-            <h3>happy clients</h3>
-        </div>
-
-        <div class="box">
-            <span>1+</span>
-            <h3>awards won</h3>
-        </div>
-
+    <!-- Mobile Menu -->
+    <div id="menu" class="fixed top-4 right-4 bg-btn text-white cursor-pointer text-xl p-3 rounded-lg z-[1001] lg:hidden hover:bg-spring hover:text-card transition-all">
+        <i class="fas fa-bars" id="menuIcon"></i>
     </div>
 
-</div>
-
-</section>
-
-<!-- about section ends -->
-
-<!-- education section starts  -->
-
-<section class="education" id="education">
-
-<h1 class="heading"> my <span>education</span> </h1>
-
-<div class="box-container">
-
-    <div class="box">
-        <i class="fas fa-graduation-cap"></i>
-        <span>2017</span>
-        <h3>Completed SSC</h3>
-        <p>It was a 7-years journey of my high school life. Completed SSC from science dept. Got GPA: 5. 0 out of 5. 00</p>
-    </div>
-
-    <div class="box">
-        <i class="fas fa-graduation-cap"></i>
-        <span>2019</span>
-        <h3>Completed HSC</h3>
-        <p>It was wonderfull time in my life. Finally completed HSC also from science dept. Got GPA: 4. 83 out of 5. 00 & it's the stage of my life. </p>
-    </div>
-
-    <div class="box">
-        <i class="fas fa-graduation-cap"></i>
-        <span>2026</span>
-        <h3>B.Sc in CSE</h3>
-        <p>After the HSC exam, i  get good subjects from my science dept. And finally i have to keep up my study so i got admission in b. Sc in cse. I feel happy cause it's helped me to find job. </p>
-    </div>
-
-    <div class="box">
-        <i class="fas fa-graduation-cap"></i>
-        <span>2023</span>
-        <h3>Fontend Web Developer</h3>
-        <p>After getting admission to B.Sc in CSE. I have done courses in HTML, CSE & javascript and got quite better skills & joined as a front-end web developer. There I learned practically to build a website project.  </p>
-    </div>
-
-    <div class="box">
-        <i class="fas fa-graduation-cap"></i>
-        <span>2024</span>
-        <h3>Backend Web Developer</h3>
-        <p>I was always interested with it world. That was my inspiration to complete MERN, Django etc. Now i am certified web developer. Now i am doing regularly practice of my work. </p>
-    </div>
-
-    <div class="box">
-        <i class="fas fa-graduation-cap"></i>
-        <span>2022</span>
-        <h3>Photographer</h3>
-        <p>I started photography course at my home after seeing so many tutorials. I am now an expert in photography.</p>
-    </div>
-
-</div>
-
-</section>
-
-<!-- education section ends -->
-
-<!-- portfolio section starts  -->
-
-<section class="portfolio" id="portfolio">
-
-<h1 class="heading"> my <span>MERN Project</span> </h1>
-
-<div class="box-container">
-
-    <div class="box">
-        <img src="images/mern-1.png" alt="">
-    </div>
-
-    <div class="box">
-        <img src="images/mern-2.png" alt="">
-    </div>
-
-    <div class="box">
-        <img src="images/mern-3.png" alt="">
-    </div>
-
-    <div class="box">
-        <img src="images/mern-4.png" alt="">
-    </div>
-
-    <div class="box">
-        <img src="images/mern-5.png" alt="">
-    </div>
-
-    <div class="box">
-        <img src="images/mern-6.png" alt="">
-    </div>
-
-</div>
-
-</section>
-
-<!-- portfolio section ends -->
-
-<section class="portfolio" id="portfolio">
-
-    <h1 class="heading"> my <span>Django Project</span> </h1>
-    
-    <div class="box-container">
-    
-        <div class="box">
-            <img src="images/d-1.png" alt="">
-        </div>
-    
-        <div class="box">
-            <img src="images/d-2.png" alt="">
-        </div>
-    
-        <div class="box">
-            <img src="images/d-3.png" alt="">
-        </div>
-    
-        <div class="box">
-            <img src="images/d-4.png" alt="">
-        </div>
-    
-        <!-- <div class="box">
-            <img src="images/5.png" alt="">
-        </div>
-    
-        <div class="box">
-            <img src="images/6.jpg" alt="">
-        </div> -->
-    
-    </div>
-    
-</section>
-
-<section class="portfolio" id="portfolio">
-
-    <h1 class="heading"> my <span>Service</span> </h1>
-    
-    <div class="box-container">
-    
-        <div class="box">
-            <img src="images/s-1.png" alt="">
-        </div>
-    
-        <div class="box">
-            <img src="images/s-2.png" alt="">
-        </div>
-    
-        <div class="box">
-            <img src="images/s-3.png" alt="">
-        </div>
-    
-        <div class="box">
-            <img src="images/s-4.png" alt="">
-        </div>
-    
-        <!-- <div class="box">
-            <img src="images/5.png" alt="">
-        </div>
-    
-        <div class="box">
-            <img src="images/6.jpg" alt="">
-        </div> -->
-    
-    </div>
-    
-</section>
-
-<section class="portfolio" id="portfolio">
-
-    <h1 class="heading"> my <span>Data Science Project</span> </h1>
-    
-    <div class="box-container">
-    
-        <div class="box">
-            <img src="images/p-1.png" alt="">
-        </div>
-    
-        <div class="box">
-            <img src="images/p-2.png" alt="">
-        </div>
-    
-        <!-- <div class="box">
-            <img src="images/s-3.png" alt="">
-        </div>
-    
-        <div class="box">
-            <img src="images/s-4.png" alt="">
-        </div> -->
-    
-        <!-- <div class="box">
-            <img src="images/5.png" alt="">
-        </div>
-    
-        <div class="box">
-            <img src="images/6.jpg" alt="">
-        </div> -->
-    
-    </div>
-    
-</section>
-
-
-<!-- contact section starts  -->
-
-<section class="contact" id="contact">
-
-<h1 class="heading"> <span>contact</span> me </h1>
-
-<div class="row">
-
-    <div class="content">
-
-        <h3 class="title">contact info</h3>
-
-        <div class="info">
-            <h3 class="lower"> <i class="fas fa-envelope"></i> abdullahmusabbir703@gmail.com </h3>
-            <h3> <i class="fas fa-phone"></i> +880-1944145084 </h3>
-            <h3> <i class="fas fa-phone"></i> +880-1706626096 </h3>
-            <h3> <i class="fas fa-map-marker-alt"></i>Keraniganj, Dhaka-1312. </h3>
-        </div>
-
-    </div>
-
-    <form action="">
-
-        <input type="text" placeholder="name" class="box">
-        <input type="email" placeholder="email" class="box">
-        <input type="text" placeholder="project" class="box">
-        <textarea name="" id="" cols="30" rows="10" class="box message" placeholder="message"></textarea>
-        <button type="submit" class="btn"> send <i class="fas fa-paper-plane"></i> </button>
-
-    </form>
-
-</div>
-
-</section>
-
-<!-- contact section ends -->
-
-
-<!-- scroll top button  -->
-
-<a href="#home" class="top">
-    <img src="images/scroll.png" alt="Scroll For Top">
-</a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- jquery cdn link  -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-<!-- custom js file link  -->
-<script src="js/script.js"></script>
-
+    <!-- ========== MAIN ========== -->
+    <main class="lg:pl-[280px]">
+
+        <!-- HOME -->
+        <section id="home" class="min-h-screen flex flex-col justify-center px-6 md:px-16 lg:px-20 py-20 relative overflow-hidden">
+            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                <div class="absolute w-72 h-72 bg-spring/5 rounded-full -top-20 -right-20 blur-3xl"></div>
+                <div class="absolute w-96 h-96 bg-spring/5 rounded-full bottom-0 -left-40 blur-3xl"></div>
+            </div>
+            <div class="relative z-10 opacity-0 translate-y-8 transition-all duration-700" data-fade>
+                <p class="text-spring text-sm md:text-base font-semibold mb-2 tracking-widest uppercase">Welcome to my portfolio</p>
+                <h3 class="text-white text-xl md:text-2xl font-light mb-2">Hi, There! 👋</h3>
+                <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-tight">I'm <span class="text-spring">Abdullah Al Musabbir</span></h1>
+                <div class="h-1 w-20 bg-spring rounded mb-6"></div>
+                <p class="text-gray-300 text-sm md:text-base max-w-2xl leading-relaxed mb-8">A professional full-stack web developer. I completed several courses in <span class="text-spring font-semibold">HTML, CSS, JavaScript, Bootstrap, MongoDB, Express, Node.js, React.js, Django</span>. Also I have coding skills in <span class="text-spring font-semibold">C++, Java</span> programming language.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#about" class="inline-flex items-center gap-2 px-7 py-3 bg-spring text-card font-bold rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg shadow-spring/20 text-sm"><i class="fas fa-user"></i> About Me</a>
+                    <a href="#contact" class="inline-flex items-center gap-2 px-7 py-3 border-2 border-spring text-spring font-bold rounded-full hover:bg-spring hover:text-card hover:scale-105 transition-all duration-300 text-sm"><i class="fas fa-paper-plane"></i> Hire Me</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about" class="min-h-screen px-6 md:px-16 lg:px-20 py-20">
+            <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20 opacity-0 translate-y-8 transition-all duration-700" data-fade><span class="text-spring">About</span> Me</h1>
+            <div class="flex flex-wrap items-center justify-center gap-8">
+                <div class="flex-1 min-w-[280px] max-w-xl opacity-0 translate-y-8 transition-all duration-700" data-fade>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box transition-all">
+                            <i class="fas fa-user text-spring text-lg w-7 text-center"></i>
+                            <div><span class="text-gray-500 text-xs">Name</span><h3 class="text-white text-base font-semibold">Abdullah Al Musabbir</h3></div>
+                        </div>
+                        <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box transition-all">
+                            <i class="fas fa-birthday-cake text-spring text-lg w-7 text-center"></i>
+                            <div><span class="text-gray-500 text-xs">Age</span><h3 class="text-white text-base font-semibold">23</h3></div>
+                        </div>
+                        <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box transition-all">
+                            <i class="fas fa-graduation-cap text-spring text-lg w-7 text-center"></i>
+                            <div><span class="text-gray-500 text-xs">Qualification</span><h3 class="text-white text-base font-semibold">B.Sc in CSE</h3></div>
+                        </div>
+                        <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box transition-all">
+                            <i class="fas fa-laptop-code text-spring text-lg w-7 text-center"></i>
+                            <div><span class="text-gray-500 text-xs">Role</span><h3 class="text-white text-base font-semibold">Full Stack Web Developer</h3></div>
+                        </div>
+                        <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box transition-all">
+                            <i class="fas fa-language text-spring text-lg w-7 text-center"></i>
+                            <div><span class="text-gray-500 text-xs">Languages</span><h3 class="text-white text-base font-semibold">English, Bangla, Hindi</h3></div>
+                        </div>
+                    </div>
+                    <a href="https://www.facebook.com/shu.dho.7" target="_blank" class="inline-flex items-center gap-2 mt-5 px-6 py-2.5 bg-btn text-white rounded-full hover:bg-spring hover:text-card transition-all text-sm"><i class="fab fa-facebook-f"></i> Follow Me</a>
+                </div>
+                <div class="flex-1 min-w-[280px] max-w-xl opacity-0 translate-y-8 transition-all duration-700" data-fade>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-box p-6 rounded-2xl text-center hover:scale-105 transition-transform duration-300 group">
+                            <span class="text-4xl font-extrabold text-spring group-hover:scale-110 inline-block transition-transform">1+</span>
+                            <h3 class="text-white text-sm mt-2 capitalize">Years of Experience</h3>
+                        </div>
+                        <div class="bg-box p-6 rounded-2xl text-center hover:scale-105 transition-transform duration-300 group">
+                            <span class="text-4xl font-extrabold text-spring group-hover:scale-110 inline-block transition-transform">15+</span>
+                            <h3 class="text-white text-sm mt-2 capitalize">Projects Completed</h3>
+                        </div>
+                        <div class="bg-box p-6 rounded-2xl text-center hover:scale-105 transition-transform duration-300 group">
+                            <span class="text-4xl font-extrabold text-spring group-hover:scale-110 inline-block transition-transform">3+</span>
+                            <h3 class="text-white text-sm mt-2 capitalize">Happy Clients</h3>
+                        </div>
+                        <div class="bg-box p-6 rounded-2xl text-center hover:scale-105 transition-transform duration-300 group">
+                            <span class="text-4xl font-extrabold text-spring group-hover:scale-110 inline-block transition-transform">1+</span>
+                            <h3 class="text-white text-sm mt-2 capitalize">Awards Won</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills" class="min-h-screen px-6 md:px-16 lg:px-20 py-20">
+            <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20 opacity-0 translate-y-8 transition-all duration-700" data-fade>My <span class="text-spring">Skills</span></h1>
+            <div class="max-w-3xl mx-auto space-y-5 opacity-0 translate-y-8 transition-all duration-700" data-fade>
+                <div>
+                    <div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">HTML / CSS</span><span class="text-spring font-bold text-sm">95%</span></div>
+                    <div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full bg-gradient-to-r from-spring to-emerald-600 transition-all duration-[1500ms] w-0" data-skill="95"></div></div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">JavaScript</span><span class="text-spring font-bold text-sm">85%</span></div>
+                    <div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full bg-gradient-to-r from-spring to-emerald-600 transition-all duration-[1500ms] w-0" data-skill="85"></div></div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">React.js</span><span class="text-spring font-bold text-sm">80%</span></div>
+                    <div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full bg-gradient-to-r from-spring to-emerald-600 transition-all duration-[1500ms] w-0" data-skill="80"></div></div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">Node.js / Express</span><span class="text-spring font-bold text-sm">78%</span></div>
+                    <div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full bg-gradient-to-r from-spring to-emerald-600 transition-all duration-[1500ms] w-0" data-skill="78"></div></div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">MongoDB</span><span class="text-spring font-bold text-sm">75%</span></div>
+                    <div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full bg-gradient-to-r from-spring to-emerald-600 transition-all duration-[1500ms] w-0" data-skill="75"></div></div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">Django / Python</span><span class="text-spring font-bold text-sm">90%</span></div>
+                    <div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full bg-gradient-to-r from-spring to-emerald-600 transition-all duration-[1500ms] w-0" data-skill="90"></div></div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">C++ / Java</span><span class="text-spring font-bold text-sm">72%</span></div>
+                    <div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full bg-gradient-to-r from-spring to-emerald-600 transition-all duration-[1500ms] w-0" data-skill="72"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION -->
+        <section id="education" class="min-h-screen px-6 md:px-16 lg:px-20 py-20">
+            <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20 opacity-0 translate-y-8 transition-all duration-700" data-fade>My <span class="text-spring">Education</span></h1>
+            <div class="max-w-4xl mx-auto relative">
+                <div class="absolute left-5 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-white/20"></div>
+                <div class="space-y-10">
+                    <!-- 1 -->
+                    <div class="relative flex items-start opacity-0 translate-y-8 transition-all duration-700" data-fade>
+                        <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-graduation-cap text-white text-sm"></i></div>
+                        <div class="ml-16 md:ml-0 md:w-[44%] md:pr-10 bg-box p-5 rounded-2xl hover:scale-[1.02] transition-transform">
+                            <span class="inline-block px-3 py-0.5 bg-btn text-white text-xs rounded-full mb-2">2017</span>
+                            <h3 class="text-white text-lg font-bold">Completed SSC</h3>
+                            <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed SSC from science dept. Got GPA: 5.0 out of 5.00</p>
+                        </div>
+                    </div>
+                    <!-- 2 -->
+                    <div class="relative flex items-start md:flex-row-reverse opacity-0 translate-y-8 transition-all duration-700" data-fade>
+                        <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-graduation-cap text-white text-sm"></i></div>
+                        <div class="ml-16 md:ml-0 md:w-[44%] md:pl-10 bg-box p-5 rounded-2xl hover:scale-[1.02] transition-transform">
+                            <span class="inline-block px-3 py-0.5 bg-btn text-white text-xs rounded-full mb-2">2019</span>
+                            <h3 class="text-white text-lg font-bold">Completed HSC</h3>
+                            <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed HSC from science dept. Got GPA: 4.83 out of 5.00</p>
+                        </div>
+                    </div>
+                    <!-- 3 -->
+                    <div class="relative flex items-start opacity-0 translate-y-8 transition-all duration-700" data-fade>
+                        <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-graduation-cap text-white text-sm"></i></div>
+                        <div class="ml-16 md:ml-0 md:w-[44%] md:pr-10 bg-box p-5 rounded-2xl hover:scale-[1.02] transition-transform">
+                            <span class="inline-block px-3 py-0.5 bg-btn text-white text-xs rounded-full mb-2">2026</span>
+                            <h3 class="text-white text-lg font-bold">B.Sc in CSE</h3>
+                            <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Got admission in B.Sc in CSE. It helped me find my career path in technology.</p>
+                        </div>
+                    </div>
+                    <!-- 4 -->
+                    <div class="relative flex items-start md:flex-row-reverse opacity-0 translate-y-8 transition-all duration-700" data-fade>
+                        <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-code text-white text-sm"></i></div>
+                        <div class="ml-16 md:ml-0 md:w-[44%] md:pl-10 bg-box p-5 rounded-2xl hover:scale-[1.02] transition-transform">
+                            <span class="inline-block px-3 py-0.5 bg-btn text-white text-xs rounded-full mb-2">2023</span>
+                            <h3 class="text-white text-lg font-bold">Frontend Web Developer</h3>
+                            <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed courses in HTML, CSS & JavaScript. Joined as a front-end developer.</p>
+                        </div>
+                    </div>
+                    <!-- 5 -->
+                    <div class="relative flex items-start opacity-0 translate-y-8 transition-all duration-700" data-fade>
+                        <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-server text-white text-sm"></i></div>
+                        <div class="ml-16 md:ml-0 md:w-[44%] md:pr-10 bg-box p-5 rounded-2xl hover:scale-[1.02] transition-transform">
+                            <span class="inline-block px-3 py-0.5 bg-btn text-white text-xs rounded-full mb-2">2024</span>
+                            <h3 class="text-white text-lg font-bold">Backend Web Developer</h3>
+                            <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed MERN stack and Django. Now a certified full-stack web developer.</p>
+                        </div>
+                    </div>
+                    <!-- 6 -->
+                    <div class="relative flex items-start md:flex-row-reverse opacity-0 translate-y-8 transition-all duration-700" data-fade>
+                        <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-camera text-white text-sm"></i></div>
+                        <div class="ml-16 md:ml-0 md:w-[44%] md:pl-10 bg-box p-5 rounded-2xl hover:scale-[1.02] transition-transform">
+                            <span class="inline-block px-3 py-0.5 bg-btn text-white text-xs rounded-full mb-2">2022</span>
+                            <h3 class="text-white text-lg font-bold">Photographer</h3>
+                            <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Started photography course at home. Now an expert in photography.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO -->
+        <section id="portfolio" class="min-h-screen px-6 md:px-16 lg:px-20 py-20">
+
+            <!-- MERN Projects -->
+            <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20 opacity-0 translate-y-8 transition-all duration-700" data-fade>My <span class="text-spring">MERN Projects</span></h1>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
+                <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
+                     data-img="images/mern-1.png" data-title="E-Commerce Platform" data-category="MERN Stack"
+                     data-desc="A full-featured e-commerce platform built with MongoDB, Express.js, React.js and Node.js. Features include user authentication, product management, shopping cart, payment integration and order tracking."
+                     data-tech="React.js,Node.js,Express.js,MongoDB,Stripe,JWT" data-live="#" data-github="#">
+                    <img src="images/mern-1.png" alt="MERN Project 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <span class="text-spring text-xs font-bold">MERN Stack</span>
+                        <h4 class="text-white font-bold text-sm">E-Commerce Platform</h4>
+                        <p class="text-gray-300 text-xs mt-1">Click to view details</p>
+                    </div>
+                </div>
+                <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
+                     data-img="images/mern-2.png" data-title="Social Media App" data-category="MERN Stack"
+                     data-desc="A social media application with real-time messaging, post sharing, likes, comments and user profiles. Built with Socket.io for real-time communication."
+                     data-tech="React.js,Node.js,Socket.io,MongoDB,Cloudinary" data-live="#" data-github="#">
+                    <img src="images/mern-2.png" alt="MERN Project 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <span class="text-spring text-xs font-bold">MERN Stack</span>
+                        <h4 class="text-white font-bold text-sm">Social Media App</h4>
+                        <p class="text-gray-300 text-xs mt-1">Click to view details</p>
+                    </div>
+                </div>
+                <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
+                     data-img="images/mern-3.png" data-title="Task Management System" data-category="MERN Stack"
+                     data-desc="A comprehensive task management system with drag-and-drop functionality, team collaboration, deadline tracking and progress analytics dashboard."
+                     data-tech="React.js,Node.js,Express.js,MongoDB,Redux" data-live="#" data-github="#">
+                    <img src="images/mern-3.png" alt="MERN Project 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <span class="text-spring text-xs font-bold">MERN Stack</span>
+                        <h4 class="text-white font-bold text-sm">Task Management System</h4>
+                        <p class="text-gray-300 text-xs mt-1">Click to view details</p>
+                    </div>
+                </div>
+                <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
+                     data-img="images/mern-4.png" data-title="Blog Platform" data-category="MERN Stack"
+                     data-desc="A modern blog platform with rich text editor, categories, tags, comment system and SEO optimization. Includes admin dashboard for content management."
+                     data-tech="React.js,Node.js,Express.js,MongoDB,TinyMCE" data-live="#" data-github="#">
+                    <img src="images/mern-4.png" alt="MERN Project 4" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <span class="text-spring text-xs font-bold">MERN Stack</span>
+                        <h4 class="text-white font-bold text-sm">Blog Platform</h4>
+                        <p class="text-gray-300 text-xs mt-1">Click to view details</p>
+                    </div>
+                </div>
+                <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
+                     data-img="images/mern-5.png" data-title="Real-time Chat App" data-category="MERN Stack"
+                     data-desc="A real-time chat application with group chats, file sharing, emoji support, and video calling feature powered by WebRTC."
+                     data-tech="React.js,Node.js,Socket.io,MongoDB,WebRTC" data-live="#" data-github="#">
+                    <img src="images/mern-5.png" alt="MERN Project 5" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <span class="text-spring text-xs font-bold">MERN Stack</span>
+                        <h4 class="text-white font-bold text-sm">Real-time Chat App</h4>
+                        <p class="text-gray-300 text-xs mt-1">Click to view details</p>
+                    </div>
+                </div>
+                <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
+                     data-img="images/mern-6.png" data-title="Job Portal" data-category="MERN Stack"
+                     data-desc="A job portal with employer and employee dashboards, resume upload, job search with filters, and application tracking system."
+                     data-tech="React.js,Node.js,Express.js,MongoDB,Multer" data-live="#" data-github="#">
+                    <img src="images/mern-6.png" alt="MERN Project 6" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <span class="text-spring text-xs font-bold">MERN Stack</span>
+                        <h4 class="text-white font-bold text-sm">Job Portal</h4>
+                        <p class="text-gray-300 text-xs mt-1">Click to view details</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Django Projects -->
+            <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20 opacity-0 translate-y-8 transition-all duration-700" data-fade>My <span class="text-spring">Django Projects</span></h1>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
+                <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
+                     data-img="images/d-1.png" data-title="Inventory Management" data-category="Django"
+                     data-desc="A complete inventory management system with stock tracking, supplier management, purchase orders, and detailed reporting with chart visualizations."
+                     data-tech="Django,Python,PostgreSQL,Bootstrap,Chart.js" data-live="#" data-github="#">
+                    <img src="images/d-1.png" alt="Django 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <span class="text-spring text-xs font-bold">Django</span>
+                        <h4 class="text-white font-bold text-sm">Inventory Management</h4>
+                        <p class="text-gray-300 text-xs mt-1">Click to view details</p>
+                    </div>
+                </div>
+                <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
+                     data-img="images/d-2.png" data-title="Learning Platform" data-category="Django"
+                     data-desc="An online learning platform with course creation, video lectures, quizzes, student progress tracking and certificate generation."
+                     data-tech="Django,Python,SQLite,JavaScript,Tailwind" data-live="#" data-github="#">
+                    <img src="images/d-2.png" alt="Django 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <span class="text-spring text-xs font-bold">Django</span>
+                        <h4 class="text-white font-bold text-sm">Learning Platform</h4>
+                        <p class="text-gray-300 text-xs mt-1">Click to view details</p>
+                    </div>
+                </div>
+                <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
+                     data-img="images/d-3.png" data-title="Hospital Management" data-category="Django"
+                     data-desc="A hospital management system with patient records, appointment scheduling, doctor management and billing system."
+                     data-tech="Django,Python,MySQL,Bootstrap,REST API" data-live="#" data-github="#">
+                    <img src="images/d-3.png" alt="Django 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <span class="text-spring text-xs font-bold">Django</span>
+                        <h4 class="text-white font-bold text-sm">Hospital Management</h4>
+                        <p class="text-gray-300 text-xs mt-1">Click to view details</p>
+                    </div>
+                </div>
+                <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
+                     data-img="images/d-4.png" data-title="News Portal" data-category="Django"
+                     data-desc="A news portal with article management, categories, commenting system, newsletter subscription and admin panel."
+                     data-tech="Django,Python,PostgreSQL,JavaScript,CSS" data-live="#" data-github="#">
+                    <img src="images/d-4.png" alt="Django 4" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <span class="text-spring text-xs font-bold">Django</span>
+                        <h4 class="text-white font-bold text-sm">News Portal</h4>
+                        <p class="text-gray-300 text-xs mt-1">Click to view details</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Services -->
+            <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20 opacity-0 translate-y-8 transition-all duration-700" data-fade>My <span class="text-spring">Services</span></h1>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
+                <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
+                     data-img="images/s-1.png" data-title="Web Development" data-category="Service"
+                     data-desc="I provide professional web development services including responsive websites, single page applications, and full-stack web applications using modern technologies."
+                     data-tech="React.js,Node.js,Django,MongoDB,Tailwind CSS" data-live="#" data-github="#">
+                    <img src="images/s-1.png" alt="Service 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <span class="text-spring text-xs font-bold">Service</span>
+                        <h4 class="text-white font-bold text-sm">Web Development</h4>
+                        <p class="text-gray-300 text-xs mt-1">Click to view details</p>
+                    </div>
+                </div>
+                <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
+                     data-img="images/s-2.png" data-title="UI/UX Design" data-category="Service"
+                     data-desc="Creative UI/UX design services with focus on user experience, wireframing, prototyping and modern design principles for web and mobile applications."
+                     data-tech="Figma,Adobe XD,Photoshop,Illustrator" data-live="#" data-github="#">
+                    <img src="images/s-2.png" alt="Service 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <span class="text-spring text-xs font-bold">Service</span>
+                        <h4 class="text-white font-bold text-sm">UI/UX Design</h4>
+                        <p class="text-gray-300 text-xs mt-1">Click to view details</p>
+                    </div>
+                </div>
+                <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
+                     data-img="images/s-3.png" data-title="API Development" data-category="Service"
+                     data-desc="RESTful API development services with secure authentication, documentation, rate limiting and scalable architecture for your applications."
+                     data-tech="Node.js,Express.js,Django REST,JWT,Swagger" data-live="#" data-github="#">
+                    <img src="images/s-3.png" alt="Service 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <span class="text-spring text-xs font-bold">Service</span>
+                        <h4 class="text-white font-bold text-sm">API Development</h4>
+                        <p class="text-gray-300 text-xs mt-1">Click to view details</p>
+                    </div>
+                </div>
+                <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
+                     data-img="images/s-4.png" data-title="Photography" data-category="Service"
+                     data-desc="Professional photography services including portrait, event, product and landscape photography with advanced editing and color grading."
+                     data-tech="Lightroom,Photoshop,Camera RAW,Color Grading" data-live="#" data-github="#">
+                    <img src="images/s-4.png" alt="Service 4" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <span class="text-spring text-xs font-bold">Service</span>
+                        <h4 class="text-white font-bold text-sm">Photography</h4>
+                        <p class="text-gray-300 text-xs mt-1">Click to view details</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Science -->
+            <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20 opacity-0 translate-y-8 transition-all duration-700" data-fade>My <span class="text-spring">Data Science Projects</span></h1>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
+                     data-img="images/p-1.png" data-title="Sales Prediction Model" data-category="Data Science"
+                     data-desc="A machine learning model for predicting sales trends using historical data. Features include data visualization, feature engineering and model evaluation."
+                     data-tech="Python,Pandas,Scikit-learn,Matplotlib,Jupyter" data-live="#" data-github="#">
+                    <img src="images/p-1.png" alt="DS 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <span class="text-spring text-xs font-bold">Data Science</span>
+                        <h4 class="text-white font-bold text-sm">Sales Prediction Model</h4>
+                        <p class="text-gray-300 text-xs mt-1">Click to view details</p>
+                    </div>
+                </div>
+                <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
+                     data-img="images/p-2.png" data-title="Sentiment Analysis" data-category="Data Science"
+                     data-desc="A natural language processing project for analyzing sentiment in social media posts and reviews using deep learning techniques."
+                     data-tech="Python,TensorFlow,NLTK,NumPy,Seaborn" data-live="#" data-github="#">
+                    <img src="images/p-2.png" alt="DS 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <span class="text-spring text-xs font-bold">Data Science</span>
+                        <h4 class="text-white font-bold text-sm">Sentiment Analysis</h4>
+                        <p class="text-gray-300 text-xs mt-1">Click to view details</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="min-h-screen px-6 md:px-16 lg:px-20 py-20">
+            <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20 opacity-0 translate-y-8 transition-all duration-700" data-fade><span class="text-spring">Contact</span> Me</h1>
+            <div class="flex flex-wrap items-start justify-center gap-8 max-w-5xl mx-auto">
+                <div class="flex-1 min-w-[260px] max-w-md opacity-0 translate-y-8 transition-all duration-700" data-fade>
+                    <h3 class="text-white text-xl font-bold uppercase mb-5 tracking-wider">Contact Info</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box transition-all group">
+                            <div class="w-10 h-10 bg-spring/20 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-spring/40 transition-all"><i class="fas fa-envelope text-spring text-sm"></i></div>
+                            <div><span class="text-gray-500 text-xs">Email</span><h3 class="text-white text-xs font-semibold">abdullahmusabbir703@gmail.com</h3></div>
+                        </div>
+                        <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box transition-all group">
+                            <div class="w-10 h-10 bg-spring/20 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-spring/40 transition-all"><i class="fas fa-phone text-spring text-sm"></i></div>
+                            <div><span class="text-gray-500 text-xs">Phone</span><h3 class="text-white text-sm font-semibold">+880-1944145084</h3></div>
+                        </div>
+                        <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box transition-all group">
+                            <div class="w-10 h-10 bg-spring/20 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-spring/40 transition-all"><i class="fas fa-phone text-spring text-sm"></i></div>
+                            <div><span class="text-gray-500 text-xs">Phone 2</span><h3 class="text-white text-sm font-semibold">+880-1316632108</h3></div>
+                        </div>
+                        <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box transition-all group">
+                            <div class="w-10 h-10 bg-spring/20 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-spring/40 transition-all"><i class="fas fa-map-marker-alt text-spring text-sm"></i></div>
+                            <div><span class="text-gray-500 text-xs">Location</span><h3 class="text-white text-sm font-semibold">Keraniganj, Dhaka-1312</h3></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1 min-w-[260px] max-w-lg opacity-0 translate-y-8 transition-all duration-700" data-fade>
+                    <form action="" class="space-y-3">
+                        <input type="text" placeholder="Your Name" class="w-full p-3.5 bg-box/50 text-white rounded-xl text-sm focus:ring-2 focus:ring-spring focus:bg-box transition-all placeholder:text-gray-500 outline-none border-none">
+                        <input type="email" placeholder="Your Email" class="w-full p-3.5 bg-box/50 text-white rounded-xl text-sm focus:ring-2 focus:ring-spring focus:bg-box transition-all placeholder:text-gray-500 outline-none border-none">
+                        <input type="text" placeholder="Your Project" class="w-full p-3.5 bg-box/50 text-white rounded-xl text-sm focus:ring-2 focus:ring-spring focus:bg-box transition-all placeholder:text-gray-500 outline-none border-none">
+                        <textarea placeholder="Your Message" rows="5" class="w-full p-3.5 bg-box/50 text-white rounded-xl text-sm resize-none focus:ring-2 focus:ring-spring focus:bg-box transition-all placeholder:text-gray-500 outline-none border-none"></textarea>
+                        <button type="submit" class="inline-flex items-center gap-2 px-7 py-3 bg-spring text-card font-bold rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg shadow-spring/20 text-sm">Send Message <i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="bg-card py-6 text-center border-t border-white/10">
+            <p class="text-gray-400 text-xs">&copy; 2024 <span class="text-spring font-bold">Abdullah Al Musabbir</span>. All Rights Reserved.</p>
+        </footer>
+    </main>
+
+    <!-- Scroll Top -->
+    <a href="#home" id="scrollTopBtn" class="fixed bottom-5 right-5 z-[999] w-11 h-11 bg-spring text-card rounded-full flex items-center justify-center shadow-lg shadow-spring/30 hover:bg-white hover:scale-110 transition-all duration-300 opacity-0 pointer-events-none">
+        <i class="fas fa-chevron-up text-base font-bold"></i>
+    </a>
+
+    <!-- ========== ALL SCRIPTS ========== -->
+    <script>
+    (function() {
+        // ====== MOBILE MENU ======
+        const menuBtn = document.getElementById('menu');
+        const menuIcon = document.getElementById('menuIcon');
+        const sidebar = document.getElementById('sidebar');
+
+        menuBtn.addEventListener('click', function() {
+            sidebar.classList.toggle('-translate-x-full');
+            sidebar.classList.toggle('translate-x-0');
+            menuIcon.classList.toggle('fa-bars');
+            menuIcon.classList.toggle('fa-times');
+        });
+
+        document.querySelectorAll('.nav-link').forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth < 1024) {
+                    sidebar.classList.add('-translate-x-full');
+                    sidebar.classList.remove('translate-x-0');
+                    menuIcon.classList.add('fa-bars');
+                    menuIcon.classList.remove('fa-times');
+                }
+            });
+        });
+
+        // ====== SCROLL TOP ======
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                scrollTopBtn.classList.add('opacity-100');
+            } else {
+                scrollTopBtn.classList.add('opacity-0', 'pointer-events-none');
+                scrollTopBtn.classList.remove('opacity-100');
+            }
+        });
+
+        // ====== ACTIVE NAV ======
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', function() {
+            let current = '';
+            sections.forEach(function(section) {
+                if (window.scrollY >= section.offsetTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(function(link) {
+                link.classList.remove('!bg-spring', '!text-card');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('!bg-spring', '!text-card');
+                }
+            });
+        });
+
+        // ====== FADE IN ON SCROLL ======
+        const fadeEls = document.querySelectorAll('[data-fade]');
+        const fadeObs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('opacity-0', 'translate-y-8');
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        fadeEls.forEach(function(el) { fadeObs.observe(el); });
+
+        // ====== SKILL BARS ======
+        const skillBars = document.querySelectorAll('[data-skill]');
+        const skillObs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.style.width = entry.target.getAttribute('data-skill') + '%';
+                }
+            });
+        }, { threshold: 0.5 });
+        skillBars.forEach(function(bar) { skillObs.observe(bar); });
+
+        // ====== SMOOTH SCROLL ======
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ====== CLOSE SIDEBAR ON SCROLL (mobile) ======
+        window.addEventListener('scroll', function() {
+            if (window.innerWidth < 1024) {
+                sidebar.classList.add('-translate-x-full');
+                sidebar.classList.remove('translate-x-0');
+                menuIcon.classList.add('fa-bars');
+                menuIcon.classList.remove('fa-times');
+            }
+        });
+
+        // ====== PROJECT MODAL ======
+        const modal = document.getElementById('projectModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalCategory = document.getElementById('modalCategory');
+        const modalDesc = document.getElementById('modalDesc');
+        const modalTech = document.getElementById('modalTech');
+        const modalLive = document.getElementById('modalLive');
+        const modalGithub = document.getElementById('modalGithub');
+        const modalClose = document.getElementById('modalClose');
+
+        document.querySelectorAll('.project-card').forEach(function(card) {
+            card.addEventListener('click', function() {
+                var img = this.getAttribute('data-img');
+                var title = this.getAttribute('data-title');
+                var category = this.getAttribute('data-category');
+                var desc = this.getAttribute('data-desc');
+                var tech = this.getAttribute('data-tech');
+                var live = this.getAttribute('data-live');
+                var github = this.getAttribute('data-github');
+
+                modalImage.src = img;
+                modalImage.alt = title;
+                modalTitle.textContent = title;
+                modalCategory.textContent = category;
+                modalDesc.textContent = desc;
+                modalLive.href = live;
+                modalGithub.href = github;
+
+                modalTech.innerHTML = '';
+                if (tech) {
+                    tech.split(',').forEach(function(t) {
+                        var span = document.createElement('span');
+                        span.className = 'inline-block px-3 py-1 bg-spring/10 text-spring text-xs font-semibold rounded-full border border-spring/30';
+                        span.textContent = t.trim();
+                        modalTech.appendChild(span);
+                    });
+                }
+
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        modalClose.addEventListener('click', function() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = '';
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // ====== ANIMATED CHARACTER ======
+        var character = document.getElementById('animated-character');
+        var charBody = document.getElementById('charBody');
+        var speechBubble = document.getElementById('speechBubble');
+        var armLeft = document.getElementById('armLeft');
+        var armRight = document.getElementById('armRight');
+        var legLeft = document.getElementById('legLeft');
+        var legRight = document.getElementById('legRight');
+
+        var lastScrollY = window.scrollY;
+        var scrollTimeout;
+        var isScrolling = false;
+
+        var messages = [
+            "Hello! 👋",
+            "Scroll down! ⬇️",
+            "Nice work! 🎨",
+            "Keep going! 🚀",
+            "Hire me! 💼",
+            "Let's code! 💻",
+            "I love JS! ❤️",
+            "MERN Stack! 🔥",
+            "Click a project! 👆",
+            "Contact me! 📧"
+        ];
+        var msgIndex = 0;
+
+        function setIdle() {
+            character.classList.add('animate-float');
+            armLeft.className = armLeft.className.replace('animate-armLFast', 'animate-armL');
+            armRight.className = armRight.className.replace('animate-armRFast', 'animate-armR');
+            legLeft.className = legLeft.className.replace('animate-legLFast', 'animate-legL');
+            legRight.className = legRight.className.replace('animate-legRFast', 'animate-legR');
+        }
+
+        function setWalking() {
+            character.classList.remove('animate-float');
+            armLeft.className = armLeft.className.replace('animate-armL', 'animate-armLFast');
+            armRight.className = armRight.className.replace('animate-armR', 'animate-armRFast');
+            legLeft.className = legLeft.className.replace('animate-legL', 'animate-legLFast');
+            legRight.className = legRight.className.replace('animate-legR', 'animate-legRFast');
+        }
+
+        function changeSpeech() {
+            msgIndex = (msgIndex + 1) % messages.length;
+            speechBubble.textContent = messages[msgIndex];
+        }
+
+        function createParticle() {
+            var p = document.createElement('div');
+            p.className = 'fixed w-1.5 h-1.5 bg-spring rounded-full pointer-events-none z-[9998] animate-particleFade';
+            var rect = character.getBoundingClientRect();
+            p.style.left = (rect.left + 30 + Math.random() * 20) + 'px';
+            p.style.top = (rect.bottom - 10) + 'px';
+            document.body.appendChild(p);
+            setTimeout(function() { p.remove(); }, 800);
+        }
+
+        var particleTimer;
+
+        window.addEventListener('scroll', function() {
+            var scrollY = window.scrollY;
+            var delta = scrollY - lastScrollY;
+
+            if (delta > 0) {
+                charBody.style.transform = 'scaleX(1)';
+            } else if (delta < 0) {
+                charBody.style.transform = 'scaleX(-1)';
+            }
+
+            var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            var pct = maxScroll > 0 ? scrollY / maxScroll : 0;
+            character.style.bottom = (20 + Math.sin(pct * Math.PI * 2) * 30) + 'px';
+
+            if (!isScrolling) {
+                isScrolling = true;
+                setWalking();
+                particleTimer = setInterval(createParticle, 120);
+            }
+
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(function() {
+                isScrolling = false;
+                setIdle();
+                clearInterval(particleTimer);
+                changeSpeech();
+            }, 250);
+
+            lastScrollY = scrollY;
+        });
+
+        setIdle();
+
+        setInterval(function() {
+            if (!isScrolling) changeSpeech();
+        }, 5000);
+
+        character.addEventListener('click', function() {
+            var cur = parseInt(character.style.bottom) || 20;
+            character.style.transition = 'bottom 0.3s ease';
+            character.style.bottom = (cur + 50) + 'px';
+            setTimeout(function() {
+                character.style.bottom = cur + 'px';
+            }, 300);
+            changeSpeech();
+            for (var i = 0; i < 8; i++) {
+                (function(j) {
+                    setTimeout(createParticle, j * 60);
+                })(i);
+            }
+        });
+
+    })();
+    </script>
 
 </body>
 </html>
