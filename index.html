@@ -100,41 +100,32 @@ tailwind.config = {
 <!-- ========== ANIMATED CHARACTER ========== -->
 <div id="animated-character" class="fixed bottom-5 right-10 z-[9999] w-20 cursor-pointer" style="height:120px;">
   <div id="charBody" class="relative w-20" style="height:120px;">
-    <!-- Speech Bubble -->
     <div id="speechBubble" class="absolute -top-12 -left-16 bg-white text-btn px-3 py-1 rounded-xl text-[10px] font-bold whitespace-nowrap z-10 animate-speechPop">
       Hello! 👋 Scroll down!
       <div class="absolute -bottom-1.5 right-5 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-white"></div>
     </div>
-    <!-- Head -->
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-9 h-9 bg-[#ffcc99] rounded-full z-[3] animate-headBob">
       <div class="absolute -top-2 -left-1 w-11 h-6 bg-btn rounded-t-full"></div>
       <div class="absolute w-[5px] h-[5px] bg-btn rounded-full top-3.5 left-2.5 z-[4]"></div>
       <div class="absolute w-[5px] h-[5px] bg-btn rounded-full top-3.5 right-2.5 z-[4]"></div>
       <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-2.5 h-1 bg-[#cc6666] rounded-b z-[4]"></div>
     </div>
-    <!-- Torso -->
     <div class="absolute top-8 left-1/2 -translate-x-1/2 w-[30px] h-[35px] bg-spring rounded-t-lg rounded-b z-[2]"></div>
-    <!-- Left Arm -->
     <div id="armLeft" class="absolute top-9 left-2.5 w-2.5 h-[30px] bg-spring rounded z-[1] origin-top animate-armL">
       <div class="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-[#ffcc99] rounded-full"></div>
     </div>
-    <!-- Right Arm -->
     <div id="armRight" class="absolute top-9 right-2.5 w-2.5 h-[30px] bg-spring rounded z-[1] origin-top animate-armR">
       <div class="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-[#ffcc99] rounded-full"></div>
     </div>
-    <!-- Laptop -->
     <div class="absolute top-[45px] -left-4 w-[22px] h-4 bg-[#555] rounded-sm z-[5] animate-laptopBob">
       <div class="absolute top-0.5 left-0.5 w-[18px] h-2.5 bg-[#4fc3f7] rounded-sm"></div>
     </div>
-    <!-- Left Leg -->
     <div id="legLeft" class="absolute top-[65px] left-[22px] w-3 h-[35px] bg-[#2a2a5a] rounded z-[1] origin-top animate-legL">
       <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-2 bg-btn rounded"></div>
     </div>
-    <!-- Right Leg -->
     <div id="legRight" class="absolute top-[65px] right-[22px] w-3 h-[35px] bg-[#2a2a5a] rounded z-[1] origin-top animate-legR">
       <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-2 bg-btn rounded"></div>
     </div>
-    <!-- Glow -->
     <div class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-[60px] h-[15px] bg-[radial-gradient(ellipse,rgba(0,206,121,0.3),transparent)] rounded-full animate-glowPulse"></div>
   </div>
 </div>
@@ -153,14 +144,7 @@ tailwind.config = {
       <h2 id="modalTitle" class="text-white text-2xl sm:text-3xl font-extrabold mb-4"></h2>
       <p id="modalDesc" class="text-gray-400 text-sm sm:text-base leading-relaxed mb-6"></p>
       <div id="modalTech" class="flex flex-wrap gap-2 mb-6"></div>
-      <div class="flex flex-wrap gap-3" id="modalBtns">
-        <a id="modalLive" href="#" target="_blank" class="inline-flex items-center gap-2 px-6 py-2.5 bg-spring text-card font-bold rounded-full hover:bg-white transition-all text-sm">
-          <i class="fas fa-external-link-alt"></i> Live Demo
-        </a>
-        <a id="modalGithub" href="#" target="_blank" class="inline-flex items-center gap-2 px-6 py-2.5 border-2 border-spring text-spring font-bold rounded-full hover:bg-spring hover:text-card transition-all text-sm">
-          <i class="fab fa-github"></i> GitHub
-        </a>
-      </div>
+      <div id="modalBtns" class="flex flex-wrap gap-3"></div>
     </div>
   </div>
 </div>
@@ -310,7 +294,6 @@ tailwind.config = {
     <div class="max-w-4xl mx-auto relative">
       <div class="absolute left-5 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-white/20"></div>
       <div class="space-y-10">
-        <!-- 1 -->
         <div class="relative flex items-start opacity-0 translate-y-8 transition-all duration-700" data-fade>
           <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-graduation-cap text-white text-sm"></i></div>
           <div class="ml-16 md:ml-0 md:w-[44%] md:pr-10 bg-box p-5 rounded-2xl hover:scale-[1.02] transition-transform">
@@ -319,7 +302,6 @@ tailwind.config = {
             <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed SSC from science dept. Got GPA: 5.0 out of 5.00</p>
           </div>
         </div>
-        <!-- 2 -->
         <div class="relative flex items-start md:flex-row-reverse opacity-0 translate-y-8 transition-all duration-700" data-fade>
           <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-graduation-cap text-white text-sm"></i></div>
           <div class="ml-16 md:ml-0 md:w-[44%] md:pl-10 bg-box p-5 rounded-2xl hover:scale-[1.02] transition-transform">
@@ -328,7 +310,6 @@ tailwind.config = {
             <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed HSC from science dept. Got GPA: 4.83 out of 5.00</p>
           </div>
         </div>
-        <!-- 3 -->
         <div class="relative flex items-start opacity-0 translate-y-8 transition-all duration-700" data-fade>
           <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-graduation-cap text-white text-sm"></i></div>
           <div class="ml-16 md:ml-0 md:w-[44%] md:pr-10 bg-box p-5 rounded-2xl hover:scale-[1.02] transition-transform">
@@ -337,7 +318,6 @@ tailwind.config = {
             <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Successfully graduated with B.Sc in Computer Science & Engineering. This degree shaped my career path in technology and software development.</p>
           </div>
         </div>
-        <!-- 4 -->
         <div class="relative flex items-start md:flex-row-reverse opacity-0 translate-y-8 transition-all duration-700" data-fade>
           <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-code text-white text-sm"></i></div>
           <div class="ml-16 md:ml-0 md:w-[44%] md:pl-10 bg-box p-5 rounded-2xl hover:scale-[1.02] transition-transform">
@@ -346,7 +326,6 @@ tailwind.config = {
             <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed courses in HTML, CSS & JavaScript. Joined as a front-end developer.</p>
           </div>
         </div>
-        <!-- 5 -->
         <div class="relative flex items-start opacity-0 translate-y-8 transition-all duration-700" data-fade>
           <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-server text-white text-sm"></i></div>
           <div class="ml-16 md:ml-0 md:w-[44%] md:pr-10 bg-box p-5 rounded-2xl hover:scale-[1.02] transition-transform">
@@ -355,7 +334,6 @@ tailwind.config = {
             <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed MERN stack and Django. Now a certified full-stack web developer.</p>
           </div>
         </div>
-        <!-- 6 -->
         <div class="relative flex items-start md:flex-row-reverse opacity-0 translate-y-8 transition-all duration-700" data-fade>
           <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-camera text-white text-sm"></i></div>
           <div class="ml-16 md:ml-0 md:w-[44%] md:pl-10 bg-box p-5 rounded-2xl hover:scale-[1.02] transition-transform">
@@ -374,89 +352,60 @@ tailwind.config = {
     <!-- MERN Projects -->
     <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20 opacity-0 translate-y-8 transition-all duration-700" data-fade>My <span class="text-spring">MERN Projects</span></h1>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
-
-      <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
-        data-img="images/mern-1.png" data-title="E-Commerce Platform" data-category="MERN Stack"
-        data-desc="A full-featured e-commerce platform built with MongoDB, Express.js, React.js and Node.js. Features include user authentication, product management, shopping cart, payment integration and order tracking."
-        data-tech="React.js,Node.js,Express.js,MongoDB,Stripe,JWT" data-live="#" data-github="#" data-hide-github="true">
-        <img src="images/mern-1.png" alt="MERN Project 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+      <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade data-img="images/mern-1.png" data-title="E-Commerce Platform" data-category="MERN Stack" data-desc="A full-featured e-commerce platform built with MongoDB, Express.js, React.js and Node.js. Features include user authentication, product management, shopping cart, payment integration and order tracking." data-tech="React.js,Node.js,Express.js,MongoDB,Stripe,JWT" data-live="" data-github="">
+        <img src="images/mern-1.png" alt="MERN 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
           <span class="text-spring text-xs font-bold">MERN Stack</span>
           <h4 class="text-white font-bold text-sm">E-Commerce Platform</h4>
           <p class="text-gray-300 text-xs mt-1">Click to view details</p>
         </div>
       </div>
-
-      <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
-        data-img="images/mern-2.png" data-title="Social Media App" data-category="MERN Stack"
-        data-desc="A social media application with real-time messaging, post sharing, likes, comments and user profiles. Built with Socket.io for real-time communication."
-        data-tech="React.js,Node.js,Socket.io,MongoDB,Cloudinary" data-live="#" data-github="#" data-hide-github="true">
-        <img src="images/mern-2.png" alt="MERN Project 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+      <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade data-img="images/mern-2.png" data-title="Social Media App" data-category="MERN Stack" data-desc="A social media application with real-time messaging, post sharing, likes, comments and user profiles. Built with Socket.io for real-time communication." data-tech="React.js,Node.js,Socket.io,MongoDB,Cloudinary" data-live="" data-github="">
+        <img src="images/mern-2.png" alt="MERN 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
           <span class="text-spring text-xs font-bold">MERN Stack</span>
           <h4 class="text-white font-bold text-sm">Social Media App</h4>
           <p class="text-gray-300 text-xs mt-1">Click to view details</p>
         </div>
       </div>
-
-      <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
-        data-img="images/mern-3.png" data-title="Task Management System" data-category="MERN Stack"
-        data-desc="A comprehensive task management system with drag-and-drop functionality, team collaboration, deadline tracking and progress analytics dashboard."
-        data-tech="React.js,Node.js,Express.js,MongoDB,Redux" data-live="#" data-github="#" data-hide-github="true">
-        <img src="images/mern-3.png" alt="MERN Project 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+      <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade data-img="images/mern-3.png" data-title="Task Management System" data-category="MERN Stack" data-desc="A comprehensive task management system with drag-and-drop functionality, team collaboration, deadline tracking and progress analytics dashboard." data-tech="React.js,Node.js,Express.js,MongoDB,Redux" data-live="" data-github="">
+        <img src="images/mern-3.png" alt="MERN 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
           <span class="text-spring text-xs font-bold">MERN Stack</span>
           <h4 class="text-white font-bold text-sm">Task Management System</h4>
           <p class="text-gray-300 text-xs mt-1">Click to view details</p>
         </div>
       </div>
-
-      <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
-        data-img="images/mern-4.png" data-title="Blog Platform" data-category="MERN Stack"
-        data-desc="A modern blog platform with rich text editor, categories, tags, comment system and SEO optimization. Includes admin dashboard for content management."
-        data-tech="React.js,Node.js,Express.js,MongoDB,TinyMCE" data-live="#" data-github="#" data-hide-github="true">
-        <img src="images/mern-4.png" alt="MERN Project 4" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+      <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade data-img="images/mern-4.png" data-title="Blog Platform" data-category="MERN Stack" data-desc="A modern blog platform with rich text editor, categories, tags, comment system and SEO optimization. Includes admin dashboard for content management." data-tech="React.js,Node.js,Express.js,MongoDB,TinyMCE" data-live="" data-github="">
+        <img src="images/mern-4.png" alt="MERN 4" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
           <span class="text-spring text-xs font-bold">MERN Stack</span>
           <h4 class="text-white font-bold text-sm">Blog Platform</h4>
           <p class="text-gray-300 text-xs mt-1">Click to view details</p>
         </div>
       </div>
-
-      <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
-        data-img="images/mern-5.png" data-title="Real-time Chat App" data-category="MERN Stack"
-        data-desc="A real-time chat application with group chats, file sharing, emoji support, and video calling feature powered by WebRTC."
-        data-tech="React.js,Node.js,Socket.io,MongoDB,WebRTC" data-live="#" data-github="#" data-hide-github="true">
-        <img src="images/mern-5.png" alt="MERN Project 5" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+      <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade data-img="images/mern-5.png" data-title="Real-time Chat App" data-category="MERN Stack" data-desc="A real-time chat application with group chats, file sharing, emoji support, and video calling feature powered by WebRTC." data-tech="React.js,Node.js,Socket.io,MongoDB,WebRTC" data-live="" data-github="">
+        <img src="images/mern-5.png" alt="MERN 5" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
           <span class="text-spring text-xs font-bold">MERN Stack</span>
           <h4 class="text-white font-bold text-sm">Real-time Chat App</h4>
           <p class="text-gray-300 text-xs mt-1">Click to view details</p>
         </div>
       </div>
-
-      <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
-        data-img="images/mern-6.png" data-title="Job Portal" data-category="MERN Stack"
-        data-desc="A job portal with employer and employee dashboards, resume upload, job search with filters, and application tracking system."
-        data-tech="React.js,Node.js,Express.js,MongoDB,Multer" data-live="#" data-github="#" data-hide-github="true">
-        <img src="images/mern-6.png" alt="MERN Project 6" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+      <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade data-img="images/mern-6.png" data-title="Job Portal" data-category="MERN Stack" data-desc="A job portal with employer and employee dashboards, resume upload, job search with filters, and application tracking system." data-tech="React.js,Node.js,Express.js,MongoDB,Multer" data-live="" data-github="">
+        <img src="images/mern-6.png" alt="MERN 6" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
           <span class="text-spring text-xs font-bold">MERN Stack</span>
           <h4 class="text-white font-bold text-sm">Job Portal</h4>
           <p class="text-gray-300 text-xs mt-1">Click to view details</p>
         </div>
       </div>
-
     </div>
 
     <!-- Django Projects -->
     <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20 opacity-0 translate-y-8 transition-all duration-700" data-fade>My <span class="text-spring">Django Projects</span></h1>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
-
-      <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
-        data-img="images/d-1.png" data-title="Inventory Management" data-category="Django"
-        data-desc="A complete inventory management system with stock tracking, supplier management, purchase orders, and detailed reporting with chart visualizations."
-        data-tech="Django,Python,PostgreSQL,Bootstrap,Chart.js" data-live="#" data-github="#" data-hide-github="true">
+      <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade data-img="images/d-1.png" data-title="Inventory Management" data-category="Django" data-desc="A complete inventory management system with stock tracking, supplier management, purchase orders, and detailed reporting with chart visualizations." data-tech="Django,Python,PostgreSQL,Bootstrap,Chart.js" data-live="" data-github="">
         <img src="images/d-1.png" alt="Django 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
           <span class="text-spring text-xs font-bold">Django</span>
@@ -464,11 +413,7 @@ tailwind.config = {
           <p class="text-gray-300 text-xs mt-1">Click to view details</p>
         </div>
       </div>
-
-      <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
-        data-img="images/d-2.png" data-title="Learning Platform" data-category="Django"
-        data-desc="An online learning platform with course creation, video lectures, quizzes, student progress tracking and certificate generation."
-        data-tech="Django,Python,SQLite,JavaScript,Tailwind" data-live="#" data-github="#" data-hide-github="true">
+      <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade data-img="images/d-2.png" data-title="Learning Platform" data-category="Django" data-desc="An online learning platform with course creation, video lectures, quizzes, student progress tracking and certificate generation." data-tech="Django,Python,SQLite,JavaScript,Tailwind" data-live="" data-github="">
         <img src="images/d-2.png" alt="Django 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
           <span class="text-spring text-xs font-bold">Django</span>
@@ -476,11 +421,7 @@ tailwind.config = {
           <p class="text-gray-300 text-xs mt-1">Click to view details</p>
         </div>
       </div>
-
-      <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
-        data-img="images/d-3.png" data-title="Hospital Management" data-category="Django"
-        data-desc="A hospital management system with patient records, appointment scheduling, doctor management and billing system."
-        data-tech="Django,Python,MySQL,Bootstrap,REST API" data-live="#" data-github="#" data-hide-github="true">
+      <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade data-img="images/d-3.png" data-title="Hospital Management" data-category="Django" data-desc="A hospital management system with patient records, appointment scheduling, doctor management and billing system." data-tech="Django,Python,MySQL,Bootstrap,REST API" data-live="" data-github="">
         <img src="images/d-3.png" alt="Django 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
           <span class="text-spring text-xs font-bold">Django</span>
@@ -488,11 +429,7 @@ tailwind.config = {
           <p class="text-gray-300 text-xs mt-1">Click to view details</p>
         </div>
       </div>
-
-      <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade
-        data-img="images/d-4.png" data-title="News Portal" data-category="Django"
-        data-desc="A news portal with article management, categories, commenting system, newsletter subscription and admin panel."
-        data-tech="Django,Python,PostgreSQL,JavaScript,CSS" data-live="#" data-github="#" data-hide-github="true">
+      <div class="project-card group relative h-48 rounded-xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700" data-fade data-img="images/d-4.png" data-title="News Portal" data-category="Django" data-desc="A news portal with article management, categories, commenting system, newsletter subscription and admin panel." data-tech="Django,Python,PostgreSQL,JavaScript,CSS" data-live="" data-github="">
         <img src="images/d-4.png" alt="Django 4" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
           <span class="text-spring text-xs font-bold">Django</span>
@@ -500,154 +437,109 @@ tailwind.config = {
           <p class="text-gray-300 text-xs mt-1">Click to view details</p>
         </div>
       </div>
-
     </div>
 
     <!-- ========== SERVICES ========== -->
     <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20 opacity-0 translate-y-8 transition-all duration-700" data-fade>My <span class="text-spring">Services</span></h1>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 mb-16">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
 
       <!-- Service 1 - Dorzi -->
-      <div class="project-card group relative rounded-2xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700 bg-box border border-white/10 hover:border-spring/40" data-fade
-        data-img="images/live-1.png"
-        data-title="Dorzi — Tailoring Service Platform"
-        data-category="Service"
-        data-desc="Dorzi is a full-stack tailoring service platform where customers can book appointments, choose services, and track their orders. Built with a modern UI focusing on seamless user experience for both tailors and customers."
-        data-tech="React.js,Node.js,MongoDB,Tailwind CSS,Express.js"
-        data-live="https://dorzi.vercel.app/"
-        data-github=""
-        data-hide-github="true">
-        <div class="relative h-52 overflow-hidden">
+      <div class="group relative rounded-2xl overflow-hidden opacity-0 translate-y-8 transition-all duration-700 bg-box border border-white/10 hover:border-spring/50 hover:shadow-xl hover:shadow-spring/10" data-fade>
+        <div class="relative h-48 overflow-hidden">
           <img src="images/live-1.png" alt="Dorzi" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
           <div class="absolute top-3 left-3">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-spring text-card text-xs font-bold rounded-full">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-spring text-card text-[10px] font-bold rounded-full">
               <span class="w-1.5 h-1.5 bg-card rounded-full animate-pulse"></span> Live
             </span>
           </div>
         </div>
         <div class="p-5">
-          <div class="flex items-start justify-between gap-3">
-            <div>
-              <h4 class="text-white font-bold text-base mb-1">Dorzi</h4>
-              <p class="text-gray-400 text-xs leading-relaxed">Tailoring Service Platform — Book, manage and track tailoring orders online with ease.</p>
-            </div>
-            <div class="flex-shrink-0 w-9 h-9 bg-spring/10 rounded-full flex items-center justify-center group-hover:bg-spring/30 transition-all">
-              <i class="fas fa-scissors text-spring text-sm"></i>
+          <div class="flex items-start justify-between gap-2 mb-2">
+            <h4 class="text-white font-bold text-sm">Dorzi</h4>
+            <div class="w-8 h-8 bg-spring/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-spring/30 transition-all">
+              <i class="fas fa-scissors text-spring text-xs"></i>
             </div>
           </div>
-          <div class="flex items-center gap-2 mt-4">
-            <span class="text-xs text-gray-500">Click to view details</span>
-            <i class="fas fa-arrow-right text-spring text-xs group-hover:translate-x-1 transition-transform"></i>
-          </div>
+          <p class="text-gray-400 text-xs leading-relaxed mb-4">Tailoring Service Platform — Book, manage and track tailoring orders online with ease.</p>
+          <a href="https://dorzi.vercel.app/" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-spring text-card text-xs font-bold rounded-full hover:bg-white transition-all duration-300">
+            <i class="fas fa-external-link-alt text-[10px]"></i> Live Demo
+          </a>
         </div>
       </div>
 
       <!-- Service 2 - DinBodol -->
-      <div class="project-card group relative rounded-2xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700 bg-box border border-white/10 hover:border-spring/40" data-fade
-        data-img="images/live-2.png"
-        data-title="DinBodol — Daily Life Exchange Platform"
-        data-category="Service"
-        data-desc="DinBodol is a community-driven platform designed to help people exchange daily life services, skills and resources. Users can post offers, search for services and connect with others in their community for a better everyday experience."
-        data-tech="React.js,Node.js,MongoDB,Express.js,Tailwind CSS"
-        data-live="https://dinbodol.vercel.app/"
-        data-github=""
-        data-hide-github="true">
-        <div class="relative h-52 overflow-hidden">
+      <div class="group relative rounded-2xl overflow-hidden opacity-0 translate-y-8 transition-all duration-700 bg-box border border-white/10 hover:border-spring/50 hover:shadow-xl hover:shadow-spring/10" data-fade>
+        <div class="relative h-48 overflow-hidden">
           <img src="images/live-2.png" alt="DinBodol" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
           <div class="absolute top-3 left-3">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-spring text-card text-xs font-bold rounded-full">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-spring text-card text-[10px] font-bold rounded-full">
               <span class="w-1.5 h-1.5 bg-card rounded-full animate-pulse"></span> Live
             </span>
           </div>
         </div>
         <div class="p-5">
-          <div class="flex items-start justify-between gap-3">
-            <div>
-              <h4 class="text-white font-bold text-base mb-1">DinBodol</h4>
-              <p class="text-gray-400 text-xs leading-relaxed">Daily Life Exchange Platform — Connect, share and exchange skills within your community.</p>
-            </div>
-            <div class="flex-shrink-0 w-9 h-9 bg-spring/10 rounded-full flex items-center justify-center group-hover:bg-spring/30 transition-all">
-              <i class="fas fa-exchange-alt text-spring text-sm"></i>
+          <div class="flex items-start justify-between gap-2 mb-2">
+            <h4 class="text-white font-bold text-sm">DinBodol</h4>
+            <div class="w-8 h-8 bg-spring/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-spring/30 transition-all">
+              <i class="fas fa-exchange-alt text-spring text-xs"></i>
             </div>
           </div>
-          <div class="flex items-center gap-2 mt-4">
-            <span class="text-xs text-gray-500">Click to view details</span>
-            <i class="fas fa-arrow-right text-spring text-xs group-hover:translate-x-1 transition-transform"></i>
-          </div>
+          <p class="text-gray-400 text-xs leading-relaxed mb-4">Daily Life Exchange Platform — Connect, share and exchange skills within your community.</p>
+          <a href="https://dinbodol.vercel.app/" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-spring text-card text-xs font-bold rounded-full hover:bg-white transition-all duration-300">
+            <i class="fas fa-external-link-alt text-[10px]"></i> Live Demo
+          </a>
         </div>
       </div>
 
       <!-- Service 3 - BoardCanvas -->
-      <div class="project-card group relative rounded-2xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700 bg-box border border-white/10 hover:border-spring/40" data-fade
-        data-img="images/live-3.png"
-        data-title="BoardCanvas — Collaborative Whiteboard"
-        data-category="Service"
-        data-desc="BoardCanvas is an interactive real-time collaborative whiteboard application. Teams can draw, annotate, add sticky notes, and brainstorm together in a shared digital canvas. Perfect for remote teams, educators and creative professionals."
-        data-tech="React.js,Node.js,Socket.io,Canvas API,Tailwind CSS"
-        data-live="https://boardcanvas.vercel.app/"
-        data-github=""
-        data-hide-github="true">
-        <div class="relative h-52 overflow-hidden">
+      <div class="group relative rounded-2xl overflow-hidden opacity-0 translate-y-8 transition-all duration-700 bg-box border border-white/10 hover:border-spring/50 hover:shadow-xl hover:shadow-spring/10" data-fade>
+        <div class="relative h-48 overflow-hidden">
           <img src="images/live-3.png" alt="BoardCanvas" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
           <div class="absolute top-3 left-3">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-spring text-card text-xs font-bold rounded-full">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-spring text-card text-[10px] font-bold rounded-full">
               <span class="w-1.5 h-1.5 bg-card rounded-full animate-pulse"></span> Live
             </span>
           </div>
         </div>
         <div class="p-5">
-          <div class="flex items-start justify-between gap-3">
-            <div>
-              <h4 class="text-white font-bold text-base mb-1">BoardCanvas</h4>
-              <p class="text-gray-400 text-xs leading-relaxed">Collaborative Whiteboard — Real-time drawing and brainstorming for remote teams.</p>
-            </div>
-            <div class="flex-shrink-0 w-9 h-9 bg-spring/10 rounded-full flex items-center justify-center group-hover:bg-spring/30 transition-all">
-              <i class="fas fa-chalkboard text-spring text-sm"></i>
+          <div class="flex items-start justify-between gap-2 mb-2">
+            <h4 class="text-white font-bold text-sm">BoardCanvas</h4>
+            <div class="w-8 h-8 bg-spring/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-spring/30 transition-all">
+              <i class="fas fa-chalkboard text-spring text-xs"></i>
             </div>
           </div>
-          <div class="flex items-center gap-2 mt-4">
-            <span class="text-xs text-gray-500">Click to view details</span>
-            <i class="fas fa-arrow-right text-spring text-xs group-hover:translate-x-1 transition-transform"></i>
-          </div>
+          <p class="text-gray-400 text-xs leading-relaxed mb-4">Collaborative Whiteboard — Real-time drawing and brainstorming for remote teams.</p>
+          <a href="https://boardcanvas.vercel.app/" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-spring text-card text-xs font-bold rounded-full hover:bg-white transition-all duration-300">
+            <i class="fas fa-external-link-alt text-[10px]"></i> Live Demo
+          </a>
         </div>
       </div>
 
       <!-- Service 4 - TazHub LLC -->
-      <div class="project-card group relative rounded-2xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700 bg-box border border-white/10 hover:border-spring/40" data-fade
-        data-img="images/live-4.png"
-        data-title="TazHub LLC — Business Solutions"
-        data-category="Service"
-        data-desc="TazHub LLC is a professional business solutions website built for a US-based company. The site showcases company services, portfolio, team and contact information with a sleek modern design and smooth user experience."
-        data-tech="React.js,Tailwind CSS,Node.js,Express.js,MongoDB"
-        data-live="https://tazhubllc.com/"
-        data-github=""
-        data-hide-github="true">
-        <div class="relative h-52 overflow-hidden">
+      <div class="group relative rounded-2xl overflow-hidden opacity-0 translate-y-8 transition-all duration-700 bg-box border border-white/10 hover:border-spring/50 hover:shadow-xl hover:shadow-spring/10" data-fade>
+        <div class="relative h-48 overflow-hidden">
           <img src="images/live-4.png" alt="TazHub LLC" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
           <div class="absolute top-3 left-3">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-spring text-card text-xs font-bold rounded-full">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-spring text-card text-[10px] font-bold rounded-full">
               <span class="w-1.5 h-1.5 bg-card rounded-full animate-pulse"></span> Live
             </span>
           </div>
         </div>
         <div class="p-5">
-          <div class="flex items-start justify-between gap-3">
-            <div>
-              <h4 class="text-white font-bold text-base mb-1">TazHub LLC</h4>
-              <p class="text-gray-400 text-xs leading-relaxed">Business Solutions Website — Professional corporate site for a US-based company.</p>
-            </div>
-            <div class="flex-shrink-0 w-9 h-9 bg-spring/10 rounded-full flex items-center justify-center group-hover:bg-spring/30 transition-all">
-              <i class="fas fa-building text-spring text-sm"></i>
+          <div class="flex items-start justify-between gap-2 mb-2">
+            <h4 class="text-white font-bold text-sm">TazHub LLC</h4>
+            <div class="w-8 h-8 bg-spring/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-spring/30 transition-all">
+              <i class="fas fa-building text-spring text-xs"></i>
             </div>
           </div>
-          <div class="flex items-center gap-2 mt-4">
-            <span class="text-xs text-gray-500">Click to view details</span>
-            <i class="fas fa-arrow-right text-spring text-xs group-hover:translate-x-1 transition-transform"></i>
-          </div>
+          <p class="text-gray-400 text-xs leading-relaxed mb-4">Business Solutions Website — Professional corporate site for a US-based company.</p>
+          <a href="https://tazhubllc.com/" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-spring text-card text-xs font-bold rounded-full hover:bg-white transition-all duration-300">
+            <i class="fas fa-external-link-alt text-[10px]"></i> Live Demo
+          </a>
         </div>
       </div>
 
@@ -657,120 +549,102 @@ tailwind.config = {
     <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20 opacity-0 translate-y-8 transition-all duration-700" data-fade>My <span class="text-spring">Data Science Projects</span></h1>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
-      <!-- DS 1 - Breast Cancer -->
-      <div class="project-card group relative rounded-2xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700 bg-box border border-white/10 hover:border-spring/40" data-fade
-        data-img="images/data-1.png"
-        data-title="Hybrid Breast Cancer Diagnosis"
-        data-category="Data Science"
-        data-desc="A hybrid machine learning model for breast cancer diagnosis combining multiple classification algorithms. The system uses feature selection, ensemble learning and cross-validation techniques to achieve high diagnostic accuracy. Built with Python using Scikit-learn and evaluated with detailed performance metrics."
-        data-tech="Python,Scikit-learn,Pandas,NumPy,Matplotlib,Jupyter"
-        data-live=""
-        data-github="https://github.com/abdullahalmusabbir/AI/blob/main/Hybrid/hybrid-breast-cancer-diagnosis.ipynb"
-        data-hide-live="true">
-        <div class="relative h-44 overflow-hidden">
+      <!-- DS 1 -->
+      <div class="group relative rounded-2xl overflow-hidden opacity-0 translate-y-8 transition-all duration-700 bg-box border border-white/10 hover:border-spring/50 hover:shadow-xl hover:shadow-spring/10" data-fade>
+        <div class="relative h-48 overflow-hidden">
           <img src="images/data-1.png" alt="Breast Cancer Diagnosis" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
           <div class="absolute top-3 left-3">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-600 text-white text-xs font-bold rounded-full">
-              <i class="fab fa-github text-xs"></i> Notebook
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-purple-600 text-white text-[10px] font-bold rounded-full">
+              <i class="fab fa-github text-[10px]"></i> Notebook
             </span>
           </div>
         </div>
         <div class="p-5">
-          <div class="flex items-start justify-between gap-3">
+          <div class="flex items-start justify-between gap-2 mb-2">
             <div>
-              <span class="text-spring text-xs font-bold uppercase tracking-wider">Data Science · ML</span>
-              <h4 class="text-white font-bold text-sm mt-1 mb-1">Hybrid Breast Cancer Diagnosis</h4>
-              <p class="text-gray-400 text-xs leading-relaxed">Hybrid ML model for accurate breast cancer classification using ensemble techniques.</p>
+              <span class="text-spring text-[10px] font-bold uppercase tracking-wider">ML · Healthcare</span>
+              <h4 class="text-white font-bold text-sm mt-0.5">Hybrid Breast Cancer Diagnosis</h4>
+            </div>
+            <div class="w-8 h-8 bg-purple-600/20 rounded-full flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-brain text-purple-400 text-xs"></i>
             </div>
           </div>
-          <div class="flex flex-wrap gap-1.5 mt-3">
+          <p class="text-gray-400 text-xs leading-relaxed mb-4">Hybrid ML model for accurate breast cancer classification using ensemble techniques.</p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
             <span class="px-2 py-0.5 bg-spring/10 text-spring text-[10px] rounded-full border border-spring/20">Python</span>
             <span class="px-2 py-0.5 bg-spring/10 text-spring text-[10px] rounded-full border border-spring/20">Scikit-learn</span>
             <span class="px-2 py-0.5 bg-spring/10 text-spring text-[10px] rounded-full border border-spring/20">Jupyter</span>
           </div>
-          <div class="flex items-center gap-2 mt-3">
-            <span class="text-xs text-gray-500">Click to view notebook</span>
-            <i class="fas fa-arrow-right text-spring text-xs group-hover:translate-x-1 transition-transform"></i>
-          </div>
+          <a href="https://github.com/abdullahalmusabbir/AI/blob/main/Hybrid/hybrid-breast-cancer-diagnosis.ipynb" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 border-2 border-spring text-spring text-xs font-bold rounded-full hover:bg-spring hover:text-card transition-all duration-300">
+            <i class="fab fa-github text-xs"></i> View on GitHub
+          </a>
         </div>
       </div>
 
-      <!-- DS 2 - Smart Crop -->
-      <div class="project-card group relative rounded-2xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700 bg-box border border-white/10 hover:border-spring/40" data-fade
-        data-img="images/data-2.png"
-        data-title="Smart Crop Recommendation System"
-        data-category="Data Science"
-        data-desc="An intelligent crop recommendation system that suggests the most suitable crops based on soil nutrients, weather conditions and environmental factors. Uses machine learning classification models trained on agricultural datasets to help farmers make data-driven decisions for better yield."
-        data-tech="Python,Scikit-learn,Pandas,Seaborn,Matplotlib,Jupyter"
-        data-live=""
-        data-github="https://github.com/abdullahalmusabbir/AI/blob/main/Hybrid/smart-crop-recommendation-system.ipynb"
-        data-hide-live="true">
-        <div class="relative h-44 overflow-hidden">
+      <!-- DS 2 -->
+      <div class="group relative rounded-2xl overflow-hidden opacity-0 translate-y-8 transition-all duration-700 bg-box border border-white/10 hover:border-spring/50 hover:shadow-xl hover:shadow-spring/10" data-fade>
+        <div class="relative h-48 overflow-hidden">
           <img src="images/data-2.png" alt="Smart Crop Recommendation" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
           <div class="absolute top-3 left-3">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-600 text-white text-xs font-bold rounded-full">
-              <i class="fab fa-github text-xs"></i> Notebook
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-purple-600 text-white text-[10px] font-bold rounded-full">
+              <i class="fab fa-github text-[10px]"></i> Notebook
             </span>
           </div>
         </div>
         <div class="p-5">
-          <div class="flex items-start justify-between gap-3">
+          <div class="flex items-start justify-between gap-2 mb-2">
             <div>
-              <span class="text-spring text-xs font-bold uppercase tracking-wider">Data Science · AI</span>
-              <h4 class="text-white font-bold text-sm mt-1 mb-1">Smart Crop Recommendation System</h4>
-              <p class="text-gray-400 text-xs leading-relaxed">ML-based crop recommendation using soil and weather data for better agricultural yield.</p>
+              <span class="text-spring text-[10px] font-bold uppercase tracking-wider">ML · Agriculture</span>
+              <h4 class="text-white font-bold text-sm mt-0.5">Smart Crop Recommendation System</h4>
+            </div>
+            <div class="w-8 h-8 bg-purple-600/20 rounded-full flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-seedling text-purple-400 text-xs"></i>
             </div>
           </div>
-          <div class="flex flex-wrap gap-1.5 mt-3">
+          <p class="text-gray-400 text-xs leading-relaxed mb-4">ML-based crop recommendation using soil and weather data for better agricultural yield.</p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
             <span class="px-2 py-0.5 bg-spring/10 text-spring text-[10px] rounded-full border border-spring/20">Python</span>
             <span class="px-2 py-0.5 bg-spring/10 text-spring text-[10px] rounded-full border border-spring/20">Pandas</span>
             <span class="px-2 py-0.5 bg-spring/10 text-spring text-[10px] rounded-full border border-spring/20">Seaborn</span>
           </div>
-          <div class="flex items-center gap-2 mt-3">
-            <span class="text-xs text-gray-500">Click to view notebook</span>
-            <i class="fas fa-arrow-right text-spring text-xs group-hover:translate-x-1 transition-transform"></i>
-          </div>
+          <a href="https://github.com/abdullahalmusabbir/AI/blob/main/Hybrid/smart-crop-recommendation-system.ipynb" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 border-2 border-spring text-spring text-xs font-bold rounded-full hover:bg-spring hover:text-card transition-all duration-300">
+            <i class="fab fa-github text-xs"></i> View on GitHub
+          </a>
         </div>
       </div>
 
-      <!-- DS 3 - Loan Default -->
-      <div class="project-card group relative rounded-2xl overflow-hidden cursor-pointer opacity-0 translate-y-8 transition-all duration-700 bg-box border border-white/10 hover:border-spring/40" data-fade
-        data-img="images/data-3.png"
-        data-title="Smart Loan Default Prediction"
-        data-category="Data Science"
-        data-desc="A smart loan default prediction system that uses machine learning to assess the risk of borrowers defaulting on loans. The model analyzes financial features including credit history, income, loan amount and employment status to predict default probability with high accuracy, helping financial institutions make better lending decisions."
-        data-tech="Python,Scikit-learn,XGBoost,Pandas,Matplotlib,Jupyter"
-        data-live=""
-        data-github="https://github.com/abdullahalmusabbir/AI/blob/main/Hybrid/smart-loan-default-prediction.ipynb"
-        data-hide-live="true">
-        <div class="relative h-44 overflow-hidden">
+      <!-- DS 3 -->
+      <div class="group relative rounded-2xl overflow-hidden opacity-0 translate-y-8 transition-all duration-700 bg-box border border-white/10 hover:border-spring/50 hover:shadow-xl hover:shadow-spring/10" data-fade>
+        <div class="relative h-48 overflow-hidden">
           <img src="images/data-3.png" alt="Loan Default Prediction" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
           <div class="absolute top-3 left-3">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-600 text-white text-xs font-bold rounded-full">
-              <i class="fab fa-github text-xs"></i> Notebook
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-purple-600 text-white text-[10px] font-bold rounded-full">
+              <i class="fab fa-github text-[10px]"></i> Notebook
             </span>
           </div>
         </div>
         <div class="p-5">
-          <div class="flex items-start justify-between gap-3">
+          <div class="flex items-start justify-between gap-2 mb-2">
             <div>
-              <span class="text-spring text-xs font-bold uppercase tracking-wider">Data Science · FinTech</span>
-              <h4 class="text-white font-bold text-sm mt-1 mb-1">Smart Loan Default Prediction</h4>
-              <p class="text-gray-400 text-xs leading-relaxed">Predicts loan default risk using financial data to assist banking decisions.</p>
+              <span class="text-spring text-[10px] font-bold uppercase tracking-wider">ML · FinTech</span>
+              <h4 class="text-white font-bold text-sm mt-0.5">Smart Loan Default Prediction</h4>
+            </div>
+            <div class="w-8 h-8 bg-purple-600/20 rounded-full flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-chart-line text-purple-400 text-xs"></i>
             </div>
           </div>
-          <div class="flex flex-wrap gap-1.5 mt-3">
+          <p class="text-gray-400 text-xs leading-relaxed mb-4">Predicts loan default risk using financial data to assist better banking decisions.</p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
             <span class="px-2 py-0.5 bg-spring/10 text-spring text-[10px] rounded-full border border-spring/20">Python</span>
             <span class="px-2 py-0.5 bg-spring/10 text-spring text-[10px] rounded-full border border-spring/20">XGBoost</span>
             <span class="px-2 py-0.5 bg-spring/10 text-spring text-[10px] rounded-full border border-spring/20">Scikit-learn</span>
           </div>
-          <div class="flex items-center gap-2 mt-3">
-            <span class="text-xs text-gray-500">Click to view notebook</span>
-            <i class="fas fa-arrow-right text-spring text-xs group-hover:translate-x-1 transition-transform"></i>
-          </div>
+          <a href="https://github.com/abdullahalmusabbir/AI/blob/main/Hybrid/smart-loan-default-prediction.ipynb" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 border-2 border-spring text-spring text-xs font-bold rounded-full hover:bg-spring hover:text-card transition-all duration-300">
+            <i class="fab fa-github text-xs"></i> View on GitHub
+          </a>
         </div>
       </div>
 
@@ -838,14 +712,12 @@ tailwind.config = {
   const menuBtn = document.getElementById('menu');
   const menuIcon = document.getElementById('menuIcon');
   const sidebar = document.getElementById('sidebar');
-
   menuBtn.addEventListener('click', function() {
     sidebar.classList.toggle('-translate-x-full');
     sidebar.classList.toggle('translate-x-0');
     menuIcon.classList.toggle('fa-bars');
     menuIcon.classList.toggle('fa-times');
   });
-
   document.querySelectorAll('.nav-link').forEach(function(link) {
     link.addEventListener('click', function() {
       if (window.innerWidth < 1024) {
@@ -872,7 +744,6 @@ tailwind.config = {
   // ====== ACTIVE NAV ======
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
-
   window.addEventListener('scroll', function() {
     let current = '';
     sections.forEach(function(section) {
@@ -939,10 +810,8 @@ tailwind.config = {
   const modalCategory = document.getElementById('modalCategory');
   const modalDesc = document.getElementById('modalDesc');
   const modalTech = document.getElementById('modalTech');
-  const modalLive = document.getElementById('modalLive');
-  const modalGithub = document.getElementById('modalGithub');
-  const modalClose = document.getElementById('modalClose');
   const modalBtns = document.getElementById('modalBtns');
+  const modalClose = document.getElementById('modalClose');
 
   document.querySelectorAll('.project-card').forEach(function(card) {
     card.addEventListener('click', function() {
@@ -953,30 +822,12 @@ tailwind.config = {
       var tech = this.getAttribute('data-tech');
       var live = this.getAttribute('data-live');
       var github = this.getAttribute('data-github');
-      var hideLive = this.getAttribute('data-hide-live') === 'true';
-      var hideGithub = this.getAttribute('data-hide-github') === 'true';
 
       modalImage.src = img;
       modalImage.alt = title;
       modalTitle.textContent = title;
       modalCategory.textContent = category;
       modalDesc.textContent = desc;
-
-      // Handle Live Demo button
-      if (hideLive || !live) {
-        modalLive.classList.add('hidden');
-      } else {
-        modalLive.classList.remove('hidden');
-        modalLive.href = live;
-      }
-
-      // Handle GitHub button
-      if (hideGithub || !github) {
-        modalGithub.classList.add('hidden');
-      } else {
-        modalGithub.classList.remove('hidden');
-        modalGithub.href = github;
-      }
 
       modalTech.innerHTML = '';
       if (tech) {
@@ -986,6 +837,24 @@ tailwind.config = {
           span.textContent = t.trim();
           modalTech.appendChild(span);
         });
+      }
+
+      modalBtns.innerHTML = '';
+      if (live) {
+        var liveBtn = document.createElement('a');
+        liveBtn.href = live;
+        liveBtn.target = '_blank';
+        liveBtn.className = 'inline-flex items-center gap-2 px-6 py-2.5 bg-spring text-card font-bold rounded-full hover:bg-white transition-all text-sm';
+        liveBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> Live Demo';
+        modalBtns.appendChild(liveBtn);
+      }
+      if (github) {
+        var ghBtn = document.createElement('a');
+        ghBtn.href = github;
+        ghBtn.target = '_blank';
+        ghBtn.className = 'inline-flex items-center gap-2 px-6 py-2.5 border-2 border-spring text-spring font-bold rounded-full hover:bg-spring hover:text-card transition-all text-sm';
+        ghBtn.innerHTML = '<i class="fab fa-github"></i> GitHub';
+        modalBtns.appendChild(ghBtn);
       }
 
       modal.classList.remove('hidden');
@@ -999,7 +868,6 @@ tailwind.config = {
     modal.classList.remove('flex');
     document.body.style.overflow = '';
   });
-
   modal.addEventListener('click', function(e) {
     if (e.target === modal) {
       modal.classList.add('hidden');
@@ -1007,7 +875,6 @@ tailwind.config = {
       document.body.style.overflow = '';
     }
   });
-
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
       modal.classList.add('hidden');
@@ -1024,23 +891,10 @@ tailwind.config = {
   var armRight = document.getElementById('armRight');
   var legLeft = document.getElementById('legLeft');
   var legRight = document.getElementById('legRight');
-
   var lastScrollY = window.scrollY;
   var scrollTimeout;
   var isScrolling = false;
-
-  var messages = [
-    "Hello! 👋",
-    "Scroll down! ⬇️",
-    "Nice work! 🎨",
-    "Keep going! 🚀",
-    "Hire me! 💼",
-    "Let's code! 💻",
-    "I love JS! ❤️",
-    "MERN Stack! 🔥",
-    "Click a project! 👆",
-    "Contact me! 📧"
-  ];
+  var messages = ["Hello! 👋","Scroll down! ⬇️","Nice work! 🎨","Keep going! 🚀","Hire me! 💼","Let's code! 💻","I love JS! ❤️","MERN Stack! 🔥","Click a project! 👆","Contact me! 📧"];
   var msgIndex = 0;
 
   function setIdle() {
@@ -1050,7 +904,6 @@ tailwind.config = {
     legLeft.className = legLeft.className.replace('animate-legLFast', 'animate-legL');
     legRight.className = legRight.className.replace('animate-legRFast', 'animate-legR');
   }
-
   function setWalking() {
     character.classList.remove('animate-float');
     armLeft.className = armLeft.className.replace('animate-armL', 'animate-armLFast');
@@ -1058,12 +911,10 @@ tailwind.config = {
     legLeft.className = legLeft.className.replace('animate-legL', 'animate-legLFast');
     legRight.className = legRight.className.replace('animate-legR', 'animate-legRFast');
   }
-
   function changeSpeech() {
     msgIndex = (msgIndex + 1) % messages.length;
     speechBubble.textContent = messages[msgIndex];
   }
-
   function createParticle() {
     var p = document.createElement('div');
     p.className = 'fixed w-1.5 h-1.5 bg-spring rounded-full pointer-events-none z-[9998] animate-particleFade';
@@ -1073,29 +924,20 @@ tailwind.config = {
     document.body.appendChild(p);
     setTimeout(function() { p.remove(); }, 800);
   }
-
   var particleTimer;
-
   window.addEventListener('scroll', function() {
     var scrollY = window.scrollY;
     var delta = scrollY - lastScrollY;
-
-    if (delta > 0) {
-      charBody.style.transform = 'scaleX(1)';
-    } else if (delta < 0) {
-      charBody.style.transform = 'scaleX(-1)';
-    }
-
+    if (delta > 0) { charBody.style.transform = 'scaleX(1)'; }
+    else if (delta < 0) { charBody.style.transform = 'scaleX(-1)'; }
     var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
     var pct = maxScroll > 0 ? scrollY / maxScroll : 0;
     character.style.bottom = (20 + Math.sin(pct * Math.PI * 2) * 30) + 'px';
-
     if (!isScrolling) {
       isScrolling = true;
       setWalking();
       particleTimer = setInterval(createParticle, 120);
     }
-
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(function() {
       isScrolling = false;
@@ -1103,31 +945,20 @@ tailwind.config = {
       clearInterval(particleTimer);
       changeSpeech();
     }, 250);
-
     lastScrollY = scrollY;
   });
-
   setIdle();
-
-  setInterval(function() {
-    if (!isScrolling) changeSpeech();
-  }, 5000);
-
+  setInterval(function() { if (!isScrolling) changeSpeech(); }, 5000);
   character.addEventListener('click', function() {
     var cur = parseInt(character.style.bottom) || 20;
     character.style.transition = 'bottom 0.3s ease';
     character.style.bottom = (cur + 50) + 'px';
-    setTimeout(function() {
-      character.style.bottom = cur + 'px';
-    }, 300);
+    setTimeout(function() { character.style.bottom = cur + 'px'; }, 300);
     changeSpeech();
     for (var i = 0; i < 8; i++) {
-      (function(j) {
-        setTimeout(createParticle, j * 60);
-      })(i);
+      (function(j) { setTimeout(createParticle, j * 60); })(i);
     }
   });
-
 })();
 </script>
 </body>
