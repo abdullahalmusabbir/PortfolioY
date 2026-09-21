@@ -91,13 +91,10 @@ tailwind.config = {
     filter: drop-shadow(0 8px 20px rgba(0,206,121,0.35));
     transition: filter 0.3s ease;
   }
-  #cat-character:hover {
-    filter: drop-shadow(0 12px 30px rgba(0,206,121,0.6));
-  }
-
+  #cat-character:hover { filter: drop-shadow(0 12px 30px rgba(0,206,121,0.6)); }
   #cat-speech {
-    position: absolute;
-    bottom: 145px;
+    position: fixed;
+    bottom: 165px;
     right: 10px;
     background: white;
     color: #111;
@@ -122,7 +119,6 @@ tailwind.config = {
     border-right: 8px solid transparent;
     border-top: 9px solid white;
   }
-
   #cat-glow {
     position: fixed;
     bottom: 12px;
@@ -135,18 +131,15 @@ tailwind.config = {
     animation: glowPulse 2s ease-in-out infinite;
     pointer-events: none;
   }
-
   .cat-body { animation: bodyBob 2s ease-in-out infinite; }
   .cat-tail { transform-origin: 10px 10px; animation: tailWag 1s ease-in-out infinite alternate; }
   .cat-ear-left { transform-origin: center bottom; animation: earWiggle 2s ease-in-out infinite; }
   .cat-ear-right { transform-origin: center bottom; animation: earWiggle 2s ease-in-out infinite reverse; }
   .cat-eye { animation: eyeBlink 3s ease-in-out infinite; transform-origin: center; }
   .cat-paw-left { transform-origin: center top; animation: pawWave 1.5s ease-in-out infinite alternate; }
-
   .cat-fast .cat-tail { animation-duration: 0.3s; }
   .cat-fast .cat-ear-left, .cat-fast .cat-ear-right { animation-duration: 0.4s; }
   .cat-fast .cat-body { animation-duration: 0.5s; }
-  .cat-fast #cat-character { animation-duration: 0.8s; }
 </style>
 </head>
 <body class="bg-dark font-nunito m-0 p-0 overflow-x-hidden relative">
@@ -341,7 +334,7 @@ tailwind.config = {
           </div>
           <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box hover:translate-x-2 transition-all">
             <i class="fas fa-birthday-cake text-spring text-lg w-7 text-center"></i>
-            <div><span class="text-gray-500 text-xs">Age</span><h3 class="text-white text-base font-semibold">24</h3></div>
+            <div><span class="text-gray-500 text-xs">Age</span><h3 class="text-white text-base font-semibold">25</h3></div>
           </div>
           <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box hover:translate-x-2 transition-all">
             <i class="fas fa-graduation-cap text-spring text-lg w-7 text-center"></i>
@@ -361,11 +354,11 @@ tailwind.config = {
       <div class="flex-1 min-w-[280px] max-w-xl" data-reveal-right>
         <div class="grid grid-cols-2 gap-4">
           <div class="bg-box p-6 rounded-2xl text-center hover:scale-105 hover:shadow-lg hover:shadow-spring/20 transition-all duration-300">
-            <span class="text-4xl font-extrabold text-spring inline-block" data-count="1" data-suffix="+">0</span>
+            <span class="text-4xl font-extrabold text-spring inline-block" data-count="2" data-suffix="+">0</span>
             <h3 class="text-white text-sm mt-2 capitalize">Years of Experience</h3>
           </div>
           <div class="bg-box p-6 rounded-2xl text-center hover:scale-105 hover:shadow-lg hover:shadow-spring/20 transition-all duration-300">
-            <span class="text-4xl font-extrabold text-spring inline-block" data-count="15" data-suffix="+">0</span>
+            <span class="text-4xl font-extrabold text-spring inline-block" data-count="17" data-suffix="+">0</span>
             <h3 class="text-white text-sm mt-2 capitalize">Projects Completed</h3>
           </div>
           <div class="bg-box p-6 rounded-2xl text-center hover:scale-105 hover:shadow-lg hover:shadow-spring/20 transition-all duration-300">
@@ -385,29 +378,17 @@ tailwind.config = {
   <section id="skills" class="min-h-screen px-6 md:px-16 lg:px-20 py-20">
     <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20" data-reveal>My <span class="text-spring">Skills</span></h1>
     <div class="max-w-3xl mx-auto space-y-5" data-reveal>
-
       <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">HTML / CSS</span><span class="text-spring font-bold text-sm">100%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="100"></div></div></div>
-
       <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">Tailwind CSS</span><span class="text-spring font-bold text-sm">100%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="100"></div></div></div>
-
       <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">JavaScript</span><span class="text-spring font-bold text-sm">99%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="99"></div></div></div>
-
       <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">React.js</span><span class="text-spring font-bold text-sm">95%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="95"></div></div></div>
-
       <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">Next.js</span><span class="text-spring font-bold text-sm">94%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="94"></div></div></div>
-
       <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">MongoDB</span><span class="text-spring font-bold text-sm">96%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="96"></div></div></div>
-
       <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">PostgreSQL</span><span class="text-spring font-bold text-sm">96%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="96"></div></div></div>
-
-      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">Django / Python</span><span class="text-spring font-bold text-sm">100%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="100"></div></div></div>
-
+      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">Django</span><span class="text-spring font-bold text-sm">100%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="100"></div></div></div>
       <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">Python</span><span class="text-spring font-bold text-sm">95%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="95"></div></div></div>
-
       <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">C / C++</span><span class="text-spring font-bold text-sm">100%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="100"></div></div></div>
-
       <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">ASP.NET</span><span class="text-spring font-bold text-sm">90%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="90"></div></div></div>
-
     </div>
   </section>
 
@@ -417,7 +398,6 @@ tailwind.config = {
     <div class="max-w-4xl mx-auto relative">
       <div class="absolute left-5 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-white/20"></div>
       <div class="space-y-10">
-
         <div class="relative flex items-start" data-reveal-left>
           <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-graduation-cap text-white text-sm"></i></div>
           <div class="ml-16 md:ml-0 md:w-[44%] md:pr-10 bg-box p-5 rounded-2xl hover:scale-[1.03] hover:shadow-lg hover:shadow-spring/10 transition-all">
@@ -426,7 +406,6 @@ tailwind.config = {
             <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed SSC from science dept. Got GPA: 5.0 out of 5.00</p>
           </div>
         </div>
-
         <div class="relative flex items-start md:flex-row-reverse" data-reveal-right>
           <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-graduation-cap text-white text-sm"></i></div>
           <div class="ml-16 md:ml-0 md:w-[44%] md:pl-10 bg-box p-5 rounded-2xl hover:scale-[1.03] hover:shadow-lg hover:shadow-spring/10 transition-all">
@@ -435,7 +414,6 @@ tailwind.config = {
             <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed HSC from science dept. Got GPA: 4.83 out of 5.00</p>
           </div>
         </div>
-
         <div class="relative flex items-start" data-reveal-left>
           <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-graduation-cap text-white text-sm"></i></div>
           <div class="ml-16 md:ml-0 md:w-[44%] md:pr-10 bg-box p-5 rounded-2xl hover:scale-[1.03] hover:shadow-lg hover:shadow-spring/10 transition-all">
@@ -444,7 +422,6 @@ tailwind.config = {
             <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Successfully graduated with B.Sc in Computer Science & Engineering.</p>
           </div>
         </div>
-
         <div class="relative flex items-start md:flex-row-reverse" data-reveal-right>
           <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-code text-white text-sm"></i></div>
           <div class="ml-16 md:ml-0 md:w-[44%] md:pl-10 bg-box p-5 rounded-2xl hover:scale-[1.03] hover:shadow-lg hover:shadow-spring/10 transition-all">
@@ -453,7 +430,6 @@ tailwind.config = {
             <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed courses in HTML, CSS, Tailwind CSS & JavaScript. Joined as a front-end developer.</p>
           </div>
         </div>
-
         <div class="relative flex items-start" data-reveal-left>
           <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-server text-white text-sm"></i></div>
           <div class="ml-16 md:ml-0 md:w-[44%] md:pr-10 bg-box p-5 rounded-2xl hover:scale-[1.03] hover:shadow-lg hover:shadow-spring/10 transition-all">
@@ -462,7 +438,6 @@ tailwind.config = {
             <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed React.js, Next.js, Django, ASP.NET, PostgreSQL & MongoDB. Now a certified full-stack web developer.</p>
           </div>
         </div>
-
         <div class="relative flex items-start md:flex-row-reverse" data-reveal-right>
           <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-camera text-white text-sm"></i></div>
           <div class="ml-16 md:ml-0 md:w-[44%] md:pl-10 bg-box p-5 rounded-2xl hover:scale-[1.03] hover:shadow-lg hover:shadow-spring/10 transition-all">
@@ -471,7 +446,6 @@ tailwind.config = {
             <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Started photography course at home. Now an expert in photography.</p>
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -481,11 +455,10 @@ tailwind.config = {
 
     <!-- SERVICES -->
     <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20" data-reveal>My <span class="text-spring">Services</span></h1>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-16">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
 
       <!-- Project 1 -->
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer"
-        data-reveal-scale
+      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale
         data-img="images/live-1.png"
         data-title="Dorzi — Tailoring Service Platform"
         data-category="Service"
@@ -502,8 +475,7 @@ tailwind.config = {
       </div>
 
       <!-- Project 2 -->
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer"
-        data-reveal-scale
+      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale
         data-img="images/live-2.png"
         data-title="DinBodol — Daily Life Exchange"
         data-category="Service"
@@ -520,8 +492,7 @@ tailwind.config = {
       </div>
 
       <!-- Project 3 -->
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer"
-        data-reveal-scale
+      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale
         data-img="images/live-3.png"
         data-title="BoardCanvas — Collaborative Whiteboard"
         data-category="Service"
@@ -538,8 +509,7 @@ tailwind.config = {
       </div>
 
       <!-- Project 4 -->
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer"
-        data-reveal-scale
+      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale
         data-img="images/live-4.png"
         data-title="TazHub LLC — Business Solutions"
         data-category="Service"
@@ -556,8 +526,7 @@ tailwind.config = {
       </div>
 
       <!-- Project 5 -->
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer"
-        data-reveal-scale
+      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale
         data-img="images/live-5.png"
         data-title="Channgo — Warehouse Management System"
         data-category="Service"
@@ -574,8 +543,7 @@ tailwind.config = {
       </div>
 
       <!-- Project 6 -->
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer"
-        data-reveal-scale
+      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale
         data-img="images/live-6.png"
         data-title="CodeRoom — Online Coding Platform"
         data-category="Service"
@@ -592,8 +560,7 @@ tailwind.config = {
       </div>
 
       <!-- Project 7 -->
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer"
-        data-reveal-scale
+      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale
         data-img="images/live-7.png"
         data-title="SecureScope — Web & API Security Testing Platform"
         data-category="Service"
@@ -615,9 +582,8 @@ tailwind.config = {
     <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20" data-reveal>My <span class="text-spring">Data Science Projects</span></h1>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
-      <!-- DS Project 1 -->
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer"
-        data-reveal-scale
+      <!-- DS 1 -->
+      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale
         data-img="images/data-1.png"
         data-title="Hybrid Breast Cancer Diagnosis"
         data-category="Data Science"
@@ -633,9 +599,8 @@ tailwind.config = {
         </div>
       </div>
 
-      <!-- DS Project 2 -->
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer"
-        data-reveal-scale
+      <!-- DS 2 -->
+      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale
         data-img="images/data-2.png"
         data-title="Smart Crop Recommendation System"
         data-category="Data Science"
@@ -651,9 +616,8 @@ tailwind.config = {
         </div>
       </div>
 
-      <!-- DS Project 3 -->
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer"
-        data-reveal-scale
+      <!-- DS 3 -->
+      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale
         data-img="images/data-3.png"
         data-title="Smart Loan Default Prediction"
         data-category="Data Science"
@@ -994,14 +958,12 @@ tailwind.config = {
   function createParticle() {
     const emojis = ['✨', '⭐', '💚', '🐾', '💫', '🌟'];
     const p = document.createElement('div');
-    p.style.cssText = [
-      'position:fixed',
-      'font-size:' + (10 + Math.random() * 10) + 'px',
-      'pointer-events:none',
-      'z-index:9998',
-      'animation:particleFade 0.9s ease-out forwards',
-      'user-select:none'
-    ].join(';');
+    p.style.position = 'fixed';
+    p.style.fontSize = (10 + Math.random() * 10) + 'px';
+    p.style.pointerEvents = 'none';
+    p.style.zIndex = '9998';
+    p.style.animation = 'particleFade 0.9s ease-out forwards';
+    p.style.userSelect = 'none';
     p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
     const rect = catCharacter.getBoundingClientRect();
     p.style.left = (rect.left + 20 + Math.random() * 60) + 'px';
