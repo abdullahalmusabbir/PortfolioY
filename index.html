@@ -95,7 +95,6 @@ tailwind.config = {
     filter: drop-shadow(0 12px 30px rgba(0,206,121,0.6));
   }
 
-  /* Speech bubble */
   #cat-speech {
     position: absolute;
     bottom: 145px;
@@ -124,7 +123,6 @@ tailwind.config = {
     border-top: 9px solid white;
   }
 
-  /* Glow under character */
   #cat-glow {
     position: fixed;
     bottom: 12px;
@@ -138,7 +136,6 @@ tailwind.config = {
     pointer-events: none;
   }
 
-  /* SVG animation classes */
   .cat-body { animation: bodyBob 2s ease-in-out infinite; }
   .cat-tail { transform-origin: 10px 10px; animation: tailWag 1s ease-in-out infinite alternate; }
   .cat-ear-left { transform-origin: center bottom; animation: earWiggle 2s ease-in-out infinite; }
@@ -146,7 +143,6 @@ tailwind.config = {
   .cat-eye { animation: eyeBlink 3s ease-in-out infinite; transform-origin: center; }
   .cat-paw-left { transform-origin: center top; animation: pawWave 1.5s ease-in-out infinite alternate; }
 
-  /* Fast mode on scroll */
   .cat-fast .cat-tail { animation-duration: 0.3s; }
   .cat-fast .cat-ear-left, .cat-fast .cat-ear-right { animation-duration: 0.4s; }
   .cat-fast .cat-body { animation-duration: 0.5s; }
@@ -171,88 +167,54 @@ tailwind.config = {
 <div id="cat-glow"></div>
 <div id="cat-character" title="Click me!">
   <svg viewBox="0 0 110 140" xmlns="http://www.w3.org/2000/svg" width="110" height="140">
-    <!-- Shadow -->
     <ellipse cx="55" cy="135" rx="28" ry="5" fill="rgba(0,0,0,0.18)"/>
-
-    <!-- TAIL -->
     <g class="cat-tail" style="transform-origin:52px 110px">
       <path d="M52 110 Q20 105 15 85 Q10 65 25 60" stroke="#1a1a2e" stroke-width="7" fill="none" stroke-linecap="round"/>
       <path d="M52 110 Q20 105 15 85 Q10 65 25 60" stroke="#2d2d4e" stroke-width="4" fill="none" stroke-linecap="round"/>
-      <!-- tail tip -->
       <circle cx="25" cy="59" r="6" fill="#00ce79"/>
       <circle cx="25" cy="59" r="3" fill="#00ff96"/>
     </g>
-
-    <!-- BODY -->
     <g class="cat-body">
-      <!-- Main body -->
       <ellipse cx="55" cy="100" rx="30" ry="28" fill="#1a1a2e"/>
       <ellipse cx="55" cy="100" rx="27" ry="25" fill="#222244"/>
-
-      <!-- Belly patch -->
       <ellipse cx="55" cy="105" rx="16" ry="14" fill="#2a2a5a"/>
       <ellipse cx="55" cy="107" rx="12" ry="10" fill="#00ce79" opacity="0.15"/>
-
-      <!-- Green hoodie/shirt detail -->
       <rect x="38" y="95" width="34" height="18" rx="8" fill="#00ce79" opacity="0.9"/>
       <text x="55" y="108" text-anchor="middle" font-size="9" fill="white" font-weight="bold" font-family="monospace">&lt;/&gt;</text>
-
-      <!-- LEFT PAW -->
       <g class="cat-paw-left">
         <ellipse cx="30" cy="118" rx="9" ry="7" fill="#1a1a2e"/>
         <ellipse cx="30" cy="118" rx="7" ry="5" fill="#222244"/>
-        <!-- paw toes -->
         <circle cx="26" cy="121" r="2.5" fill="#1a1a2e"/>
         <circle cx="30" cy="123" r="2.5" fill="#1a1a2e"/>
         <circle cx="34" cy="121" r="2.5" fill="#1a1a2e"/>
       </g>
-
-      <!-- RIGHT PAW -->
       <ellipse cx="80" cy="118" rx="9" ry="7" fill="#1a1a2e"/>
       <ellipse cx="80" cy="118" rx="7" ry="5" fill="#222244"/>
       <circle cx="76" cy="121" r="2.5" fill="#1a1a2e"/>
       <circle cx="80" cy="123" r="2.5" fill="#1a1a2e"/>
       <circle cx="84" cy="121" r="2.5" fill="#1a1a2e"/>
-
-      <!-- Laptop the cat is holding -->
       <rect x="36" y="108" width="38" height="5" rx="2" fill="#333" opacity="0.8"/>
-
-      <!-- HEAD -->
-      <!-- Ear Left -->
       <g class="cat-ear-left">
         <polygon points="20,52 28,30 40,52" fill="#1a1a2e"/>
         <polygon points="23,50 29,34 37,50" fill="#2a2a5a"/>
         <polygon points="25,49 29,37 35,49" fill="#00ce79" opacity="0.6"/>
       </g>
-
-      <!-- Ear Right -->
       <g class="cat-ear-right">
         <polygon points="70,52 82,30 90,52" fill="#1a1a2e"/>
         <polygon points="73,50 81,34 87,50" fill="#2a2a5a"/>
         <polygon points="75,49 81,37 85,49" fill="#00ce79" opacity="0.6"/>
       </g>
-
-      <!-- Head circle -->
       <circle cx="55" cy="60" r="28" fill="#1a1a2e"/>
       <circle cx="55" cy="60" r="25" fill="#222244"/>
-
-      <!-- Forehead marking -->
       <path d="M48 42 Q55 36 62 42" stroke="#00ce79" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
       <path d="M51 39 Q55 34 59 39" stroke="#00ce79" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/>
-
-      <!-- EYES -->
       <g class="cat-eye" style="transform-origin:43px 60px">
-        <!-- Eye white/glow -->
         <ellipse cx="43" cy="60" rx="8" ry="9" fill="#111133"/>
-        <!-- Iris -->
         <ellipse cx="43" cy="60" rx="6" ry="7" fill="#00ce79"/>
-        <!-- Pupil (cat slit) -->
         <ellipse cx="43" cy="60" rx="2" ry="5" fill="#0a0a1a"/>
-        <!-- Shine -->
         <circle cx="45" cy="57" r="1.8" fill="white" opacity="0.9"/>
         <circle cx="41" cy="63" r="0.9" fill="white" opacity="0.5"/>
       </g>
-
       <g class="cat-eye" style="transform-origin:67px 60px">
         <ellipse cx="67" cy="60" rx="8" ry="9" fill="#111133"/>
         <ellipse cx="67" cy="60" rx="6" ry="7" fill="#00ce79"/>
@@ -260,36 +222,22 @@ tailwind.config = {
         <circle cx="69" cy="57" r="1.8" fill="white" opacity="0.9"/>
         <circle cx="65" cy="63" r="0.9" fill="white" opacity="0.5"/>
       </g>
-
-      <!-- NOSE -->
       <polygon points="55,68 52,73 58,73" fill="#ff9eb5"/>
       <ellipse cx="55" cy="70" rx="3" ry="2" fill="#ff7aa8"/>
-
-      <!-- MOUTH -->
       <path d="M52 73 Q55 78 58 73" stroke="#ff9eb5" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-
-      <!-- Whiskers LEFT -->
       <line x1="20" y1="67" x2="45" y2="70" stroke="white" stroke-width="1" opacity="0.6"/>
       <line x1="18" y1="72" x2="45" y2="73" stroke="white" stroke-width="1" opacity="0.5"/>
       <line x1="20" y1="77" x2="45" y2="75" stroke="white" stroke-width="1" opacity="0.4"/>
-
-      <!-- Whiskers RIGHT -->
       <line x1="65" y1="70" x2="90" y2="67" stroke="white" stroke-width="1" opacity="0.6"/>
       <line x1="65" y1="73" x2="92" y2="72" stroke="white" stroke-width="1" opacity="0.5"/>
       <line x1="65" y1="75" x2="90" y2="77" stroke="white" stroke-width="1" opacity="0.4"/>
-
-      <!-- Headphone / coding accessory -->
       <path d="M28 55 Q28 30 55 28 Q82 30 82 55" stroke="#00ce79" stroke-width="3.5" fill="none" stroke-linecap="round"/>
       <rect x="22" y="52" width="10" height="14" rx="5" fill="#00ce79"/>
       <rect x="78" y="52" width="10" height="14" rx="5" fill="#00ce79"/>
       <rect x="24" y="54" width="6" height="10" rx="3" fill="#005533"/>
       <rect x="80" y="54" width="6" height="10" rx="3" fill="#005533"/>
-
-      <!-- Blush cheeks -->
       <ellipse cx="34" cy="68" rx="5" ry="3" fill="#ff9eb5" opacity="0.35"/>
       <ellipse cx="76" cy="68" rx="5" ry="3" fill="#ff9eb5" opacity="0.35"/>
-
-      <!-- Green sparkle on head -->
       <g opacity="0.8">
         <circle cx="55" cy="22" r="2" fill="#00ce79">
           <animate attributeName="r" values="2;3;2" dur="2s" repeatCount="indefinite"/>
@@ -371,7 +319,7 @@ tailwind.config = {
       <h3 class="text-white text-xl md:text-2xl font-light mb-2" data-reveal>Hi, There! <span class="inline-block origin-[70%_70%] animate-wave">👋</span></h3>
       <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-tight" data-reveal>I'm <span class="grad-text">Abdullah Al Musabbir</span></h1>
       <div class="h-1 w-20 bg-spring rounded mb-6" data-reveal></div>
-      <p class="text-gray-300 text-sm md:text-base max-w-2xl leading-relaxed mb-4" data-reveal>A professional full-stack web developer. I completed several courses in <span class="text-spring font-semibold">HTML, CSS, JavaScript, Bootstrap, MongoDB, Express, Node.js, React.js, Django</span>. Also I have coding skills in <span class="text-spring font-semibold">C++, Java</span> programming language.</p>
+      <p class="text-gray-300 text-sm md:text-base max-w-2xl leading-relaxed mb-4" data-reveal>A professional full-stack web developer. I completed several courses in <span class="text-spring font-semibold">HTML, CSS, JavaScript, Tailwind CSS, PostgreSQL, MongoDB, Express, Next.js, React.js, Django, ASP.NET</span>. Also I have coding skills in <span class="text-spring font-semibold">C/C++, Python</span> programming language.</p>
       <p class="text-spring text-lg md:text-2xl font-bold mb-8 h-8" data-reveal><span id="typed"></span><span class="animate-pulse">|</span></p>
       <div class="flex flex-wrap gap-4" data-reveal>
         <a href="#about" class="magnetic inline-flex items-center gap-2 px-7 py-3 bg-spring text-card font-bold rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg shadow-spring/20 text-sm"><i class="fas fa-user"></i> About Me</a>
@@ -437,13 +385,29 @@ tailwind.config = {
   <section id="skills" class="min-h-screen px-6 md:px-16 lg:px-20 py-20">
     <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20" data-reveal>My <span class="text-spring">Skills</span></h1>
     <div class="max-w-3xl mx-auto space-y-5" data-reveal>
-      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">HTML / CSS</span><span class="text-spring font-bold text-sm">95%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="95"></div></div></div>
-      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">JavaScript</span><span class="text-spring font-bold text-sm">85%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="85"></div></div></div>
-      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">React.js</span><span class="text-spring font-bold text-sm">80%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="80"></div></div></div>
-      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">Node.js / Express</span><span class="text-spring font-bold text-sm">78%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="78"></div></div></div>
-      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">MongoDB</span><span class="text-spring font-bold text-sm">75%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="75"></div></div></div>
-      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">Django / Python</span><span class="text-spring font-bold text-sm">90%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="90"></div></div></div>
-      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">C++ / Java</span><span class="text-spring font-bold text-sm">72%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="72"></div></div></div>
+
+      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">HTML / CSS</span><span class="text-spring font-bold text-sm">100%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="100"></div></div></div>
+
+      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">Tailwind CSS</span><span class="text-spring font-bold text-sm">100%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="100"></div></div></div>
+
+      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">JavaScript</span><span class="text-spring font-bold text-sm">99%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="99"></div></div></div>
+
+      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">React.js</span><span class="text-spring font-bold text-sm">95%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="95"></div></div></div>
+
+      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">Next.js</span><span class="text-spring font-bold text-sm">94%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="94"></div></div></div>
+
+      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">MongoDB</span><span class="text-spring font-bold text-sm">96%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="96"></div></div></div>
+
+      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">PostgreSQL</span><span class="text-spring font-bold text-sm">96%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="96"></div></div></div>
+
+      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">Django / Python</span><span class="text-spring font-bold text-sm">100%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="100"></div></div></div>
+
+      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">Python</span><span class="text-spring font-bold text-sm">95%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="95"></div></div></div>
+
+      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">C / C++</span><span class="text-spring font-bold text-sm">100%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="100"></div></div></div>
+
+      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">ASP.NET</span><span class="text-spring font-bold text-sm">90%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="90"></div></div></div>
+
     </div>
   </section>
 
@@ -453,6 +417,7 @@ tailwind.config = {
     <div class="max-w-4xl mx-auto relative">
       <div class="absolute left-5 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-white/20"></div>
       <div class="space-y-10">
+
         <div class="relative flex items-start" data-reveal-left>
           <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-graduation-cap text-white text-sm"></i></div>
           <div class="ml-16 md:ml-0 md:w-[44%] md:pr-10 bg-box p-5 rounded-2xl hover:scale-[1.03] hover:shadow-lg hover:shadow-spring/10 transition-all">
@@ -461,6 +426,7 @@ tailwind.config = {
             <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed SSC from science dept. Got GPA: 5.0 out of 5.00</p>
           </div>
         </div>
+
         <div class="relative flex items-start md:flex-row-reverse" data-reveal-right>
           <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-graduation-cap text-white text-sm"></i></div>
           <div class="ml-16 md:ml-0 md:w-[44%] md:pl-10 bg-box p-5 rounded-2xl hover:scale-[1.03] hover:shadow-lg hover:shadow-spring/10 transition-all">
@@ -469,6 +435,7 @@ tailwind.config = {
             <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed HSC from science dept. Got GPA: 4.83 out of 5.00</p>
           </div>
         </div>
+
         <div class="relative flex items-start" data-reveal-left>
           <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-graduation-cap text-white text-sm"></i></div>
           <div class="ml-16 md:ml-0 md:w-[44%] md:pr-10 bg-box p-5 rounded-2xl hover:scale-[1.03] hover:shadow-lg hover:shadow-spring/10 transition-all">
@@ -477,22 +444,25 @@ tailwind.config = {
             <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Successfully graduated with B.Sc in Computer Science & Engineering.</p>
           </div>
         </div>
+
         <div class="relative flex items-start md:flex-row-reverse" data-reveal-right>
           <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-code text-white text-sm"></i></div>
           <div class="ml-16 md:ml-0 md:w-[44%] md:pl-10 bg-box p-5 rounded-2xl hover:scale-[1.03] hover:shadow-lg hover:shadow-spring/10 transition-all">
             <span class="inline-block px-3 py-0.5 bg-btn text-white text-xs rounded-full mb-2">2023</span>
             <h3 class="text-white text-lg font-bold">Frontend Web Developer</h3>
-            <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed courses in HTML, CSS & JavaScript. Joined as a front-end developer.</p>
+            <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed courses in HTML, CSS, Tailwind CSS & JavaScript. Joined as a front-end developer.</p>
           </div>
         </div>
+
         <div class="relative flex items-start" data-reveal-left>
           <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-server text-white text-sm"></i></div>
           <div class="ml-16 md:ml-0 md:w-[44%] md:pr-10 bg-box p-5 rounded-2xl hover:scale-[1.03] hover:shadow-lg hover:shadow-spring/10 transition-all">
             <span class="inline-block px-3 py-0.5 bg-btn text-white text-xs rounded-full mb-2">2024</span>
-            <h3 class="text-white text-lg font-bold">Backend Web Developer</h3>
-            <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed MERN stack and Django. Now a certified full-stack web developer.</p>
+            <h3 class="text-white text-lg font-bold">Full Stack Web Developer</h3>
+            <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed React.js, Next.js, Django, ASP.NET, PostgreSQL & MongoDB. Now a certified full-stack web developer.</p>
           </div>
         </div>
+
         <div class="relative flex items-start md:flex-row-reverse" data-reveal-right>
           <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-camera text-white text-sm"></i></div>
           <div class="ml-16 md:ml-0 md:w-[44%] md:pl-10 bg-box p-5 rounded-2xl hover:scale-[1.03] hover:shadow-lg hover:shadow-spring/10 transition-all">
@@ -501,60 +471,204 @@ tailwind.config = {
             <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Started photography course at home. Now an expert in photography.</p>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
   <!-- PORTFOLIO -->
   <section id="portfolio" class="min-h-screen px-6 md:px-16 lg:px-20 py-20">
+
+    <!-- SERVICES -->
     <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20" data-reveal>My <span class="text-spring">Services</span></h1>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale data-img="images/live-1.png" data-title="Dorzi — Tailoring Service Platform" data-category="Service" data-desc="Dorzi is a full-stack tailoring service platform where customers can book appointments, choose services, and track their orders. Built with a modern UI focusing on seamless user experience for both tailors and customers." data-tech="React.js,Node.js,MongoDB,Tailwind CSS,Express.js" data-live="https://dorzi.vercel.app/" data-github="">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-16">
+
+      <!-- Project 1 -->
+      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer"
+        data-reveal-scale
+        data-img="images/live-1.png"
+        data-title="Dorzi — Tailoring Service Platform"
+        data-category="Service"
+        data-desc="Dorzi is a full-stack tailoring service platform where customers can book appointments, choose services, and track their orders. Built with a modern UI focusing on seamless user experience for both tailors and customers."
+        data-tech="React.js,Node.js,MongoDB,Tailwind CSS,Express.js"
+        data-live="https://dorzi.vercel.app/"
+        data-github="">
         <img src="images/live-1.png" alt="Dorzi" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-          <span class="text-spring text-xs font-bold">Service</span><h4 class="text-white font-bold text-sm">Dorzi</h4><p class="text-gray-300 text-xs mt-1">Click to view details</p>
+          <span class="text-spring text-xs font-bold">Service</span>
+          <h4 class="text-white font-bold text-sm">Dorzi</h4>
+          <p class="text-gray-300 text-xs mt-1">Click to view details</p>
         </div>
       </div>
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale data-img="images/live-2.png" data-title="DinBodol — Daily Life Exchange" data-category="Service" data-desc="DinBodol is a community-driven platform designed to help people exchange daily life services, skills and resources." data-tech="React.js,Node.js,MongoDB,Express.js,Tailwind CSS" data-live="https://dinbodol.vercel.app/" data-github="">
+
+      <!-- Project 2 -->
+      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer"
+        data-reveal-scale
+        data-img="images/live-2.png"
+        data-title="DinBodol — Daily Life Exchange"
+        data-category="Service"
+        data-desc="DinBodol is a community-driven platform designed to help people exchange daily life services, skills and resources."
+        data-tech="React.js,Node.js,MongoDB,Express.js,Tailwind CSS"
+        data-live="https://dinbodol.vercel.app/"
+        data-github="">
         <img src="images/live-2.png" alt="DinBodol" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-          <span class="text-spring text-xs font-bold">Service</span><h4 class="text-white font-bold text-sm">DinBodol</h4><p class="text-gray-300 text-xs mt-1">Click to view details</p>
+          <span class="text-spring text-xs font-bold">Service</span>
+          <h4 class="text-white font-bold text-sm">DinBodol</h4>
+          <p class="text-gray-300 text-xs mt-1">Click to view details</p>
         </div>
       </div>
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale data-img="images/live-3.png" data-title="BoardCanvas — Collaborative Whiteboard" data-category="Service" data-desc="BoardCanvas is an interactive real-time collaborative whiteboard application." data-tech="React.js,Node.js,Socket.io,Canvas API,Tailwind CSS" data-live="https://boardcanvas.vercel.app/" data-github="">
+
+      <!-- Project 3 -->
+      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer"
+        data-reveal-scale
+        data-img="images/live-3.png"
+        data-title="BoardCanvas — Collaborative Whiteboard"
+        data-category="Service"
+        data-desc="BoardCanvas is an interactive real-time collaborative whiteboard application."
+        data-tech="React.js,Node.js,Socket.io,Canvas API,Tailwind CSS"
+        data-live="https://boardcanvas.vercel.app/"
+        data-github="">
         <img src="images/live-3.png" alt="BoardCanvas" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-          <span class="text-spring text-xs font-bold">Service</span><h4 class="text-white font-bold text-sm">BoardCanvas</h4><p class="text-gray-300 text-xs mt-1">Click to view details</p>
+          <span class="text-spring text-xs font-bold">Service</span>
+          <h4 class="text-white font-bold text-sm">BoardCanvas</h4>
+          <p class="text-gray-300 text-xs mt-1">Click to view details</p>
         </div>
       </div>
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale data-img="images/live-4.png" data-title="TazHub LLC — Business Solutions" data-category="Service" data-desc="TazHub LLC is a professional business solutions website built for a US-based company." data-tech="React.js,Tailwind CSS,Node.js,Express.js,MongoDB" data-live="https://tazhubllc.com/" data-github="">
+
+      <!-- Project 4 -->
+      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer"
+        data-reveal-scale
+        data-img="images/live-4.png"
+        data-title="TazHub LLC — Business Solutions"
+        data-category="Service"
+        data-desc="TazHub LLC is a professional business solutions website built for a US-based company."
+        data-tech="React.js,Tailwind CSS,Node.js,Express.js,MongoDB"
+        data-live="https://tazhubllc.com/"
+        data-github="">
         <img src="images/live-4.png" alt="TazHub LLC" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-          <span class="text-spring text-xs font-bold">Service</span><h4 class="text-white font-bold text-sm">TazHub LLC</h4><p class="text-gray-300 text-xs mt-1">Click to view details</p>
+          <span class="text-spring text-xs font-bold">Service</span>
+          <h4 class="text-white font-bold text-sm">TazHub LLC</h4>
+          <p class="text-gray-300 text-xs mt-1">Click to view details</p>
         </div>
       </div>
+
+      <!-- Project 5 -->
+      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer"
+        data-reveal-scale
+        data-img="images/live-5.png"
+        data-title="Channgo — Warehouse Management System"
+        data-category="Service"
+        data-desc="Channgo is a full-stack warehouse management system designed to manage inventory, products, suppliers, stock movements, and warehouse operations. It provides a modern interface for tracking resources efficiently and streamlining day-to-day warehouse management."
+        data-tech="ASP.NET,Next.js,PostgreSQL,Tailwind CSS"
+        data-live="https://channgo.vercel.app/"
+        data-github="">
+        <img src="images/live-5.png" alt="Channgo" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+          <span class="text-spring text-xs font-bold">Service</span>
+          <h4 class="text-white font-bold text-sm">Channgo</h4>
+          <p class="text-gray-300 text-xs mt-1">Click to view details</p>
+        </div>
+      </div>
+
+      <!-- Project 6 -->
+      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer"
+        data-reveal-scale
+        data-img="images/live-6.png"
+        data-title="CodeRoom — Online Coding Platform"
+        data-category="Service"
+        data-desc="CodeRoom is an online coding platform where users can write, run, and test code in multiple programming languages. It provides a simple environment for practicing programming, solving problems, and improving coding skills."
+        data-tech="Django,Next.js,PostgreSQL,Tailwind CSS"
+        data-live="https://coderoom-gamma.vercel.app/"
+        data-github="">
+        <img src="images/live-6.png" alt="CodeRoom" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+          <span class="text-spring text-xs font-bold">Service</span>
+          <h4 class="text-white font-bold text-sm">CodeRoom</h4>
+          <p class="text-gray-300 text-xs mt-1">Click to view details</p>
+        </div>
+      </div>
+
+      <!-- Project 7 -->
+      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer"
+        data-reveal-scale
+        data-img="images/live-7.png"
+        data-title="SecureScope — Web & API Security Testing Platform"
+        data-category="Service"
+        data-desc="SecureScope is a security testing platform for analyzing web applications and APIs to identify common vulnerabilities and security issues. It provides a centralized environment for running security checks, reviewing findings, and improving application security."
+        data-tech="Django,Next.js,PostgreSQL,Tailwind CSS"
+        data-live="https://securescope-delta.vercel.app/"
+        data-github="">
+        <img src="images/live-7.png" alt="SecureScope" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+          <span class="text-spring text-xs font-bold">Service</span>
+          <h4 class="text-white font-bold text-sm">SecureScope</h4>
+          <p class="text-gray-300 text-xs mt-1">Click to view details</p>
+        </div>
+      </div>
+
     </div>
 
+    <!-- DATA SCIENCE -->
     <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20" data-reveal>My <span class="text-spring">Data Science Projects</span></h1>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale data-img="images/data-1.png" data-title="Hybrid Breast Cancer Diagnosis" data-category="Data Science" data-desc="A hybrid machine learning model for breast cancer diagnosis combining multiple classification algorithms." data-tech="Python,Scikit-learn,Pandas,NumPy,Matplotlib,Jupyter" data-live="" data-github="https://github.com/abdullahalmusabbir/AI/blob/main/Hybrid/hybrid-breast-cancer-diagnosis.ipynb">
+
+      <!-- DS Project 1 -->
+      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer"
+        data-reveal-scale
+        data-img="images/data-1.png"
+        data-title="Hybrid Breast Cancer Diagnosis"
+        data-category="Data Science"
+        data-desc="A hybrid machine learning model for breast cancer diagnosis combining multiple classification algorithms."
+        data-tech="Python,Scikit-learn,Pandas,NumPy,Matplotlib,Jupyter"
+        data-live=""
+        data-github="https://github.com/abdullahalmusabbir/AI/blob/main/Hybrid/hybrid-breast-cancer-diagnosis.ipynb">
         <img src="images/data-1.png" alt="Breast Cancer" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-          <span class="text-spring text-xs font-bold">Data Science</span><h4 class="text-white font-bold text-sm">Hybrid Breast Cancer Diagnosis</h4><p class="text-gray-300 text-xs mt-1">Click to view details</p>
+          <span class="text-spring text-xs font-bold">Data Science</span>
+          <h4 class="text-white font-bold text-sm">Hybrid Breast Cancer Diagnosis</h4>
+          <p class="text-gray-300 text-xs mt-1">Click to view details</p>
         </div>
       </div>
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale data-img="images/data-2.png" data-title="Smart Crop Recommendation System" data-category="Data Science" data-desc="An intelligent crop recommendation system that suggests the most suitable crops based on soil nutrients, weather conditions and environmental factors." data-tech="Python,Scikit-learn,Pandas,Seaborn,Matplotlib,Jupyter" data-live="" data-github="https://github.com/abdullahalmusabbir/AI/blob/main/Hybrid/smart-crop-recommendation-system.ipynb">
+
+      <!-- DS Project 2 -->
+      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer"
+        data-reveal-scale
+        data-img="images/data-2.png"
+        data-title="Smart Crop Recommendation System"
+        data-category="Data Science"
+        data-desc="An intelligent crop recommendation system that suggests the most suitable crops based on soil nutrients, weather conditions and environmental factors."
+        data-tech="Python,Scikit-learn,Pandas,Seaborn,Matplotlib,Jupyter"
+        data-live=""
+        data-github="https://github.com/abdullahalmusabbir/AI/blob/main/Hybrid/smart-crop-recommendation-system.ipynb">
         <img src="images/data-2.png" alt="Crop" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-          <span class="text-spring text-xs font-bold">Data Science</span><h4 class="text-white font-bold text-sm">Smart Crop Recommendation</h4><p class="text-gray-300 text-xs mt-1">Click to view details</p>
+          <span class="text-spring text-xs font-bold">Data Science</span>
+          <h4 class="text-white font-bold text-sm">Smart Crop Recommendation</h4>
+          <p class="text-gray-300 text-xs mt-1">Click to view details</p>
         </div>
       </div>
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale data-img="images/data-3.png" data-title="Smart Loan Default Prediction" data-category="Data Science" data-desc="A smart loan default prediction system that uses machine learning to assess the risk of borrowers defaulting on loans." data-tech="Python,Scikit-learn,XGBoost,Pandas,Matplotlib,Jupyter" data-live="" data-github="https://github.com/abdullahalmusabbir/AI/blob/main/Hybrid/smart-loan-default-prediction.ipynb">
+
+      <!-- DS Project 3 -->
+      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer"
+        data-reveal-scale
+        data-img="images/data-3.png"
+        data-title="Smart Loan Default Prediction"
+        data-category="Data Science"
+        data-desc="A smart loan default prediction system that uses machine learning to assess the risk of borrowers defaulting on loans."
+        data-tech="Python,Scikit-learn,XGBoost,Pandas,Matplotlib,Jupyter"
+        data-live=""
+        data-github="https://github.com/abdullahalmusabbir/AI/blob/main/Hybrid/smart-loan-default-prediction.ipynb">
         <img src="images/data-3.png" alt="Loan" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-          <span class="text-spring text-xs font-bold">Data Science</span><h4 class="text-white font-bold text-sm">Smart Loan Default Prediction</h4><p class="text-gray-300 text-xs mt-1">Click to view details</p>
+          <span class="text-spring text-xs font-bold">Data Science</span>
+          <h4 class="text-white font-bold text-sm">Smart Loan Default Prediction</h4>
+          <p class="text-gray-300 text-xs mt-1">Click to view details</p>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -601,6 +715,7 @@ tailwind.config = {
 
 <script>
 (function () {
+
   // ===== MOBILE MENU =====
   const menuBtn = document.getElementById('menu');
   const menuIcon = document.getElementById('menuIcon');
@@ -630,10 +745,15 @@ tailwind.config = {
   window.addEventListener('scroll', function () {
     const max = document.documentElement.scrollHeight - window.innerHeight;
     progress.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
-    if (window.scrollY > 300) { scrollTopBtn.classList.remove('opacity-0', 'pointer-events-none'); }
-    else { scrollTopBtn.classList.add('opacity-0', 'pointer-events-none'); }
+    if (window.scrollY > 300) {
+      scrollTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+    } else {
+      scrollTopBtn.classList.add('opacity-0', 'pointer-events-none');
+    }
     let current = '';
-    sections.forEach(function (s) { if (window.scrollY >= s.offsetTop - 150) current = s.getAttribute('id'); });
+    sections.forEach(function (s) {
+      if (window.scrollY >= s.offsetTop - 150) current = s.getAttribute('id');
+    });
     navLinks.forEach(function (l) {
       l.classList.remove('!bg-spring', '!text-card');
       if (l.getAttribute('href') === '#' + current) l.classList.add('!bg-spring', '!text-card');
@@ -654,7 +774,11 @@ tailwind.config = {
 
   // ===== SKILL BARS =====
   const skillObs = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) { if (e.isIntersecting) { e.target.style.width = e.target.getAttribute('data-skill') + '%'; } });
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.style.width = e.target.getAttribute('data-skill') + '%';
+      }
+    });
   }, { threshold: 0.5 });
   document.querySelectorAll('[data-skill]').forEach(function (b) { skillObs.observe(b); });
 
@@ -662,9 +786,16 @@ tailwind.config = {
   const countObs = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (e.isIntersecting) {
-        const el = e.target, target = parseInt(el.getAttribute('data-count')), suffix = el.getAttribute('data-suffix') || '';
-        let cur = 0; const step = Math.max(1, Math.ceil(target / 40));
-        const t = setInterval(function () { cur += step; if (cur >= target) { cur = target; clearInterval(t); } el.textContent = cur + suffix; }, 35);
+        const el = e.target;
+        const target = parseInt(el.getAttribute('data-count'));
+        const suffix = el.getAttribute('data-suffix') || '';
+        let cur = 0;
+        const step = Math.max(1, Math.ceil(target / 40));
+        const t = setInterval(function () {
+          cur += step;
+          if (cur >= target) { cur = target; clearInterval(t); }
+          el.textContent = cur + suffix;
+        }, 35);
         countObs.unobserve(el);
       }
     });
@@ -673,7 +804,15 @@ tailwind.config = {
 
   // ===== TYPING =====
   const typedEl = document.getElementById('typed');
-  const roles = ['Full Stack Developer', 'MERN Stack Expert', 'Django Developer', 'UI/UX Designer', 'Problem Solver'];
+  const roles = [
+    'Full Stack Developer',
+    'Next.js Expert',
+    'Django Developer',
+    'ASP.NET Developer',
+    'React.js Developer',
+    'UI/UX Designer',
+    'Problem Solver'
+  ];
   let rI = 0, cI = 0, del = false;
   function typeLoop() {
     const word = roles[rI];
@@ -688,7 +827,9 @@ tailwind.config = {
   document.querySelectorAll('.magnetic').forEach(function (btn) {
     btn.addEventListener('mousemove', function (e) {
       const r = btn.getBoundingClientRect();
-      btn.style.transform = 'translate(' + ((e.clientX - r.left - r.width / 2) * 0.25) + 'px,' + ((e.clientY - r.top - r.height / 2) * 0.35) + 'px) scale(1.05)';
+      btn.style.transform = 'translate(' +
+        ((e.clientX - r.left - r.width / 2) * 0.25) + 'px,' +
+        ((e.clientY - r.top - r.height / 2) * 0.35) + 'px) scale(1.05)';
     });
     btn.addEventListener('mouseleave', function () { btn.style.transform = ''; });
   });
@@ -702,27 +843,46 @@ tailwind.config = {
       card.style.transform = 'perspective(700px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) scale(1.03)';
       card.style.boxShadow = '0 20px 40px rgba(0,206,121,0.25)';
     });
-    card.addEventListener('mouseleave', function () { card.style.transform = ''; card.style.boxShadow = ''; });
+    card.addEventListener('mouseleave', function () {
+      card.style.transform = '';
+      card.style.boxShadow = '';
+    });
   });
 
   // ===== STARFIELD =====
-  const canvas = document.getElementById('starfield'), ctx = canvas.getContext('2d');
+  const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
   let stars = [];
   function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
   function initStars() {
     stars = [];
     const n = Math.min(80, Math.floor(window.innerWidth / 18));
-    for (let i = 0; i < n; i++) { stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 1.6 + 0.3, vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25, a: Math.random() }); }
+    for (let i = 0; i < n; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.6 + 0.3,
+        vx: (Math.random() - 0.5) * 0.25,
+        vy: (Math.random() - 0.5) * 0.25,
+        a: Math.random()
+      });
+    }
   }
   function drawStars() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     stars.forEach(function (s) {
-      s.x += s.vx; s.y += s.vy; s.a += (Math.random() - 0.5) * 0.05;
-      if (s.a < 0.1) s.a = 0.1; if (s.a > 1) s.a = 1;
-      if (s.x < 0) s.x = canvas.width; if (s.x > canvas.width) s.x = 0;
-      if (s.y < 0) s.y = canvas.height; if (s.y > canvas.height) s.y = 0;
-      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0,206,121,' + s.a * 0.6 + ')'; ctx.fill();
+      s.x += s.vx; s.y += s.vy;
+      s.a += (Math.random() - 0.5) * 0.05;
+      if (s.a < 0.1) s.a = 0.1;
+      if (s.a > 1) s.a = 1;
+      if (s.x < 0) s.x = canvas.width;
+      if (s.x > canvas.width) s.x = 0;
+      if (s.y < 0) s.y = canvas.height;
+      if (s.y > canvas.height) s.y = 0;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,206,121,' + s.a * 0.6 + ')';
+      ctx.fill();
     });
     requestAnimationFrame(drawStars);
   }
@@ -740,36 +900,64 @@ tailwind.config = {
   const modalClose = document.getElementById('modalClose');
 
   function openModal(img, title, category, desc, tech, live, github) {
-    modalImage.src = img; modalImage.alt = title;
+    modalImage.src = img;
+    modalImage.alt = title;
     modalTitle.textContent = title;
     modalCategory.textContent = category;
     modalDesc.textContent = desc;
     modalTech.innerHTML = '';
-    if (tech) tech.split(',').forEach(function (t) {
-      const s = document.createElement('span');
-      s.className = 'inline-block px-3 py-1 bg-spring/10 text-spring text-xs font-semibold rounded-full border border-spring/30';
-      s.textContent = t.trim(); modalTech.appendChild(s);
-    });
+    if (tech) {
+      tech.split(',').forEach(function (t) {
+        const s = document.createElement('span');
+        s.className = 'inline-block px-3 py-1 bg-spring/10 text-spring text-xs font-semibold rounded-full border border-spring/30';
+        s.textContent = t.trim();
+        modalTech.appendChild(s);
+      });
+    }
     modalBtns.innerHTML = '';
     if (live && live.trim() !== '') {
-      const a = document.createElement('a'); a.href = live.trim(); a.target = '_blank'; a.rel = 'noopener noreferrer';
+      const a = document.createElement('a');
+      a.href = live.trim();
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
       a.className = 'inline-flex items-center gap-2 px-6 py-2.5 bg-spring text-card font-bold rounded-full hover:bg-white transition-all text-sm';
-      a.innerHTML = '<i class="fas fa-external-link-alt"></i> Live Demo'; modalBtns.appendChild(a);
+      a.innerHTML = '<i class="fas fa-external-link-alt"></i> Live Demo';
+      modalBtns.appendChild(a);
     }
     if (github && github.trim() !== '') {
-      const a = document.createElement('a'); a.href = github.trim(); a.target = '_blank'; a.rel = 'noopener noreferrer';
+      const a = document.createElement('a');
+      a.href = github.trim();
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
       a.className = 'inline-flex items-center gap-2 px-6 py-2.5 border-2 border-spring text-spring font-bold rounded-full hover:bg-spring hover:text-card transition-all text-sm';
-      a.innerHTML = '<i class="fab fa-github"></i> GitHub'; modalBtns.appendChild(a);
+      a.innerHTML = '<i class="fab fa-github"></i> GitHub';
+      modalBtns.appendChild(a);
     }
-    modal.classList.remove('hidden'); modal.classList.add('flex');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
     document.body.style.overflow = 'hidden';
   }
-  function closeModal() { modal.classList.add('hidden'); modal.classList.remove('flex'); document.body.style.overflow = ''; }
+
+  function closeModal() {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
   document.querySelectorAll('.project-card').forEach(function (card) {
     card.addEventListener('click', function () {
-      openModal(this.getAttribute('data-img'), this.getAttribute('data-title'), this.getAttribute('data-category'), this.getAttribute('data-desc'), this.getAttribute('data-tech'), this.getAttribute('data-live'), this.getAttribute('data-github'));
+      openModal(
+        this.getAttribute('data-img'),
+        this.getAttribute('data-title'),
+        this.getAttribute('data-category'),
+        this.getAttribute('data-desc'),
+        this.getAttribute('data-tech'),
+        this.getAttribute('data-live'),
+        this.getAttribute('data-github')
+      );
     });
   });
+
   modalClose.addEventListener('click', closeModal);
   modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
@@ -786,7 +974,7 @@ tailwind.config = {
     "Meow! Keep going! 🚀",
     "Hire my owner! 💼",
     "Let's code! 💻",
-    "MERN Stack! 🔥",
+    "Next.js is 🔥",
     "Click a project! 👆",
     "Contact him! 📧",
     "Purrfect dev! 😸"
@@ -806,14 +994,14 @@ tailwind.config = {
   function createParticle() {
     const emojis = ['✨', '⭐', '💚', '🐾', '💫', '🌟'];
     const p = document.createElement('div');
-    p.style.cssText = `
-      position: fixed;
-      font-size: ${10 + Math.random() * 10}px;
-      pointer-events: none;
-      z-index: 9998;
-      animation: particleFade 0.9s ease-out forwards;
-      user-select: none;
-    `;
+    p.style.cssText = [
+      'position:fixed',
+      'font-size:' + (10 + Math.random() * 10) + 'px',
+      'pointer-events:none',
+      'z-index:9998',
+      'animation:particleFade 0.9s ease-out forwards',
+      'user-select:none'
+    ].join(';');
     p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
     const rect = catCharacter.getBoundingClientRect();
     p.style.left = (rect.left + 20 + Math.random() * 60) + 'px';
@@ -822,19 +1010,15 @@ tailwind.config = {
     setTimeout(function () { p.remove(); }, 900);
   }
 
-  // Scroll interaction
   window.addEventListener('scroll', function () {
     const scrollY = window.scrollY;
     const delta = scrollY - lastScrollY;
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
     const pct = maxScroll > 0 ? scrollY / maxScroll : 0;
 
-    // Move cat vertically with scroll wave
     const newBottom = 20 + Math.sin(pct * Math.PI * 3) * 20;
     catCharacter.style.bottom = newBottom + 'px';
     catGlow.style.bottom = (newBottom - 8) + 'px';
-
-    // Mirror cat direction on scroll direction
     catCharacter.style.transform = delta > 0 ? 'scaleX(1)' : 'scaleX(-1)';
 
     if (!isScrolling) {
@@ -855,27 +1039,20 @@ tailwind.config = {
     lastScrollY = scrollY;
   });
 
-  // Click — jump + burst
   catCharacter.addEventListener('click', function () {
     const curBottom = parseFloat(catCharacter.style.bottom) || 20;
     catCharacter.style.transition = 'bottom 0.35s cubic-bezier(0.34,1.56,0.64,1), transform 0.2s';
     catCharacter.style.bottom = (curBottom + 70) + 'px';
     catGlow.style.bottom = (curBottom + 70 - 8) + 'px';
-
     setTimeout(function () {
       catCharacter.style.bottom = curBottom + 'px';
       catGlow.style.bottom = (curBottom - 8) + 'px';
     }, 380);
-
-    setTimeout(function () {
-      catCharacter.style.transition = '';
-    }, 450);
-
+    setTimeout(function () { catCharacter.style.transition = ''; }, 450);
     changeSpeech();
     for (let i = 0; i < 12; i++) { setTimeout(createParticle, i * 55); }
   });
 
-  // Hover
   catCharacter.addEventListener('mouseenter', function () {
     catCharacter.style.filter = 'drop-shadow(0 14px 30px rgba(0,206,121,0.65))';
   });
@@ -883,7 +1060,6 @@ tailwind.config = {
     catCharacter.style.filter = 'drop-shadow(0 8px 20px rgba(0,206,121,0.35))';
   });
 
-  // Auto speech change
   setInterval(function () { if (!isScrolling) changeSpeech(); }, 5000);
 
 })();
