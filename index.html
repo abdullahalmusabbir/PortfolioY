@@ -74,9 +74,25 @@ tailwind.config = {
   [data-reveal-scale].revealed { opacity: 1; transform: scale(1); }
   .grad-text { background: linear-gradient(90deg,#00ce79,#4fc3f7,#00ce79); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gradientShift 4s linear infinite; }
   .tilt-card { transition: transform 0.25s ease, box-shadow 0.25s ease; transform-style: preserve-3d; }
+  /* after reveal finished, make tilt snappy */
+  .tilt-card.settled { transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.3s ease; }
   .magnetic { transition: transform 0.2s ease; }
   .shimmer-fill { background-image: linear-gradient(90deg,#00ce79,#059669,#00ce79); background-size: 200% 100%; animation: shimmer 2.5s linear infinite; }
   .nav-link { position: relative; overflow: hidden; }
+
+  /* Marquee */
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .marquee-track { display: flex; width: max-content; animation: marquee 35s linear infinite; }
+  .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
+  .marquee-mask { -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+
+  /* Section title underline accent */
+  .sec-title { position: relative; }
+  .sec-title::after { content: ''; position: absolute; left: 50%; bottom: -1px; transform: translateX(-50%); width: 90px; height: 3px; border-radius: 3px; background: linear-gradient(90deg,#00ce79,#4fc3f7); }
+
+  /* Filter buttons */
+  .filter-btn { transition: all .25s ease; }
+  .filter-btn.active { background: #00ce79; color: #1a1a1a; border-color: #00ce79; box-shadow: 0 6px 20px rgba(0,206,121,.3); }
 
   /* ====== CUTE CAT CHARACTER ====== */
   #cat-character {
@@ -91,6 +107,7 @@ tailwind.config = {
     filter: drop-shadow(0 8px 20px rgba(0,206,121,0.35));
     transition: filter 0.3s ease;
   }
+  #cat-flip { width: 100%; height: 100%; transition: transform 0.2s ease; }
   #cat-character:hover { filter: drop-shadow(0 12px 30px rgba(0,206,121,0.6)); }
   #cat-speech {
     position: fixed;
@@ -131,6 +148,12 @@ tailwind.config = {
     animation: glowPulse 2s ease-in-out infinite;
     pointer-events: none;
   }
+  @media (max-width: 640px) {
+    #cat-character { width: 80px; height: 102px; right: 10px; }
+    #cat-character svg { width: 100%; height: 100%; }
+    #cat-speech { bottom: 125px; font-size: 10px; right: 6px; }
+    #cat-glow { right: 15px; width: 55px; }
+  }
   .cat-body { animation: bodyBob 2s ease-in-out infinite; }
   .cat-tail { transform-origin: 10px 10px; animation: tailWag 1s ease-in-out infinite alternate; }
   .cat-ear-left { transform-origin: center bottom; animation: earWiggle 2s ease-in-out infinite; }
@@ -151,6 +174,8 @@ tailwind.config = {
   <div class="absolute w-[300px] h-[300px] bg-spring/5 rounded-full top-1/2 left-1/3 blur-3xl animate-blobFloat" style="animation-delay:-8s;"></div>
 </div>
 <canvas id="starfield" class="fixed inset-0 z-0 pointer-events-none"></canvas>
+<!-- Cursor glow -->
+<div id="cursorGlow" class="fixed top-0 left-0 w-[420px] h-[420px] rounded-full pointer-events-none z-[1] hidden lg:block" style="background:radial-gradient(circle,rgba(0,206,121,.10),transparent 60%);transform:translate3d(-500px,-500px,0);"></div>
 
 <!-- ===== SCROLL PROGRESS BAR ===== -->
 <div id="scrollProgress" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-spring to-blue-400 z-[10001] w-0 transition-[width] duration-100"></div>
@@ -159,6 +184,7 @@ tailwind.config = {
 <div id="cat-speech">Hello! 👋 I'm Shuvo's cat!</div>
 <div id="cat-glow"></div>
 <div id="cat-character" title="Click me!">
+  <div id="cat-flip">
   <svg viewBox="0 0 110 140" xmlns="http://www.w3.org/2000/svg" width="110" height="140">
     <ellipse cx="55" cy="135" rx="28" ry="5" fill="rgba(0,0,0,0.18)"/>
     <g class="cat-tail" style="transform-origin:52px 110px">
@@ -247,21 +273,25 @@ tailwind.config = {
       </g>
     </g>
   </svg>
+  </div>
 </div>
 
 <!-- ========== PROJECT MODAL ========== -->
 <div id="projectModal" class="fixed inset-0 z-[10000] bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-  <div class="bg-card rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto animate-modalIn">
+  <div class="bg-card rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto animate-modalIn border border-white/10">
     <div class="relative">
       <img id="modalImage" src="" alt="" class="w-full h-56 sm:h-72 md:h-80 object-cover rounded-t-3xl">
-      <button id="modalClose" class="absolute top-4 right-4 w-10 h-10 bg-black/50 hover:bg-spring text-white rounded-full flex items-center justify-center text-xl transition-all hover:scale-110 hover:rotate-90">
+      <div class="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent rounded-t-3xl pointer-events-none"></div>
+      <button id="modalClose" class="absolute top-4 right-4 w-10 h-10 bg-black/50 hover:bg-spring text-white rounded-full flex items-center justify-center text-xl transition-all hover:scale-110 hover:rotate-90" aria-label="Close">
         <i class="fas fa-times"></i>
       </button>
     </div>
-    <div class="p-5 sm:p-8">
+    <div class="p-5 sm:p-8 -mt-4 relative">
       <span id="modalCategory" class="inline-block px-4 py-1 bg-spring/20 text-spring text-sm font-bold rounded-full mb-3"></span>
-      <h2 id="modalTitle" class="text-white text-xl sm:text-3xl font-extrabold mb-4"></h2>
+      <h2 id="modalTitle" class="text-white text-xl sm:text-3xl font-extrabold mb-1"></h2>
+      <p id="modalSub" class="text-spring/80 text-sm font-semibold mb-4"></p>
       <p id="modalDesc" class="text-gray-400 text-sm sm:text-base leading-relaxed mb-6"></p>
+      <h5 class="text-white text-xs font-bold uppercase tracking-widest mb-3 opacity-70">Tech Stack</h5>
       <div id="modalTech" class="flex flex-wrap gap-2 mb-6"></div>
       <div id="modalBtns" class="flex flex-wrap gap-3"></div>
     </div>
@@ -279,6 +309,9 @@ tailwind.config = {
     <h3 class="text-white text-xl font-bold">Abdullah Al Musabbir</h3>
     <h4 class="text-spring text-base font-semibold">(Shuvo)</h4>
     <p class="text-gray-400 text-xs mt-1">Full Stack Web Developer & Designer</p>
+    <div class="inline-flex items-center gap-2 mt-3 px-3 py-1 rounded-full bg-spring/10 border border-spring/30 text-spring text-[11px] font-bold">
+      <span class="w-2 h-2 rounded-full bg-spring animate-pulse"></span> Available for work
+    </div>
   </div>
   <nav class="w-full px-5 mt-1">
     <ul class="space-y-2">
@@ -291,9 +324,9 @@ tailwind.config = {
     </ul>
   </nav>
   <div class="flex gap-3 mt-4 pb-4">
-    <a href="https://www.facebook.com/profile.php?id=61586996791374" target="_blank" class="w-9 h-9 bg-btn text-white rounded-full flex items-center justify-center hover:bg-spring hover:text-card hover:-translate-y-1 transition-all text-sm"><i class="fab fa-facebook-f"></i></a>
-    <a href="https://github.com/abdullahalmusabbir" target="_blank" class="w-9 h-9 bg-btn text-white rounded-full flex items-center justify-center hover:bg-spring hover:text-card hover:-translate-y-1 transition-all text-sm"><i class="fab fa-github"></i></a>
-    <a href="https://www.linkedin.com/in/abdullah-al-musabbir/" target="_blank" class="w-9 h-9 bg-btn text-white rounded-full flex items-center justify-center hover:bg-spring hover:text-card hover:-translate-y-1 transition-all text-sm"><i class="fab fa-linkedin-in"></i></a>
+    <a href="https://www.facebook.com/profile.php?id=61586996791374" target="_blank" rel="noopener" class="w-9 h-9 bg-btn text-white rounded-full flex items-center justify-center hover:bg-spring hover:text-card hover:-translate-y-1 transition-all text-sm"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://github.com/abdullahalmusabbir" target="_blank" rel="noopener" class="w-9 h-9 bg-btn text-white rounded-full flex items-center justify-center hover:bg-spring hover:text-card hover:-translate-y-1 transition-all text-sm"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/abdullah-al-musabbir/" target="_blank" rel="noopener" class="w-9 h-9 bg-btn text-white rounded-full flex items-center justify-center hover:bg-spring hover:text-card hover:-translate-y-1 transition-all text-sm"><i class="fab fa-linkedin-in"></i></a>
   </div>
 </header>
 
@@ -316,56 +349,64 @@ tailwind.config = {
       <p class="text-spring text-lg md:text-2xl font-bold mb-8 h-8" data-reveal><span id="typed"></span><span class="animate-pulse">|</span></p>
       <div class="flex flex-wrap gap-4" data-reveal>
         <a href="#about" class="magnetic inline-flex items-center gap-2 px-7 py-3 bg-spring text-card font-bold rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg shadow-spring/20 text-sm"><i class="fas fa-user"></i> About Me</a>
+        <a href="#portfolio" class="magnetic inline-flex items-center gap-2 px-7 py-3 bg-btn text-white font-bold rounded-full hover:bg-white hover:text-card hover:scale-105 transition-all duration-300 text-sm"><i class="fas fa-folder-open"></i> My Work</a>
         <a href="#contact" class="magnetic inline-flex items-center gap-2 px-7 py-3 border-2 border-spring text-spring font-bold rounded-full hover:bg-spring hover:text-card hover:scale-105 transition-all duration-300 text-sm"><i class="fas fa-paper-plane"></i> Hire Me</a>
       </div>
     </div>
     <a href="#about" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-spring text-2xl animate-bounceSoft"><i class="fas fa-chevron-down"></i></a>
   </section>
 
+  <!-- TECH MARQUEE -->
+  <div class="marquee-wrap relative border-y border-white/5 bg-card/40 backdrop-blur py-4 overflow-hidden">
+    <div class="marquee-mask">
+      <div id="marqueeTrack" class="marquee-track"></div>
+    </div>
+  </div>
+
   <!-- ABOUT -->
   <section id="about" class="min-h-screen px-6 md:px-16 lg:px-20 py-20">
-    <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20" data-reveal><span class="text-spring">About</span> Me</h1>
+    <h1 class="sec-title text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20" data-reveal><span class="text-spring">About</span> Me</h1>
     <div class="flex flex-wrap items-center justify-center gap-8">
       <div class="flex-1 min-w-[280px] max-w-xl" data-reveal-left>
         <div class="space-y-3">
-          <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box hover:translate-x-2 transition-all">
+          <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box hover:translate-x-2 transition-all border border-transparent hover:border-spring/20">
             <i class="fas fa-user text-spring text-lg w-7 text-center"></i>
             <div><span class="text-gray-500 text-xs">Name</span><h3 class="text-white text-base font-semibold">Abdullah Al Musabbir</h3></div>
           </div>
-          <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box hover:translate-x-2 transition-all">
+          <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box hover:translate-x-2 transition-all border border-transparent hover:border-spring/20">
             <i class="fas fa-birthday-cake text-spring text-lg w-7 text-center"></i>
             <div><span class="text-gray-500 text-xs">Age</span><h3 class="text-white text-base font-semibold">25</h3></div>
           </div>
-          <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box hover:translate-x-2 transition-all">
+          <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box hover:translate-x-2 transition-all border border-transparent hover:border-spring/20">
             <i class="fas fa-graduation-cap text-spring text-lg w-7 text-center"></i>
             <div><span class="text-gray-500 text-xs">Qualification</span><h3 class="text-white text-base font-semibold">B.Sc in CSE (Graduated)</h3></div>
           </div>
-          <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box hover:translate-x-2 transition-all">
+          <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box hover:translate-x-2 transition-all border border-transparent hover:border-spring/20">
             <i class="fas fa-laptop-code text-spring text-lg w-7 text-center"></i>
             <div><span class="text-gray-500 text-xs">Role</span><h3 class="text-white text-base font-semibold">Full Stack Web Developer</h3></div>
           </div>
-          <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box hover:translate-x-2 transition-all">
+          <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box hover:translate-x-2 transition-all border border-transparent hover:border-spring/20">
             <i class="fas fa-language text-spring text-lg w-7 text-center"></i>
             <div><span class="text-gray-500 text-xs">Languages</span><h3 class="text-white text-base font-semibold">English, Bangla, Hindi</h3></div>
           </div>
         </div>
-        <a href="https://www.facebook.com/profile.php?id=61586996791374" target="_blank" class="inline-flex items-center gap-2 mt-5 px-6 py-2.5 bg-btn text-white rounded-full hover:bg-spring hover:text-card transition-all text-sm"><i class="fab fa-facebook-f"></i> Follow Me</a>
+        <a href="https://www.facebook.com/profile.php?id=61586996791374" target="_blank" rel="noopener" class="inline-flex items-center gap-2 mt-5 px-6 py-2.5 bg-btn text-white rounded-full hover:bg-spring hover:text-card transition-all text-sm"><i class="fab fa-facebook-f"></i> Follow Me</a>
       </div>
       <div class="flex-1 min-w-[280px] max-w-xl" data-reveal-right>
         <div class="grid grid-cols-2 gap-4">
-          <div class="bg-box p-6 rounded-2xl text-center hover:scale-105 hover:shadow-lg hover:shadow-spring/20 transition-all duration-300">
+          <div class="bg-box p-6 rounded-2xl text-center hover:scale-105 hover:shadow-lg hover:shadow-spring/20 transition-all duration-300 border border-white/5">
             <span class="text-4xl font-extrabold text-spring inline-block" data-count="2" data-suffix="+">0</span>
             <h3 class="text-white text-sm mt-2 capitalize">Years of Experience</h3>
           </div>
-          <div class="bg-box p-6 rounded-2xl text-center hover:scale-105 hover:shadow-lg hover:shadow-spring/20 transition-all duration-300">
-            <span class="text-4xl font-extrabold text-spring inline-block" data-count="17" data-suffix="+">0</span>
+          <div class="bg-box p-6 rounded-2xl text-center hover:scale-105 hover:shadow-lg hover:shadow-spring/20 transition-all duration-300 border border-white/5">
+            <span class="text-4xl font-extrabold text-spring inline-block" data-count="19" data-suffix="+">0</span>
             <h3 class="text-white text-sm mt-2 capitalize">Projects Completed</h3>
           </div>
-          <div class="bg-box p-6 rounded-2xl text-center hover:scale-105 hover:shadow-lg hover:shadow-spring/20 transition-all duration-300">
+          <div class="bg-box p-6 rounded-2xl text-center hover:scale-105 hover:shadow-lg hover:shadow-spring/20 transition-all duration-300 border border-white/5">
             <span class="text-4xl font-extrabold text-spring inline-block" data-count="3" data-suffix="+">0</span>
             <h3 class="text-white text-sm mt-2 capitalize">Happy Clients</h3>
           </div>
-          <div class="bg-box p-6 rounded-2xl text-center hover:scale-105 hover:shadow-lg hover:shadow-spring/20 transition-all duration-300">
+          <div class="bg-box p-6 rounded-2xl text-center hover:scale-105 hover:shadow-lg hover:shadow-spring/20 transition-all duration-300 border border-white/5">
             <span class="text-4xl font-extrabold text-spring inline-block" data-count="1" data-suffix="+">0</span>
             <h3 class="text-white text-sm mt-2 capitalize">Awards Won</h3>
           </div>
@@ -376,311 +417,340 @@ tailwind.config = {
 
   <!-- SKILLS -->
   <section id="skills" class="min-h-screen px-6 md:px-16 lg:px-20 py-20">
-    <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20" data-reveal>My <span class="text-spring">Skills</span></h1>
-    <div class="max-w-3xl mx-auto space-y-5" data-reveal>
-      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">HTML / CSS</span><span class="text-spring font-bold text-sm">100%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="100"></div></div></div>
-      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">Tailwind CSS</span><span class="text-spring font-bold text-sm">100%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="100"></div></div></div>
-      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">JavaScript</span><span class="text-spring font-bold text-sm">99%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="99"></div></div></div>
-      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">React.js</span><span class="text-spring font-bold text-sm">95%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="95"></div></div></div>
-      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">Next.js</span><span class="text-spring font-bold text-sm">94%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="94"></div></div></div>
-      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">MongoDB</span><span class="text-spring font-bold text-sm">96%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="96"></div></div></div>
-      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">PostgreSQL</span><span class="text-spring font-bold text-sm">96%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="96"></div></div></div>
-      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">Django</span><span class="text-spring font-bold text-sm">100%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="100"></div></div></div>
-      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">Python</span><span class="text-spring font-bold text-sm">95%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="95"></div></div></div>
-      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">C / C++</span><span class="text-spring font-bold text-sm">100%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="100"></div></div></div>
-      <div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">ASP.NET</span><span class="text-spring font-bold text-sm">90%</span></div><div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="90"></div></div></div>
-    </div>
+    <h1 class="sec-title text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20" data-reveal>My <span class="text-spring">Skills</span></h1>
+    <div id="skillsGrid" class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-5" data-reveal></div>
+
+    <h3 class="text-center text-white text-xl font-bold mt-16 mb-6" data-reveal>Tools & <span class="text-spring">Technologies</span></h3>
+    <div id="toolsWrap" class="max-w-4xl mx-auto flex flex-wrap justify-center gap-3" data-reveal></div>
   </section>
 
   <!-- EDUCATION -->
   <section id="education" class="min-h-screen px-6 md:px-16 lg:px-20 py-20">
-    <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20" data-reveal>My <span class="text-spring">Education</span></h1>
+    <h1 class="sec-title text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20" data-reveal>My <span class="text-spring">Education</span></h1>
     <div class="max-w-4xl mx-auto relative">
-      <div class="absolute left-5 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-white/20"></div>
-      <div class="space-y-10">
-        <div class="relative flex items-start" data-reveal-left>
-          <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-graduation-cap text-white text-sm"></i></div>
-          <div class="ml-16 md:ml-0 md:w-[44%] md:pr-10 bg-box p-5 rounded-2xl hover:scale-[1.03] hover:shadow-lg hover:shadow-spring/10 transition-all">
-            <span class="inline-block px-3 py-0.5 bg-btn text-white text-xs rounded-full mb-2">2017</span>
-            <h3 class="text-white text-lg font-bold">Completed SSC</h3>
-            <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed SSC from science dept. Got GPA: 5.0 out of 5.00</p>
-          </div>
-        </div>
-        <div class="relative flex items-start md:flex-row-reverse" data-reveal-right>
-          <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-graduation-cap text-white text-sm"></i></div>
-          <div class="ml-16 md:ml-0 md:w-[44%] md:pl-10 bg-box p-5 rounded-2xl hover:scale-[1.03] hover:shadow-lg hover:shadow-spring/10 transition-all">
-            <span class="inline-block px-3 py-0.5 bg-btn text-white text-xs rounded-full mb-2">2019</span>
-            <h3 class="text-white text-lg font-bold">Completed HSC</h3>
-            <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed HSC from science dept. Got GPA: 4.83 out of 5.00</p>
-          </div>
-        </div>
-        <div class="relative flex items-start" data-reveal-left>
-          <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-graduation-cap text-white text-sm"></i></div>
-          <div class="ml-16 md:ml-0 md:w-[44%] md:pr-10 bg-box p-5 rounded-2xl hover:scale-[1.03] hover:shadow-lg hover:shadow-spring/10 transition-all">
-            <span class="inline-block px-3 py-0.5 bg-spring text-card text-xs rounded-full mb-2 font-bold">2026 ✓ Graduated</span>
-            <h3 class="text-white text-lg font-bold">B.Sc in CSE</h3>
-            <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Successfully graduated with B.Sc in Computer Science & Engineering.</p>
-          </div>
-        </div>
-        <div class="relative flex items-start md:flex-row-reverse" data-reveal-right>
-          <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-code text-white text-sm"></i></div>
-          <div class="ml-16 md:ml-0 md:w-[44%] md:pl-10 bg-box p-5 rounded-2xl hover:scale-[1.03] hover:shadow-lg hover:shadow-spring/10 transition-all">
-            <span class="inline-block px-3 py-0.5 bg-btn text-white text-xs rounded-full mb-2">2024</span>
-            <h3 class="text-white text-lg font-bold">Frontend Web Developer</h3>
-            <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed courses in HTML, CSS, Tailwind CSS & JavaScript. Joined as a front-end developer.</p>
-          </div>
-        </div>
-        <div class="relative flex items-start" data-reveal-left>
-          <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-server text-white text-sm"></i></div>
-          <div class="ml-16 md:ml-0 md:w-[44%] md:pr-10 bg-box p-5 rounded-2xl hover:scale-[1.03] hover:shadow-lg hover:shadow-spring/10 transition-all">
-            <span class="inline-block px-3 py-0.5 bg-btn text-white text-xs rounded-full mb-2">2026</span>
-            <h3 class="text-white text-lg font-bold">Full Stack Web Developer</h3>
-            <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Completed Next.js, Django, FastAPI, ASP.NET, PostgreSQL & MongoDB. Now a certified full-stack web developer.</p>
-          </div>
-        </div>
-        <div class="relative flex items-start md:flex-row-reverse" data-reveal-right>
-          <div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas fa-camera text-white text-sm"></i></div>
-          <div class="ml-16 md:ml-0 md:w-[44%] md:pl-10 bg-box p-5 rounded-2xl hover:scale-[1.03] hover:shadow-lg hover:shadow-spring/10 transition-all">
-            <span class="inline-block px-3 py-0.5 bg-btn text-white text-xs rounded-full mb-2">2022</span>
-            <h3 class="text-white text-lg font-bold">Photographer</h3>
-            <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Started photography course at home. Now an expert in photography.</p>
-          </div>
-        </div>
-      </div>
+      <div class="absolute left-5 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-spring/60 via-white/20 to-transparent"></div>
+      <div id="eduList" class="space-y-10"></div>
     </div>
   </section>
 
   <!-- PORTFOLIO -->
   <section id="portfolio" class="min-h-screen px-6 md:px-16 lg:px-20 py-20">
 
-    <!-- SERVICES -->
-    <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20" data-reveal>My <span class="text-spring">Services</span></h1>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
+    <!-- PROJECTS -->
+    <h1 class="sec-title text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-4 border-b border-white/20" data-reveal>My <span class="text-spring">Projects</span></h1>
+    <p class="text-center text-gray-400 text-sm max-w-xl mx-auto mb-8" data-reveal>Real-world full-stack applications I've designed and built. Click any card to see details.</p>
 
-      <!-- Project 1 -->
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale
-        data-img="images/live-1.png"
-        data-title="Dorzi — Tailoring Service Platform"
-        data-category="Service"
-        data-desc="Dorzi is a full-stack tailoring service platform where customers can book appointments, choose services, and track their orders. Built with a modern UI focusing on seamless user experience for both tailors and customers."
-        data-tech="React.js,Node.js,MongoDB,Tailwind CSS,Express.js"
-        data-live="https://dorzi.vercel.app/"
-        data-github="">
-        <img src="images/live-1.png" alt="Dorzi" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-          <span class="text-spring text-xs font-bold">Service</span>
-          <h4 class="text-white font-bold text-sm">Dorzi</h4>
-          <p class="text-gray-300 text-xs mt-1">Click to view details</p>
-        </div>
-      </div>
+    <div id="filterBar" class="flex flex-wrap justify-center gap-2 mb-3" data-reveal></div>
+    <p id="projectCount" class="text-center text-gray-500 text-xs mb-8"></p>
 
-      <!-- Project 2 -->
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale
-        data-img="images/live-2.png"
-        data-title="DinBodol — Daily Life Exchange"
-        data-category="Service"
-        data-desc="DinBodol is a community-driven platform designed to help people exchange daily life services, skills and resources."
-        data-tech="React.js,Node.js,MongoDB,Express.js,Tailwind CSS"
-        data-live="https://dinbodol.vercel.app/"
-        data-github="">
-        <img src="images/live-2.png" alt="DinBodol" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-          <span class="text-spring text-xs font-bold">Service</span>
-          <h4 class="text-white font-bold text-sm">DinBodol</h4>
-          <p class="text-gray-300 text-xs mt-1">Click to view details</p>
-        </div>
-      </div>
-
-      <!-- Project 3 -->
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale
-        data-img="images/live-3.png"
-        data-title="BoardCanvas — Collaborative Whiteboard"
-        data-category="Service"
-        data-desc="BoardCanvas is an interactive real-time collaborative whiteboard application."
-        data-tech="React.js,Node.js,Socket.io,Canvas API,Tailwind CSS"
-        data-live="https://boardcanvas.vercel.app/"
-        data-github="">
-        <img src="images/live-3.png" alt="BoardCanvas" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-          <span class="text-spring text-xs font-bold">Service</span>
-          <h4 class="text-white font-bold text-sm">BoardCanvas</h4>
-          <p class="text-gray-300 text-xs mt-1">Click to view details</p>
-        </div>
-      </div>
-
-      <!-- Project 4 -->
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale
-        data-img="images/live-4.png"
-        data-title="TazHub LLC — Business Solutions"
-        data-category="Service"
-        data-desc="TazHub LLC is a professional business solutions website built for a US-based company."
-        data-tech="React.js,Tailwind CSS,Node.js,Express.js,MongoDB"
-        data-live="https://tazhub.app/"
-        data-github="">
-        <img src="images/live-4.png" alt="TazHub LLC" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-          <span class="text-spring text-xs font-bold">Service</span>
-          <h4 class="text-white font-bold text-sm">TazHub LLC</h4>
-          <p class="text-gray-300 text-xs mt-1">Click to view details</p>
-        </div>
-      </div>
-
-      <!-- Project 5 -->
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale
-        data-img="images/live-5.png"
-        data-title="Channgo — Warehouse Management System"
-        data-category="Service"
-        data-desc="Channgo is a full-stack warehouse management system designed to manage inventory, products, suppliers, stock movements, and warehouse operations. It provides a modern interface for tracking resources efficiently and streamlining day-to-day warehouse management."
-        data-tech="ASP.NET,Next.js,PostgreSQL,Tailwind CSS"
-        data-live="https://channgo.vercel.app/"
-        data-github="">
-        <img src="images/live-5.png" alt="Channgo" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-          <span class="text-spring text-xs font-bold">Service</span>
-          <h4 class="text-white font-bold text-sm">Channgo</h4>
-          <p class="text-gray-300 text-xs mt-1">Click to view details</p>
-        </div>
-      </div>
-
-      <!-- Project 6 -->
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale
-        data-img="images/live-6.png"
-        data-title="CodeRoom — Online Coding Platform"
-        data-category="Service"
-        data-desc="CodeRoom is an online coding platform where users can write, run, and test code in multiple programming languages. It provides a simple environment for practicing programming, solving problems, and improving coding skills."
-        data-tech="Django,Next.js,PostgreSQL,Tailwind CSS"
-        data-live="https://coderoom-gamma.vercel.app/"
-        data-github="">
-        <img src="images/live-6.png" alt="CodeRoom" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-          <span class="text-spring text-xs font-bold">Service</span>
-          <h4 class="text-white font-bold text-sm">CodeRoom</h4>
-          <p class="text-gray-300 text-xs mt-1">Click to view details</p>
-        </div>
-      </div>
-
-      <!-- Project 7 -->
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale
-        data-img="images/live-7.png"
-        data-title="SecureScope — Web & API Security Testing Platform"
-        data-category="Service"
-        data-desc="SecureScope is a security testing platform for analyzing web applications and APIs to identify common vulnerabilities and security issues. It provides a centralized environment for running security checks, reviewing findings, and improving application security."
-        data-tech="Django,Next.js,PostgreSQL,Tailwind CSS"
-        data-live="https://securescope-pied.vercel.app/"
-        data-github="">
-        <img src="images/live-7.png" alt="SecureScope" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-          <span class="text-spring text-xs font-bold">Service</span>
-          <h4 class="text-white font-bold text-sm">SecureScope</h4>
-          <p class="text-gray-300 text-xs mt-1">Click to view details</p>
-        </div>
-      </div>
-
-    </div>
+    <div id="servicesGrid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mb-20"></div>
 
     <!-- DATA SCIENCE -->
-    <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20" data-reveal>My <span class="text-spring">Data Science Projects</span></h1>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-
-      <!-- DS 1 -->
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale
-        data-img="images/data-1.png"
-        data-title="Hybrid Breast Cancer Diagnosis"
-        data-category="Data Science"
-        data-desc="A hybrid machine learning model for breast cancer diagnosis combining multiple classification algorithms."
-        data-tech="Python,Scikit-learn,Pandas,NumPy,Matplotlib,Jupyter"
-        data-live=""
-        data-github="https://github.com/abdullahalmusabbir/AI/blob/main/Hybrid/hybrid-breast-cancer-diagnosis.ipynb">
-        <img src="images/data-1.png" alt="Breast Cancer" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-          <span class="text-spring text-xs font-bold">Data Science</span>
-          <h4 class="text-white font-bold text-sm">Hybrid Breast Cancer Diagnosis</h4>
-          <p class="text-gray-300 text-xs mt-1">Click to view details</p>
-        </div>
-      </div>
-
-      <!-- DS 2 -->
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale
-        data-img="images/data-2.png"
-        data-title="Smart Crop Recommendation System"
-        data-category="Data Science"
-        data-desc="An intelligent crop recommendation system that suggests the most suitable crops based on soil nutrients, weather conditions and environmental factors."
-        data-tech="Python,Scikit-learn,Pandas,Seaborn,Matplotlib,Jupyter"
-        data-live=""
-        data-github="https://github.com/abdullahalmusabbir/AI/blob/main/Hybrid/smart-crop-recommendation-system.ipynb">
-        <img src="images/data-2.png" alt="Crop" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-          <span class="text-spring text-xs font-bold">Data Science</span>
-          <h4 class="text-white font-bold text-sm">Smart Crop Recommendation</h4>
-          <p class="text-gray-300 text-xs mt-1">Click to view details</p>
-        </div>
-      </div>
-
-      <!-- DS 3 -->
-      <div class="project-card tilt-card group relative h-48 rounded-xl overflow-hidden cursor-pointer" data-reveal-scale
-        data-img="images/data-3.png"
-        data-title="Smart Loan Default Prediction"
-        data-category="Data Science"
-        data-desc="A smart loan default prediction system that uses machine learning to assess the risk of borrowers defaulting on loans."
-        data-tech="Python,Scikit-learn,XGBoost,Pandas,Matplotlib,Jupyter"
-        data-live=""
-        data-github="https://github.com/abdullahalmusabbir/AI/blob/main/Hybrid/smart-loan-default-prediction.ipynb">
-        <img src="images/data-3.png" alt="Loan" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-          <span class="text-spring text-xs font-bold">Data Science</span>
-          <h4 class="text-white font-bold text-sm">Smart Loan Default Prediction</h4>
-          <p class="text-gray-300 text-xs mt-1">Click to view details</p>
-        </div>
-      </div>
-
-    </div>
+    <h1 class="sec-title text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20" data-reveal>My <span class="text-spring">Data Science Projects</span></h1>
+    <div id="dataGrid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"></div>
   </section>
 
   <!-- CONTACT -->
   <section id="contact" class="min-h-screen flex flex-col justify-center px-6 md:px-16 lg:px-20 py-20">
-    <h1 class="text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20" data-reveal><span class="text-spring">Contact</span> Me</h1>
-    <div class="max-w-2xl mx-auto w-full" data-reveal-scale>
-      <h3 class="text-white text-xl font-bold uppercase mb-5 tracking-wider text-center">Contact Info</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <a href="mailto:abdullahmusabbir703@gmail.com" class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box hover:-translate-y-1 transition-all group">
-          <div class="w-10 h-10 bg-spring/20 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-spring/40 group-hover:scale-110 transition-all"><i class="fas fa-envelope text-spring text-sm"></i></div>
-          <div class="min-w-0"><span class="text-gray-500 text-xs">Email</span><h3 class="text-white text-xs font-semibold truncate">abdullahmusabbir703@gmail.com</h3></div>
-        </a>
-        <a href="tel:+8801944145084" class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box hover:-translate-y-1 transition-all group">
-          <div class="w-10 h-10 bg-spring/20 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-spring/40 group-hover:scale-110 transition-all"><i class="fas fa-phone text-spring text-sm"></i></div>
-          <div><span class="text-gray-500 text-xs">Phone</span><h3 class="text-white text-sm font-semibold">+880-1944145084</h3></div>
-        </a>
-        <a href="tel:+8801316632108" class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box hover:-translate-y-1 transition-all group">
-          <div class="w-10 h-10 bg-spring/20 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-spring/40 group-hover:scale-110 transition-all"><i class="fas fa-phone text-spring text-sm"></i></div>
-          <div><span class="text-gray-500 text-xs">Phone 2</span><h3 class="text-white text-sm font-semibold">+880-1316632108</h3></div>
-        </a>
-        <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box hover:-translate-y-1 transition-all group">
-          <div class="w-10 h-10 bg-spring/20 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-spring/40 group-hover:scale-110 transition-all"><i class="fas fa-map-marker-alt text-spring text-sm"></i></div>
-          <div><span class="text-gray-500 text-xs">Location</span><h3 class="text-white text-sm font-semibold">Keraniganj, Dhaka-1312</h3></div>
+    <h1 class="sec-title text-center text-3xl md:text-4xl font-bold text-white pb-4 mb-10 border-b border-white/20" data-reveal><span class="text-spring">Contact</span> Me</h1>
+    <div class="max-w-5xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8" data-reveal-scale>
+      <!-- Info -->
+      <div>
+        <h3 class="text-white text-xl font-bold uppercase mb-5 tracking-wider">Contact Info</h3>
+        <div class="space-y-3">
+          <a href="mailto:abdullahmusabbir703@gmail.com" class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box hover:-translate-y-1 transition-all group border border-transparent hover:border-spring/20">
+            <div class="w-10 h-10 bg-spring/20 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-spring/40 group-hover:scale-110 transition-all"><i class="fas fa-envelope text-spring text-sm"></i></div>
+            <div class="min-w-0"><span class="text-gray-500 text-xs">Email</span><h3 class="text-white text-xs sm:text-sm font-semibold truncate">abdullahmusabbir703@gmail.com</h3></div>
+          </a>
+          <a href="tel:+8801944145084" class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box hover:-translate-y-1 transition-all group border border-transparent hover:border-spring/20">
+            <div class="w-10 h-10 bg-spring/20 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-spring/40 group-hover:scale-110 transition-all"><i class="fas fa-phone text-spring text-sm"></i></div>
+            <div><span class="text-gray-500 text-xs">Phone</span><h3 class="text-white text-sm font-semibold">+880-1944145084</h3></div>
+          </a>
+          <a href="tel:+8801316632108" class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box hover:-translate-y-1 transition-all group border border-transparent hover:border-spring/20">
+            <div class="w-10 h-10 bg-spring/20 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-spring/40 group-hover:scale-110 transition-all"><i class="fas fa-phone text-spring text-sm"></i></div>
+            <div><span class="text-gray-500 text-xs">Phone 2</span><h3 class="text-white text-sm font-semibold">+880-1316632108</h3></div>
+          </a>
+          <div class="flex items-center gap-3 p-4 bg-box/50 rounded-xl hover:bg-box hover:-translate-y-1 transition-all group border border-transparent hover:border-spring/20">
+            <div class="w-10 h-10 bg-spring/20 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-spring/40 group-hover:scale-110 transition-all"><i class="fas fa-map-marker-alt text-spring text-sm"></i></div>
+            <div><span class="text-gray-500 text-xs">Location</span><h3 class="text-white text-sm font-semibold">Keraniganj, Dhaka-1312</h3></div>
+          </div>
+        </div>
+        <div class="flex gap-3 mt-6">
+          <a href="https://www.facebook.com/profile.php?id=61586996791374" target="_blank" rel="noopener" class="w-11 h-11 bg-btn text-white rounded-full flex items-center justify-center hover:bg-spring hover:text-card hover:-translate-y-1 transition-all"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://github.com/abdullahalmusabbir" target="_blank" rel="noopener" class="w-11 h-11 bg-btn text-white rounded-full flex items-center justify-center hover:bg-spring hover:text-card hover:-translate-y-1 transition-all"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/abdullah-al-musabbir/" target="_blank" rel="noopener" class="w-11 h-11 bg-btn text-white rounded-full flex items-center justify-center hover:bg-spring hover:text-card hover:-translate-y-1 transition-all"><i class="fab fa-linkedin-in"></i></a>
         </div>
       </div>
-      <div class="flex justify-center gap-3 mt-6">
-        <a href="https://www.facebook.com/profile.php?id=61586996791374" target="_blank" class="w-11 h-11 bg-btn text-white rounded-full flex items-center justify-center hover:bg-spring hover:text-card hover:-translate-y-1 transition-all"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://github.com/abdullahalmusabbir" target="_blank" class="w-11 h-11 bg-btn text-white rounded-full flex items-center justify-center hover:bg-spring hover:text-card hover:-translate-y-1 transition-all"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/abdullah-al-musabbir/" target="_blank" class="w-11 h-11 bg-btn text-white rounded-full flex items-center justify-center hover:bg-spring hover:text-card hover:-translate-y-1 transition-all"><i class="fab fa-linkedin-in"></i></a>
+
+      <!-- Form -->
+      <div>
+        <h3 class="text-white text-xl font-bold uppercase mb-5 tracking-wider">Send a Message</h3>
+        <form id="contactForm" class="bg-box/60 border border-white/5 rounded-2xl p-5 space-y-4">
+          <div>
+            <label class="block text-gray-400 text-xs mb-1.5" for="cName">Your Name</label>
+            <input id="cName" required type="text" placeholder="John Doe" class="w-full bg-dark/60 border border-white/10 focus:border-spring focus:outline-none rounded-xl px-4 py-2.5 text-white text-sm transition-colors">
+          </div>
+          <div>
+            <label class="block text-gray-400 text-xs mb-1.5" for="cEmail">Your Email</label>
+            <input id="cEmail" required type="email" placeholder="you@example.com" class="w-full bg-dark/60 border border-white/10 focus:border-spring focus:outline-none rounded-xl px-4 py-2.5 text-white text-sm transition-colors">
+          </div>
+          <div>
+            <label class="block text-gray-400 text-xs mb-1.5" for="cMsg">Message</label>
+            <textarea id="cMsg" required rows="4" placeholder="Tell me about your project..." class="w-full bg-dark/60 border border-white/10 focus:border-spring focus:outline-none rounded-xl px-4 py-2.5 text-white text-sm transition-colors resize-none"></textarea>
+          </div>
+          <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-spring text-card font-bold rounded-full hover:bg-white hover:scale-[1.02] transition-all text-sm shadow-lg shadow-spring/20"><i class="fas fa-paper-plane"></i> Send Message</button>
+        </form>
       </div>
     </div>
   </section>
 
   <footer class="bg-card py-6 text-center border-t border-white/10">
-    <p class="text-gray-400 text-xs">&copy; 2025 <span class="text-spring font-bold">Abdullah Al Musabbir</span>. All Rights Reserved.</p>
+    <p class="text-gray-400 text-xs">&copy; 2026 <span class="text-spring font-bold">Abdullah Al Musabbir</span>. All Rights Reserved.</p>
   </footer>
 </main>
 
 <!-- Scroll Top -->
-<a href="#home" id="scrollTopBtn" class="fixed bottom-5 left-5 z-[999] w-11 h-11 bg-spring text-card rounded-full flex items-center justify-center shadow-lg shadow-spring/30 hover:bg-white hover:scale-110 transition-all duration-300 opacity-0 pointer-events-none">
+<a href="#home" id="scrollTopBtn" class="fixed bottom-5 left-5 z-[999] w-11 h-11 bg-spring text-card rounded-full flex items-center justify-center shadow-lg shadow-spring/30 hover:bg-white hover:scale-110 transition-all duration-300 opacity-0 pointer-events-none lg:left-[300px]">
   <i class="fas fa-chevron-up text-base font-bold"></i>
 </a>
 
 <script>
 (function () {
 
-  // ===== MOBILE MENU =====
+  /* =====================================================
+     DATA  (নতুন প্রজেক্ট/স্কিল যোগ করতে শুধু এখানে এডিট করুন)
+     ===================================================== */
+  const projects = [
+    {
+      id: 'dorzi', img: 'images/live-1.png', name: 'Dorzi', subtitle: 'Tailoring Service Platform', category: 'Service Platform',
+      desc: 'Dorzi is a full-stack tailoring service platform where customers can book appointments, choose services, and track their orders. Built with a modern UI focusing on seamless user experience for both tailors and customers.',
+      tech: ['React.js', 'Node.js', 'MongoDB', 'Tailwind CSS', 'Express.js'],
+      live: 'https://dorzi.vercel.app/', github: ''
+    },
+    {
+      id: 'dinbodol', img: 'images/live-2.png', name: 'DinBodol', subtitle: 'Daily Life Exchange', category: 'Community',
+      desc: 'DinBodol is a community-driven platform designed to help people exchange daily life services, skills and resources.',
+      tech: ['React.js', 'Node.js', 'MongoDB', 'Express.js', 'Tailwind CSS'],
+      live: 'https://dinbodol.vercel.app/', github: ''
+    },
+    {
+      id: 'boardcanvas', img: 'images/live-3.png', name: 'BoardCanvas', subtitle: 'Collaborative Whiteboard', category: 'Real-time App',
+      desc: 'BoardCanvas is an interactive real-time collaborative whiteboard application.',
+      tech: ['React.js', 'Node.js', 'Socket.io', 'Canvas API', 'Tailwind CSS'],
+      live: 'https://boardcanvas.vercel.app/', github: ''
+    },
+    {
+      id: 'tazhub', img: 'images/live-4.png', name: 'TazHub LLC', subtitle: 'Business Solutions', category: 'Business Website',
+      desc: 'TazHub LLC is a professional business solutions website built for a US-based company.',
+      tech: ['React.js', 'Tailwind CSS', 'Node.js', 'Express.js', 'MongoDB'],
+      live: 'https://tazhub.app/', github: ''
+    },
+    {
+      id: 'channgo', img: 'images/live-5.png', name: 'Channgo', subtitle: 'Warehouse Management System', category: 'Management System',
+      desc: 'Channgo is a full-stack warehouse management system designed to manage inventory, products, suppliers, stock movements, and warehouse operations. It provides a modern interface for tracking resources efficiently and streamlining day-to-day warehouse management.',
+      tech: ['ASP.NET', 'Next.js', 'PostgreSQL', 'Tailwind CSS'],
+      live: 'https://channgo.vercel.app/', github: ''
+    },
+    {
+      // UPDATED with new description & tech
+      id: 'coderoom', img: 'images/live-6.png', name: 'CodeRoom', subtitle: 'Online Code Execution Platform', category: 'Developer Tool',
+      desc: 'A web-based coding platform that allows users to write, compile, and execute C, C++, and Java code with a simple and responsive interface.',
+      tech: ['Django', 'Next.js', 'JavaScript', 'Tailwind CSS', 'Docker'],
+      live: 'https://coderoom-gamma.vercel.app/', github: ''
+    },
+    {
+      id: 'securescope', img: 'images/live-7.png', name: 'SecureScope', subtitle: 'Web & API Security Testing Platform', category: 'Security',
+      desc: 'SecureScope is a security testing platform for analyzing web applications and APIs to identify common vulnerabilities and security issues. It provides a centralized environment for running security checks, reviewing findings, and improving application security.',
+      tech: ['Django', 'Next.js', 'PostgreSQL', 'Tailwind CSS'],
+      live: 'https://securescope-pied.vercel.app/', github: ''
+    },
+    {
+      // NEW
+      id: 'nexusai', img: 'images/live-8.png', name: 'NexusAI', subtitle: 'AI Research & Knowledge Platform', category: 'AI Platform', isNew: true,
+      desc: 'An AI-powered research platform for document analysis, intelligent search, summarization, and citation-based conversations using Retrieval-Augmented Generation.',
+      tech: ['FastAPI', 'Next.js', 'Python', 'PostgreSQL', 'pgvector', 'Hugging Face'],
+      live: 'https://nexus-frontend-beta-indol.vercel.app/',  github: ''
+    },
+    {
+      // NEW
+      id: 'walletbd', img: 'images/live-9.png', name: 'WalletBD', subtitle: 'Secure Digital Wallet Platform', category: 'FinTech', isNew: true,
+      desc: 'A digital wallet platform for secure balance management, money transfers, and transaction processing, with Docker-based isolation and resource restrictions for safer transaction execution.',
+      tech: ['Django', 'Django REST Framework', 'Next.js', 'PostgreSQL', 'Docker', 'JavaScript', 'Tailwind CSS'],
+      live: 'https://wallet-frontend-chi.vercel.app/login', github: ''
+    }
+  ];
+
+  const dataProjects = [
+    {
+      id: 'ds1', img: 'images/data-1.png', name: 'Hybrid Breast Cancer Diagnosis', subtitle: 'ML Classification Model', category: 'Data Science',
+      desc: 'A hybrid machine learning model for breast cancer diagnosis combining multiple classification algorithms.',
+      tech: ['Python', 'Scikit-learn', 'Pandas', 'NumPy', 'Matplotlib', 'Jupyter'],
+      live: '', github: 'https://github.com/abdullahalmusabbir/AI/blob/main/Hybrid/hybrid-breast-cancer-diagnosis.ipynb'
+    },
+    {
+      id: 'ds2', img: 'images/data-2.png', name: 'Smart Crop Recommendation', subtitle: 'Agriculture ML System', category: 'Data Science',
+      desc: 'An intelligent crop recommendation system that suggests the most suitable crops based on soil nutrients, weather conditions and environmental factors.',
+      tech: ['Python', 'Scikit-learn', 'Pandas', 'Seaborn', 'Matplotlib', 'Jupyter'],
+      live: '', github: 'https://github.com/abdullahalmusabbir/AI/blob/main/Hybrid/smart-crop-recommendation-system.ipynb'
+    },
+    {
+      id: 'ds3', img: 'images/data-3.png', name: 'Smart Loan Default Prediction', subtitle: 'Credit Risk Prediction', category: 'Data Science',
+      desc: 'A smart loan default prediction system that uses machine learning to assess the risk of borrowers defaulting on loans.',
+      tech: ['Python', 'Scikit-learn', 'XGBoost', 'Pandas', 'Matplotlib', 'Jupyter'],
+      live: '', github: 'https://github.com/abdullahalmusabbir/AI/blob/main/Hybrid/smart-loan-default-prediction.ipynb'
+    }
+  ];
+  const allProjects = projects.concat(dataProjects);
+
+  const skills = [
+    ['HTML / CSS', 100], ['Tailwind CSS', 100], ['JavaScript', 99], ['React.js', 95],
+    ['Next.js', 94], ['MongoDB', 96], ['PostgreSQL', 96], ['Django', 100],
+    ['Python', 95], ['C / C++', 100], ['ASP.NET', 90]
+  ];
+
+  const tools = [
+    ['fab fa-docker', 'Docker'], ['fas fa-bolt', 'FastAPI'], ['fas fa-server', 'Django REST Framework'],
+    ['fab fa-node-js', 'Node.js'], ['fas fa-plug', 'Socket.io'], ['fas fa-project-diagram', 'pgvector'],
+    ['fas fa-brain', 'Hugging Face'], ['fas fa-robot', 'RAG'], ['fab fa-git-alt', 'Git'],
+    ['fab fa-github', 'GitHub'], ['fas fa-vial', 'REST APIs'], ['fas fa-palette', 'UI/UX Design'],
+    ['fas fa-camera', 'Photography']
+  ];
+
+  const marqueeItems = [
+    ['fab fa-html5', 'HTML5'], ['fab fa-css3-alt', 'CSS3'], ['fab fa-js', 'JavaScript'], ['fas fa-wind', 'Tailwind'],
+    ['fab fa-react', 'React'], ['fas fa-layer-group', 'Next.js'], ['fab fa-node-js', 'Node.js'], ['fas fa-leaf', 'Django'],
+    ['fas fa-bolt', 'FastAPI'], ['fab fa-microsoft', 'ASP.NET'], ['fas fa-database', 'PostgreSQL'], ['fas fa-leaf', 'MongoDB'],
+    ['fab fa-docker', 'Docker'], ['fab fa-python', 'Python'], ['fas fa-microchip', 'C / C++']
+  ];
+
+  const education = [
+    { year: '2017', title: 'Completed SSC', desc: 'Completed SSC from science dept. Got GPA: 5.0 out of 5.00', icon: 'fa-graduation-cap' },
+    { year: '2019', title: 'Completed HSC', desc: 'Completed HSC from science dept. Got GPA: 4.83 out of 5.00', icon: 'fa-graduation-cap' },
+    { year: '2022', title: 'Photographer', desc: 'Started photography course at home. Now an expert in photography.', icon: 'fa-camera' },
+    { year: '2024', title: 'Frontend Web Developer', desc: 'Completed courses in HTML, CSS, Tailwind CSS & JavaScript. Joined as a front-end developer.', icon: 'fa-code' },
+    { year: '2026 ✓ Graduated', title: 'B.Sc in CSE', desc: 'Successfully graduated with B.Sc in Computer Science & Engineering.', icon: 'fa-graduation-cap', highlight: true },
+    { year: '2026', title: 'Full Stack Web Developer', desc: 'Completed Next.js, Django, FastAPI, ASP.NET, PostgreSQL & MongoDB. Now a certified full-stack web developer.', icon: 'fa-server' }
+  ];
+
+  const filters = [
+    ['all', 'All'], ['react.js', 'React.js'], ['next.js', 'Next.js'], ['django', 'Django'],
+    ['fastapi', 'FastAPI'], ['asp.net', 'ASP.NET'], ['docker', 'Docker']
+  ];
+
+  /* =====================================================
+     HELPERS
+     ===================================================== */
+  function placeholder(text) {
+    const safe = String(text || 'Project').replace(/[<>&]/g, '');
+    const svg = "<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#00ce79'/><stop offset='1' stop-color='#0b3d5c'/></linearGradient></defs><rect width='800' height='500' fill='url(#g)'/><text x='50%' y='52%' text-anchor='middle' font-family='sans-serif' font-size='40' font-weight='800' fill='white'>" + safe + "</text></svg>";
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  }
+  // Fallback for any broken image (errors don't bubble => use capture)
+  document.addEventListener('error', function (e) {
+    const t = e.target;
+    if (t && t.tagName === 'IMG' && !t.dataset.fb) {
+      t.dataset.fb = '1';
+      t.src = placeholder(t.alt);
+    }
+  }, true);
+
+  function cardHTML(p) {
+    const chips = p.tech.slice(0, 3).map(function (t) {
+      return '<span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-spring/10 text-spring border border-spring/20">' + t + '</span>';
+    }).join('');
+    const more = p.tech.length > 3 ? '<span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-white/5 text-gray-400">+' + (p.tech.length - 3) + '</span>' : '';
+    const liveBadge = p.live ? '<span class="flex items-center gap-1 px-2.5 py-1 text-[10px] font-extrabold uppercase bg-black/60 backdrop-blur text-white rounded-full border border-white/10"><span class="w-1.5 h-1.5 rounded-full bg-spring animate-pulse"></span>Live</span>' : '';
+    const newBadge = p.isNew ? '<span class="px-2.5 py-1 text-[10px] font-extrabold uppercase bg-spring text-card rounded-full shadow-lg shadow-spring/40">New</span>' : '';
+    return '' +
+    '<article class="project-card tilt-card group relative flex flex-col bg-card/80 border border-white/5 hover:border-spring/40 rounded-2xl overflow-hidden cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-spring" data-reveal-scale data-id="' + p.id + '" data-tech="' + p.tech.join(',').toLowerCase() + '" tabindex="0" role="button" aria-label="View ' + p.name + ' details">' +
+      '<div class="relative h-44 overflow-hidden">' +
+        '<img src="' + p.img + '" alt="' + p.name + '" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">' +
+        '<div class="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent"></div>' +
+        '<span class="absolute top-3 left-3 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider bg-black/60 backdrop-blur text-spring rounded-full border border-spring/30">' + p.category + '</span>' +
+        '<div class="absolute top-3 right-3 flex gap-1.5">' + newBadge + liveBadge + '</div>' +
+        '<div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"><span class="w-12 h-12 rounded-full bg-spring text-card flex items-center justify-center text-lg shadow-lg shadow-spring/40 scale-75 group-hover:scale-100 transition-transform duration-300"><i class="fas fa-eye"></i></span></div>' +
+      '</div>' +
+      '<div class="p-4 flex flex-col flex-1">' +
+        '<h4 class="text-white font-extrabold text-base leading-snug group-hover:text-spring transition-colors">' + p.name + '</h4>' +
+        '<p class="text-gray-400 text-xs mt-0.5 mb-3">' + p.subtitle + '</p>' +
+        '<div class="flex flex-wrap gap-1.5 mt-auto">' + chips + more + '</div>' +
+        '<div class="flex items-center justify-between mt-4 pt-3 border-t border-white/5 text-xs">' +
+          '<span class="text-gray-500">Click to view details</span>' +
+          '<i class="fas fa-arrow-right text-spring group-hover:translate-x-1 transition-transform"></i>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }
+
+  /* =====================================================
+     RENDER
+     ===================================================== */
+  const servicesGrid = document.getElementById('servicesGrid');
+  const dataGrid = document.getElementById('dataGrid');
+  servicesGrid.innerHTML = projects.map(cardHTML).join('');
+  dataGrid.innerHTML = dataProjects.map(cardHTML).join('');
+
+  // Filters
+  const filterBar = document.getElementById('filterBar');
+  const projectCount = document.getElementById('projectCount');
+  filterBar.innerHTML = filters.map(function (f, i) {
+    return '<button class="filter-btn px-4 py-1.5 text-xs font-bold rounded-full border border-white/10 bg-box text-gray-300 hover:border-spring hover:text-spring ' + (i === 0 ? 'active' : '') + '" data-filter="' + f[0] + '">' + f[1] + '</button>';
+  }).join('');
+  function applyFilter(f) {
+    let n = 0;
+    servicesGrid.querySelectorAll('.project-card').forEach(function (c) {
+      const show = f === 'all' || c.getAttribute('data-tech').indexOf(f) !== -1;
+      c.classList.toggle('hidden', !show);
+      if (show) n++;
+    });
+    projectCount.textContent = 'Showing ' + n + ' of ' + projects.length + ' projects';
+  }
+  filterBar.addEventListener('click', function (e) {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    filterBar.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    applyFilter(btn.getAttribute('data-filter'));
+  });
+  applyFilter('all');
+
+  // Skills
+  document.getElementById('skillsGrid').innerHTML = skills.map(function (s) {
+    return '<div><div class="flex justify-between mb-1.5"><span class="text-white font-semibold text-sm">' + s[0] + '</span><span class="text-spring font-bold text-sm">' + s[1] + '%</span></div>' +
+           '<div class="w-full h-2.5 bg-box rounded-full overflow-hidden"><div class="h-full rounded-full shimmer-fill transition-all duration-[1500ms] w-0" data-skill="' + s[1] + '"></div></div></div>';
+  }).join('');
+
+  // Tools
+  document.getElementById('toolsWrap').innerHTML = tools.map(function (t) {
+    return '<span class="inline-flex items-center gap-2 px-4 py-2 bg-box border border-white/5 text-gray-200 text-xs font-semibold rounded-full hover:border-spring/50 hover:text-spring hover:-translate-y-1 transition-all"><i class="' + t[0] + ' text-spring"></i>' + t[1] + '</span>';
+  }).join('');
+
+  // Education
+  document.getElementById('eduList').innerHTML = education.map(function (e, i) {
+    const right = i % 2 === 1;
+    const badge = e.highlight
+      ? '<span class="inline-block px-3 py-0.5 bg-spring text-card text-xs rounded-full mb-2 font-bold">' + e.year + '</span>'
+      : '<span class="inline-block px-3 py-0.5 bg-btn text-white text-xs rounded-full mb-2">' + e.year + '</span>';
+    return '' +
+    '<div class="relative flex items-start ' + (right ? 'md:flex-row-reverse' : '') + '" ' + (right ? 'data-reveal-right' : 'data-reveal-left') + '>' +
+      '<div class="absolute left-5 md:left-1/2 -translate-x-1/2 w-10 h-10 bg-spring rounded-full flex items-center justify-center z-10 shadow-lg shadow-spring/30"><i class="fas ' + e.icon + ' text-white text-sm"></i></div>' +
+      '<div class="ml-16 md:ml-0 md:w-[44%] ' + (right ? 'md:pl-10' : 'md:pr-10') + ' bg-box p-5 rounded-2xl border border-white/5 hover:border-spring/30 hover:scale-[1.03] hover:shadow-lg hover:shadow-spring/10 transition-all">' +
+        badge +
+        '<h3 class="text-white text-lg font-bold">' + e.title + '</h3>' +
+        '<p class="text-gray-400 text-xs mt-1.5 leading-relaxed">' + e.desc + '</p>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+
+  // Marquee (duplicate for seamless loop)
+  const marqueeHTML = marqueeItems.map(function (m) {
+    return '<span class="inline-flex items-center gap-2 px-6 text-gray-400 text-sm font-bold whitespace-nowrap"><i class="' + m[0] + ' text-spring"></i>' + m[1] + '</span>';
+  }).join('');
+  document.getElementById('marqueeTrack').innerHTML = marqueeHTML + marqueeHTML;
+
+  /* =====================================================
+     MOBILE MENU
+     ===================================================== */
   const menuBtn = document.getElementById('menu');
   const menuIcon = document.getElementById('menuIcon');
   const sidebar = document.getElementById('sidebar');
@@ -701,7 +771,9 @@ tailwind.config = {
     });
   });
 
-  // ===== SCROLL PROGRESS + SCROLL TOP + ACTIVE NAV =====
+  /* =====================================================
+     SCROLL PROGRESS + SCROLL TOP + ACTIVE NAV
+     ===================================================== */
   const scrollTopBtn = document.getElementById('scrollTopBtn');
   const progress = document.getElementById('scrollProgress');
   const sections = document.querySelectorAll('section[id]');
@@ -724,19 +796,28 @@ tailwind.config = {
     });
   });
 
-  // ===== REVEAL ON SCROLL =====
+  /* =====================================================
+     REVEAL ON SCROLL
+     ===================================================== */
   const revealEls = document.querySelectorAll('[data-reveal],[data-reveal-left],[data-reveal-right],[data-reveal-scale]');
   const revObs = new IntersectionObserver(function (entries) {
     entries.forEach(function (e, i) {
       if (e.isIntersecting) {
-        setTimeout(function () { e.target.classList.add('revealed'); }, i * 60);
+        setTimeout(function () {
+          e.target.classList.add('revealed');
+          if (e.target.classList.contains('tilt-card')) {
+            setTimeout(function () { e.target.classList.add('settled'); }, 900);
+          }
+        }, i * 60);
         revObs.unobserve(e.target);
       }
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   revealEls.forEach(function (el) { revObs.observe(el); });
 
-  // ===== SKILL BARS =====
+  /* =====================================================
+     SKILL BARS
+     ===================================================== */
   const skillObs = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (e.isIntersecting) {
@@ -746,7 +827,9 @@ tailwind.config = {
   }, { threshold: 0.5 });
   document.querySelectorAll('[data-skill]').forEach(function (b) { skillObs.observe(b); });
 
-  // ===== COUNTER =====
+  /* =====================================================
+     COUNTER
+     ===================================================== */
   const countObs = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (e.isIntersecting) {
@@ -766,12 +849,15 @@ tailwind.config = {
   }, { threshold: 0.5 });
   document.querySelectorAll('[data-count]').forEach(function (c) { countObs.observe(c); });
 
-  // ===== TYPING =====
+  /* =====================================================
+     TYPING
+     ===================================================== */
   const typedEl = document.getElementById('typed');
   const roles = [
     'Full Stack Developer',
     'Next.js Expert',
     'Django Developer',
+    'FastAPI & AI Developer',
     'ASP.NET Developer',
     'React.js Developer',
     'UI/UX Designer',
@@ -787,7 +873,9 @@ tailwind.config = {
   }
   if (typedEl) typeLoop();
 
-  // ===== MAGNETIC =====
+  /* =====================================================
+     MAGNETIC
+     ===================================================== */
   document.querySelectorAll('.magnetic').forEach(function (btn) {
     btn.addEventListener('mousemove', function (e) {
       const r = btn.getBoundingClientRect();
@@ -798,14 +886,17 @@ tailwind.config = {
     btn.addEventListener('mouseleave', function () { btn.style.transform = ''; });
   });
 
-  // ===== TILT CARDS =====
+  /* =====================================================
+     TILT CARDS
+     ===================================================== */
   document.querySelectorAll('.tilt-card').forEach(function (card) {
     card.addEventListener('mousemove', function (e) {
+      if (!card.classList.contains('revealed')) return;
       const r = card.getBoundingClientRect();
-      const rx = ((e.clientY - r.top - r.height / 2) / r.height) * -10;
-      const ry = ((e.clientX - r.left - r.width / 2) / r.width) * 10;
-      card.style.transform = 'perspective(700px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) scale(1.03)';
-      card.style.boxShadow = '0 20px 40px rgba(0,206,121,0.25)';
+      const rx = ((e.clientY - r.top - r.height / 2) / r.height) * -8;
+      const ry = ((e.clientX - r.left - r.width / 2) / r.width) * 8;
+      card.style.transform = 'perspective(800px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) scale(1.02)';
+      card.style.boxShadow = '0 20px 40px rgba(0,206,121,0.22)';
     });
     card.addEventListener('mouseleave', function () {
       card.style.transform = '';
@@ -813,7 +904,19 @@ tailwind.config = {
     });
   });
 
-  // ===== STARFIELD =====
+  /* =====================================================
+     CURSOR GLOW
+     ===================================================== */
+  const glow = document.getElementById('cursorGlow');
+  if (glow && window.matchMedia('(hover: hover)').matches) {
+    window.addEventListener('mousemove', function (e) {
+      glow.style.transform = 'translate3d(' + (e.clientX - 210) + 'px,' + (e.clientY - 210) + 'px,0)';
+    });
+  }
+
+  /* =====================================================
+     STARFIELD
+     ===================================================== */
   const canvas = document.getElementById('starfield');
   const ctx = canvas.getContext('2d');
   let stars = [];
@@ -853,49 +956,54 @@ tailwind.config = {
   resize(); initStars(); drawStars();
   window.addEventListener('resize', function () { resize(); initStars(); });
 
-  // ===== PROJECT MODAL =====
+  /* =====================================================
+     PROJECT MODAL
+     ===================================================== */
   const modal = document.getElementById('projectModal');
   const modalImage = document.getElementById('modalImage');
   const modalTitle = document.getElementById('modalTitle');
+  const modalSub = document.getElementById('modalSub');
   const modalCategory = document.getElementById('modalCategory');
   const modalDesc = document.getElementById('modalDesc');
   const modalTech = document.getElementById('modalTech');
   const modalBtns = document.getElementById('modalBtns');
   const modalClose = document.getElementById('modalClose');
 
-  function openModal(img, title, category, desc, tech, live, github) {
-    modalImage.src = img;
-    modalImage.alt = title;
-    modalTitle.textContent = title;
-    modalCategory.textContent = category;
-    modalDesc.textContent = desc;
+  function openModal(p) {
+    delete modalImage.dataset.fb;
+    modalImage.alt = p.name;
+    modalImage.src = p.img;
+    modalTitle.textContent = p.name;
+    modalSub.textContent = p.subtitle;
+    modalCategory.textContent = p.category;
+    modalDesc.textContent = p.desc;
     modalTech.innerHTML = '';
-    if (tech) {
-      tech.split(',').forEach(function (t) {
-        const s = document.createElement('span');
-        s.className = 'inline-block px-3 py-1 bg-spring/10 text-spring text-xs font-semibold rounded-full border border-spring/30';
-        s.textContent = t.trim();
-        modalTech.appendChild(s);
-      });
-    }
+    p.tech.forEach(function (t) {
+      const s = document.createElement('span');
+      s.className = 'inline-block px-3 py-1 bg-spring/10 text-spring text-xs font-semibold rounded-full border border-spring/30';
+      s.textContent = t;
+      modalTech.appendChild(s);
+    });
     modalBtns.innerHTML = '';
-    if (live && live.trim() !== '') {
+    if (p.live) {
       const a = document.createElement('a');
-      a.href = live.trim();
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
+      a.href = p.live; a.target = '_blank'; a.rel = 'noopener noreferrer';
       a.className = 'inline-flex items-center gap-2 px-6 py-2.5 bg-spring text-card font-bold rounded-full hover:bg-white transition-all text-sm';
       a.innerHTML = '<i class="fas fa-external-link-alt"></i> Live Demo';
       modalBtns.appendChild(a);
     }
-    if (github && github.trim() !== '') {
+    if (p.github) {
       const a = document.createElement('a');
-      a.href = github.trim();
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
+      a.href = p.github; a.target = '_blank'; a.rel = 'noopener noreferrer';
       a.className = 'inline-flex items-center gap-2 px-6 py-2.5 border-2 border-spring text-spring font-bold rounded-full hover:bg-spring hover:text-card transition-all text-sm';
       a.innerHTML = '<i class="fab fa-github"></i> GitHub';
       modalBtns.appendChild(a);
+    }
+    if (!p.live && !p.github) {
+      const s = document.createElement('span');
+      s.className = 'inline-flex items-center gap-2 px-5 py-2.5 bg-white/5 text-gray-400 rounded-full text-sm';
+      s.innerHTML = '<i class="fas fa-lock"></i> Links coming soon';
+      modalBtns.appendChild(s);
     }
     modal.classList.remove('hidden');
     modal.classList.add('flex');
@@ -909,16 +1017,13 @@ tailwind.config = {
   }
 
   document.querySelectorAll('.project-card').forEach(function (card) {
-    card.addEventListener('click', function () {
-      openModal(
-        this.getAttribute('data-img'),
-        this.getAttribute('data-title'),
-        this.getAttribute('data-category'),
-        this.getAttribute('data-desc'),
-        this.getAttribute('data-tech'),
-        this.getAttribute('data-live'),
-        this.getAttribute('data-github')
-      );
+    function open() {
+      const p = allProjects.find(function (x) { return x.id === card.getAttribute('data-id'); });
+      if (p) openModal(p);
+    }
+    card.addEventListener('click', open);
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
     });
   });
 
@@ -926,8 +1031,24 @@ tailwind.config = {
   modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
 
-  // ===== CAT CHARACTER INTERACTION =====
+  /* =====================================================
+     CONTACT FORM (opens mail app)
+     ===================================================== */
+  document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const name = document.getElementById('cName').value.trim();
+    const email = document.getElementById('cEmail').value.trim();
+    const msg = document.getElementById('cMsg').value.trim();
+    const subject = encodeURIComponent('Portfolio Contact from ' + name);
+    const body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + msg);
+    window.location.href = 'mailto:abdullahmusabbir703@gmail.com?subject=' + subject + '&body=' + body;
+  });
+
+  /* =====================================================
+     CAT CHARACTER INTERACTION
+     ===================================================== */
   const catCharacter = document.getElementById('cat-character');
+  const catFlip = document.getElementById('cat-flip');
   const catSpeech = document.getElementById('cat-speech');
   const catGlow = document.getElementById('cat-glow');
 
@@ -940,6 +1061,8 @@ tailwind.config = {
     "Let's code! 💻",
     "Next.js is 🔥",
     "Click a project! 👆",
+    "Check NexusAI! 🤖",
+    "WalletBD is secure! 🔐",
     "Contact him! 📧",
     "Purrfect dev! 😸"
   ];
@@ -981,7 +1104,7 @@ tailwind.config = {
     const newBottom = 20 + Math.sin(pct * Math.PI * 3) * 20;
     catCharacter.style.bottom = newBottom + 'px';
     catGlow.style.bottom = (newBottom - 8) + 'px';
-    catCharacter.style.transform = delta > 0 ? 'scaleX(1)' : 'scaleX(-1)';
+    if (delta !== 0) catFlip.style.transform = delta > 0 ? 'scaleX(1)' : 'scaleX(-1)';
 
     if (!isScrolling) {
       isScrolling = true;
@@ -993,7 +1116,7 @@ tailwind.config = {
     scrollTimeout = setTimeout(function () {
       isScrolling = false;
       document.body.classList.remove('cat-fast');
-      catCharacter.style.transform = 'scaleX(1)';
+      catFlip.style.transform = 'scaleX(1)';
       clearInterval(particleTimer);
       changeSpeech();
     }, 350);
@@ -1003,7 +1126,7 @@ tailwind.config = {
 
   catCharacter.addEventListener('click', function () {
     const curBottom = parseFloat(catCharacter.style.bottom) || 20;
-    catCharacter.style.transition = 'bottom 0.35s cubic-bezier(0.34,1.56,0.64,1), transform 0.2s';
+    catCharacter.style.transition = 'bottom 0.35s cubic-bezier(0.34,1.56,0.64,1), filter 0.3s ease';
     catCharacter.style.bottom = (curBottom + 70) + 'px';
     catGlow.style.bottom = (curBottom + 70 - 8) + 'px';
     setTimeout(function () {
